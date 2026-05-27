@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,13 +14,18 @@ import java.time.format.DateTimeFormatter;
 public class GlobalExceptionHandler {
     
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private final Clock clock;
+
+    public GlobalExceptionHandler(Clock clock) {
+        this.clock = clock;
+    }
     
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status("404")
                 .message(ex.getMessage())
-                .timestamp(LocalDateTime.now().format(dateTimeFormatter))
+                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         
@@ -31,7 +37,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status("400")
                 .message(ex.getMessage())
-                .timestamp(LocalDateTime.now().format(dateTimeFormatter))
+                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         
@@ -43,7 +49,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status("400")
                 .message(ex.getMessage())
-                .timestamp(LocalDateTime.now().format(dateTimeFormatter))
+                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         
@@ -55,7 +61,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status("500")
                 .message("An unexpected error occurred")
-                .timestamp(LocalDateTime.now().format(dateTimeFormatter))
+                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         
