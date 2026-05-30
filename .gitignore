@@ -28,7 +28,7 @@ target/
 
 # ApprovalTests
 *.received.txt
-*.approved.txt
+#*.approved.txt
 
 # Logs
 *.log
