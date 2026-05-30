@@ -54,7 +54,8 @@ class BookApiIntegrationTest {
         
         // Create sample author
         AuthorDTO authorDTO = AuthorDTO.builder()
-                .name("Arthur Conan Doyle")
+                .firstName("Arthur")
+                .lastName("Conan Doyle")
                 .email("doyle@example.com")
                 .build();
         

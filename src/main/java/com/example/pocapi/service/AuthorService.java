@@ -28,12 +28,14 @@ public class AuthorService {
         
         // Create sample authors
         Author author1 = new Author();
-        author1.setName("J.K. Rowling");
+        author1.setFirstName("J.K.");
+        author1.setLastName("Rowling");
         author1.setEmail("jk@example.com");
         authorRepository.save(author1);
         
         Author author2 = new Author();
-        author2.setName("George R.R. Martin");
+        author2.setFirstName("George R.R.");
+        author2.setLastName("Martin");
         author2.setEmail("grrm@example.com");
         authorRepository.save(author2);
         
@@ -62,7 +64,8 @@ public class AuthorService {
         }
         
         Author author = new Author();
-        author.setName(authorDTO.getName());
+        author.setFirstName(authorDTO.getFirstName());
+        author.setLastName(authorDTO.getLastName());
         author.setEmail(authorDTO.getEmail());
         
         Author savedAuthor = authorRepository.save(author);
@@ -83,7 +86,8 @@ public class AuthorService {
             throw new ValidationException("Author with email " + authorDTO.getEmail() + " already exists");
         }
         
-        author.setName(authorDTO.getName());
+        author.setFirstName(authorDTO.getFirstName());
+        author.setLastName(authorDTO.getLastName());
         author.setEmail(authorDTO.getEmail());
         
         Author updatedAuthor = authorRepository.save(author);
@@ -101,8 +105,11 @@ public class AuthorService {
     }
     
     private void validateAuthorDTO(AuthorDTO authorDTO) {
-        if (authorDTO.getName() == null || authorDTO.getName().isBlank()) {
+        if (authorDTO.getFirstName() == null || authorDTO.getFirstName().isBlank()) {
             throw new ValidationException("Author name cannot be empty");
+        }
+        if (authorDTO.getLastName() == null || authorDTO.getLastName().isBlank()) {
+            throw new ValidationException("Author last name cannot be empty");
         }
         if (authorDTO.getEmail() == null || authorDTO.getEmail().isBlank()) {
             throw new ValidationException("Author email cannot be empty");
@@ -115,7 +122,8 @@ public class AuthorService {
     private AuthorDTO convertToDTO(Author author) {
         return AuthorDTO.builder()
                 .id(author.getId())
-                .name(author.getName())
+                .firstName(author.getFirstName())
+                .lastName(author.getLastName())
                 .email(author.getEmail())
                 .build();
     }

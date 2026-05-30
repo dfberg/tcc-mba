@@ -44,7 +44,8 @@ class ReviewServiceTest {
     void setUp() {
         testAuthor = Author.builder()
                 .id(1L)
-                .name("Test Author")
+                .firstName("Test")
+                .lastName("Author")
                 .email("test@example.com")
                 .build();
         

@@ -119,7 +119,7 @@ public class BookService {
                 .title(book.getTitle())
                 .isbn(book.getIsbn())
                 .authorId(book.getAuthor().getId())
-                .authorName(book.getAuthor().getName())
+                .authorName(book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName())
                 .build();
     }
 }

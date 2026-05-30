@@ -19,7 +19,10 @@ public class Author {
     private Long id;
     
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+    
+    @Column(nullable = false)
+    private String lastName;
     
     @Column(nullable = false, unique = true)
     private String email;
@@ -28,9 +31,10 @@ public class Author {
     @Builder.Default
     private List<Book> books = new ArrayList<>();
     
-    public Author(Long id, String name, String email) {
+    public Author(Long id, String firstName, String lastName, String email) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.books = new ArrayList<>();
     }

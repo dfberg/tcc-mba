@@ -70,7 +70,8 @@ class AuthorApiIntegrationTest {
     void testCreateAuthor_Snapshot() throws Exception {
         // Arrange
         AuthorDTO authorDTO = AuthorDTO.builder()
-                .name("Isaac Asimov")
+                .firstName("Isaac")
+                .lastName("Asimov")
                 .email("isaac@example.com")
                 .build();
         
@@ -92,7 +93,8 @@ class AuthorApiIntegrationTest {
     void testGetAuthorById_Snapshot() throws Exception {
         // Arrange
         AuthorDTO authorDTO = AuthorDTO.builder()
-                .name("J.R.R. Tolkien")
+                .firstName("J.R.R.")
+                .lastName("Tolkien")
                 .email("tolkien@example.com")
                 .build();
         

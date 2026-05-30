@@ -43,12 +43,14 @@ class AuthorServiceTest {
     void setUp() {
         testAuthor = Author.builder()
                 .id(1L)
-                .name("Test Author")
+                .firstName("Test")
+                .lastName("Author")
                 .email("test@example.com")
                 .build();
         
         testAuthorDTO = AuthorDTO.builder()
-                .name("Test Author")
+                .firstName("Test")
+                .lastName("Author")
                 .email("test@example.com")
                 .build();
     }
@@ -65,7 +67,8 @@ class AuthorServiceTest {
         
         // Assert
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Test Author");
+        assertThat(result.getFirstName()).isEqualTo("Test");
+        assertThat(result.getLastName()).isEqualTo("Author");
         assertThat(result.getEmail()).isEqualTo("test@example.com");
         verify(authorRepository, times(1)).save(any(Author.class));
     }
@@ -75,7 +78,8 @@ class AuthorServiceTest {
     void testCreateAuthorWithEmptyEmail() {
         // Arrange
         AuthorDTO invalidDTO = AuthorDTO.builder()
-                .name("Test Author")
+                .firstName("Test")
+                .lastName("Author")
                 .email("")
                 .build();
         
@@ -92,7 +96,8 @@ class AuthorServiceTest {
     void testCreateAuthorWithInvalidEmail() {
         // Arrange
         AuthorDTO invalidDTO = AuthorDTO.builder()
-                .name("Test Author")
+                .firstName("Test")
+                .lastName("Author")
                 .email("invalid-email")
                 .build();
         
@@ -129,7 +134,8 @@ class AuthorServiceTest {
         
         // Assert
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Test Author");
+        assertThat(result.getFirstName()).isEqualTo("Test");
+        assertThat(result.getLastName()).isEqualTo("Author");
         verify(authorRepository, times(1)).findById(1L);
     }
     

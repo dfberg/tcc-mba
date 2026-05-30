@@ -16,13 +16,15 @@ import java.util.List;
 public class AuthorDTO {
     
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private List<BookDTO> books;
     
     // Constructor for creating new author (without id and books)
-    public AuthorDTO(String name, String email) {
-        this.name = name;
+    public AuthorDTO(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
     }
 }
