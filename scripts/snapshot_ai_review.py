@@ -13,6 +13,7 @@ if not API_KEY:
     sys.exit(1)
 
 TEST_OUTPUT_FILE = "target/snapshot-test-output.txt"
+PROMPT_LOG_FILE = "target/snapshot-prompt-log.txt"
 
 
 def read_test_output():
@@ -154,6 +155,19 @@ def parse_response(text):
     return json.loads(text)
 
 
+def append_prompt_log(prompt):
+    os.makedirs(os.path.dirname(PROMPT_LOG_FILE), exist_ok=True)
+    with open(PROMPT_LOG_FILE, "a", encoding="utf-8") as f:
+        f.write("=" * 80)
+        f.write("\n")
+        f.write("Prompt generated at: ")
+        f.write("\n")
+        f.write("\n")
+        f.write(prompt)
+        f.write("\n")
+        f.write("\n")
+
+
 def main():
     test_output = read_test_output()
 
@@ -164,6 +178,7 @@ def main():
     git_diff = normalize_text(get_git_diff())
 
     prompt = build_prompt(git_diff, snapshot_failure)
+    append_prompt_log(prompt)
 
     print("Reviewing snapshot with AI...")
     print("")
