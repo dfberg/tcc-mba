@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ground-truth.schema.json",
+  "title": "Ground Truth do caso experimental",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["caseId", "classification", "reason"],
+  "properties": {
+    "caseId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "classification": { "type": "string", "enum": ["SHOULD_UPDATE", "SHOULD_NOT_UPDATE"] },
+    "reason": { "type": "string", "minLength": 1 }
+  }
+}

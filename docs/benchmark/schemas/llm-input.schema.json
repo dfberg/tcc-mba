@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "llm-input.schema.json",
+  "title": "Evidências fornecidas à LLM avaliada",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["caseId", "gitDiff", "expectedSnapshot", "receivedSnapshot", "testOutput", "testName", "endpoint", "httpMethod"],
+  "properties": {
+    "caseId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "gitDiff": { "type": "string" },
+    "expectedSnapshot": { "type": "string" },
+    "receivedSnapshot": { "type": "string" },
+    "testOutput": { "type": "string" },
+    "testName": { "type": "string", "minLength": 1 },
+    "endpoint": { "type": "string", "minLength": 1 },
+    "httpMethod": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"] }
+  }
+}

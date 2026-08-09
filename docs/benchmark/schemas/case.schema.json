@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "case.schema.json",
+  "title": "Caso experimental de snapshot testing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["caseId", "category", "endpoint", "httpMethod", "description", "difficulty", "status"],
+  "properties": {
+    "caseId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "category": { "type": "string", "enum": ["CONTRACT_EVOLUTION", "BREAKING_CHANGE", "BUSINESS_RULE", "HTTP", "SERIALIZATION", "ERROR_HANDLING", "COLLECTION", "NON_DETERMINISTIC", "NOISE", "BUG"] },
+    "objective": { "type": "string", "minLength": 1 },
+    "endpoint": { "type": "string", "minLength": 1 },
+    "httpMethod": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"] },
+    "candidateFiles": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "description": { "type": "string", "minLength": 1 },
+    "difficulty": { "type": "string", "enum": ["EASY", "MEDIUM", "HARD"] },
+    "status": { "type": "string", "enum": ["PLANNED", "IMPLEMENTED", "EXECUTED", "VALIDATED", "REJECTED"] }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "execution.schema.json",
+  "title": "Registro reproduzível de execução",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["caseId", "timestamp", "baselineCommit", "model", "modelProvider", "modelParameters", "durationMs", "testCommand", "testExitCode"],
+  "properties": {
+    "caseId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "baselineCommit": { "type": "string", "minLength": 1 },
+    "experimentCommit": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1 },
+    "modelProvider": { "type": "string", "minLength": 1 },
+    "modelParameters": { "type": "object" },
+    "durationMs": { "type": "integer", "minimum": 0 },
+    "inputTokens": { "type": "integer", "minimum": 0 },
+    "outputTokens": { "type": "integer", "minimum": 0 },
+    "testCommand": { "type": "string", "minLength": 1 },
+    "testExitCode": { "type": "integer" }
+  }
+}

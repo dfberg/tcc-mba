@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "llm-output.schema.json",
+  "title": "Classificação produzida pela LLM avaliada",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["shouldUpdateSnapshot", "confidence", "reason"],
+  "properties": {
+    "shouldUpdateSnapshot": { "type": "boolean" },
+    "confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "reason": { "type": "string", "minLength": 1 }
+  }
+}
