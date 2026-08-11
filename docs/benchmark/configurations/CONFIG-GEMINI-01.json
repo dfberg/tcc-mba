@@ -1,0 +1,62 @@
+{
+  "configurationId": "CONFIG-GEMINI-01",
+  "provider": "Google",
+  "modelRequested": "gemini-3.6-flash",
+  "promptTemplate": "PROMPT_TEMPLATE_V1",
+  "promptTemplateSha256": "85135355C8C1A22AEE5F693369538BED7C46E27AA106B9B933E3DC5E4B4E9A3C",
+  "api": {
+    "type": "REST",
+    "name": "Gemini Generate Content API",
+    "version": "v1beta",
+    "endpointTemplate": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+  },
+  "authentication": {
+    "source": "ENVIRONMENT",
+    "environmentVariable": "GEMINI_API_KEY",
+    "transport": "x-goog-api-key header"
+  },
+  "structuredOutput": {
+    "enabled": true,
+    "responseMimeType": "application/json",
+    "responseSchema": "docs/benchmark/schemas/llm-output.schema.json",
+    "providerField": "generationConfig.responseFormat"
+  },
+  "explicitlyConfigured": {
+    "responseFormat": "JSON_SCHEMA",
+    "httpTimeoutSeconds": 60
+  },
+  "providerDefaults": [
+    "candidateCount",
+    "maxOutputTokens",
+    "seed",
+    "thinkingLevel"
+  ],
+  "unsupportedOrObsolete": [
+    "temperature",
+    "topP",
+    "topK"
+  ],
+  "http": {
+    "timeoutSeconds": 60
+  },
+  "retryPolicy": {
+    "initialAttempt": 1,
+    "maximumTechnicalRetries": 2,
+    "maximumTechnicalAttempts": 3,
+    "retryableStates": [
+      "TIMEOUT",
+      "API_ERROR",
+      "RATE_LIMIT",
+      "EMPTY_RESPONSE",
+      "INVALID_JSON",
+      "SCHEMA_INVALID"
+    ],
+    "backoffSeconds": [
+      1,
+      2
+    ],
+    "selectionRule": "FIRST_VALID_RESPONSE"
+  },
+  "validResponsesPerExperiment": 1,
+  "preparedAt": "2026-08-10"
+}
