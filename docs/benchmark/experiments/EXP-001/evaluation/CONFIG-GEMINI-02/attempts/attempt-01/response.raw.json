@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":95,\"reason\":\"A alteração no controlador AuthorController mudou intencionalmente o contrato da resposta do endpoint GET /authors de uma lista simples para um objeto encapsulado contendo as propriedades 'authors' e 'count'. O snapshot recebido reflete exatamente essa nova estrutura de resposta introduzida no código.\"}",
+            "thoughtSignature": "Eu8JCuwJARFNMg/GdKoNJVrYFnmuXYz6mpfnLCG51Tioq/vrOK0JdckKV/Qk0Hs/4xYdzu7LQ4gTlGTwmldlYDB5FU6FLCZG03DQ/FB/m+ECG2rUf9vgIAC9BRVwwo8p+di3BPp8Q61DMfxV6iwUKuM5JB+q5uJEDhOcEs1GNB3R6qeVwdLxnH+854pzHJZ87EnEZRCxIV9Z8y1itunQToq13X8OKhDolgUpAfrCoxvMvXnYO+dM1M/Y8Ffn0x+zvsb+K19snlzlA3gY4fChL2SAkafmK19b0PeHeYqovsZA2xec5Gm39roBrtQoC7kXd+yT4RV1uBrG2SToainxpso2KlDkOi+pk+8O2qi7Rh+JoM2Yr3ys3z5A0JWpBzEx6uA/wINYMq3Z3frxnu9Spc4Ha3Y/rs5KX/1Q/wWCoifW4Mm91CCuPeAxMEjxUiMQwPaBnwBOFRfiY+8VmLmS3Ih0aXzHbCEIKzVMM1mehhJxvNguosctmKtFORgWjj6llU7tX+E6WZM7ihAdmYNL57kIwaqocNmKGaOHi9+O7iXsVAnSjCrE4Jhgp9CY1QVMMT+kRGNJCS0hzcztzBJMNBpbYywDRqUil4n6/3uR8ScHCxNYQlUDP0cz4PP7hPQE17AaGUJbTiKdaokhSruFciih34EAqsHsCm6OYR/z7wWhBuXTvT07qMxI3GZ2c+robChW3YDFaBGLLnrFKq98vkiwhq9PrhPC1iOUUR6ZuEh9EYPWJl445Yvcu0hJkVf2ImGFU9OoigU9TMCMwVSAC2kgbCizkpQAUV7sO04X28VVkGLv+0o0GIMSl+LXYfi1S3P3ywa7LvMtxc68fVQBqH7n9IhzafY4PLthwblHFKWbCr1qlPa05rvAk9Mdyi8uIrt83I4yUueeSTW7eoYw/BJz+mdoYwGXKI6PqPKItSPlphjodfWz1zfbHRpx+m4WRcSj6/nHR5QKPq4XdZ00mIQY2aGQOz81yObCHpLAOvWxXgAMcl8d4fzyCSOTq4QthtHocPljcwM+x5GvaUyA4VmWuKLfY4Qxy7tnuNbIA0eG0WE+mwNssmRPqDKd1KOn0r01o3IuSUTLw5fA7J43Rzszpc0gkAazIMUUBiZdAQn3OnVkOHHhIkWDM6mY0fM/UIfgSEpCXgajUb3Lo2QCdqx9JxPLvPTCOutbZrdwzulB7VtmDLATt3sg9q6XR/F0ParXRLV7fssrOlMf1ycLbIJa5CFVX8wuC5zmy/+evpxiND87FYsge7CwzrzKrVdFyJArP755EOpblwHpCzl0sAl79lI6Ik1TGkvdlMMfveeq7bCMD5MvHOfhe0+3bhBp4vo3S9aZ8Kj4IHMy3JUhUHF5ONuDCHlX3fqaFFdLDtAfcjO4jH1VDORmjvgXWL8Y9BogkJtVclQgU0n/Y4pfot/892U2QYkHp08bh6kbXWd4nhSVi+SAhA/nXNao2l2hK1ioEUmrKrW9xUhf2vcJIsLWqiIc/tCFjDwcrvPu/lTXGDChGmkzuSuj8l+iw8DWktMidA5b/ba/BcoMoVDzb2Zzrb9K3gYEZLX2pSoFS0hTtj51SkEzRVb2SmlCi6SU8HZIonJCFhzgylP+Jj8PA9rRLTqLRinrFtan7ouvLLF3astS7a7tKwBanwUazmd0tt9FA4MzG7bRbODAuI5tn0/Q"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3849,
+    "candidatesTokenCount": 74,
+    "totalTokenCount": 4186,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3849
+      }
+    ],
+    "thoughtsTokenCount": 263,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "s4mJarjiA4GTqtsPkrrwoAQ"
+}
