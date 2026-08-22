@@ -82,15 +82,23 @@ def validate_instance(instance, schema, location="$"):
 
 def provider_response_schema(schema):
     supported = {
+        "$id",
+        "$defs",
+        "$ref",
+        "$anchor",
         "type",
         "properties",
         "required",
+        "additionalProperties",
         "items",
+        "prefixItems",
         "enum",
+        "minItems",
+        "maxItems",
         "minimum",
         "maximum",
-        "minLength",
-        "maxLength",
+        "anyOf",
+        "oneOf",
         "title",
         "description",
         "format",
@@ -118,12 +126,8 @@ def build_request_payload(prompt_text, output_schema):
     return {
         "contents": [{"parts": [{"text": prompt_text}]}],
         "generationConfig": {
-            "responseFormat": {
-                "text": {
-                    "mimeType": "application/json",
-                    "schema": provider_response_schema(output_schema),
-                }
-            }
+            "responseMimeType": "application/json",
+            "responseJsonSchema": provider_response_schema(output_schema),
         },
     }
 
@@ -264,7 +268,7 @@ def validate_configuration(config):
     missing = sorted(required - set(config))
     if missing:
         raise ValueError(f"Configuration is missing fields: {', '.join(missing)}")
-    if config["configurationId"] != "CONFIG-GEMINI-01":
+    if config["configurationId"] != "CONFIG-GEMINI-02":
         raise ValueError("Unexpected configurationId")
     if config["modelRequested"] != "gemini-3.6-flash":
         raise ValueError("Unexpected Gemini model")
