@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/example/pocapi/controller/AuthorController.java b/src/main/java/com/example/pocapi/controller/AuthorController.java
+index 1b4ef10..128ad08 100644
+--- a/src/main/java/com/example/pocapi/controller/AuthorController.java
++++ b/src/main/java/com/example/pocapi/controller/AuthorController.java
+@@ -25,6 +25,7 @@ public class AuthorController {
+     @GetMapping("/{id}")
+     public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id) {
+         AuthorDTO author = authorService.getAuthorById(id);
++        author.setEmail("********");
+         return ResponseEntity.ok(author);
+     }
+     

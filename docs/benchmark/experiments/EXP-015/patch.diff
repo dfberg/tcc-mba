@@ -1,0 +1,55 @@
+diff --git a/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java b/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
+index 448a5ea..883b662 100644
+--- a/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
++++ b/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
+@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
+ import org.springframework.web.context.request.WebRequest;
+ 
+ import java.time.Clock;
+-import java.time.LocalDateTime;
+ import java.time.format.DateTimeFormatter;
+ 
+ @ControllerAdvice
+ public class GlobalExceptionHandler {
+     
+-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
++    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_INSTANT;
+     private final Clock clock;
+ 
+     public GlobalExceptionHandler(Clock clock) {
+@@ -25,7 +24,7 @@ public class GlobalExceptionHandler {
+         ErrorResponse errorResponse = ErrorResponse.builder()
+                 .status("404")
+                 .message(ex.getMessage())
+-                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
++                .timestamp(dateTimeFormatter.format(clock.instant()))
+                 .path(request.getDescription(false).replace("uri=", ""))
+                 .build();
+         
+@@ -37,7 +36,7 @@ public class GlobalExceptionHandler {
+         ErrorResponse errorResponse = ErrorResponse.builder()
+                 .status("400")
+                 .message(ex.getMessage())
+-                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
++                .timestamp(dateTimeFormatter.format(clock.instant()))
+                 .path(request.getDescription(false).replace("uri=", ""))
+                 .build();
+         
+@@ -49,7 +48,7 @@ public class GlobalExceptionHandler {
+         ErrorResponse errorResponse = ErrorResponse.builder()
+                 .status("400")
+                 .message(ex.getMessage())
+-                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
++                .timestamp(dateTimeFormatter.format(clock.instant()))
+                 .path(request.getDescription(false).replace("uri=", ""))
+                 .build();
+         
+@@ -61,7 +60,7 @@ public class GlobalExceptionHandler {
+         ErrorResponse errorResponse = ErrorResponse.builder()
+                 .status("500")
+                 .message("An unexpected error occurred")
+-                .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
++                .timestamp(dateTimeFormatter.format(clock.instant()))
+                 .path(request.getDescription(false).replace("uri=", ""))
+                 .build();
+         

@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-012",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "A nova propriedade exposta não foi intencionalmente aprovada."
+}

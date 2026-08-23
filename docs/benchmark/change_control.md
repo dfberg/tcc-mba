@@ -264,3 +264,7 @@ Antes de mudar qualquer artefato do benchmark:
 8. revisar casos contrastivos afetados;
 9. reexecutar e revalidar quando aplicável;
 10. confirmar que métricas não reutilizam versões inválidas.
+
+## Correção pré-EVALUATED de EXP-011 e EXP-012
+
+EXP-011 e EXP-012 ainda não haviam sido avaliados e nenhuma resposta LLM havia sido observada. Uma auditoria detectou a diferença espúria `id:4 -> id:3`, tornando a evidência anterior inadequada para freeze. A causa foi a execução isolada do teste-alvo: os dois registros criados na inicialização consumiam os IDs 1 e 2 e, embora o `deleteAll()` removesse os registros, a sequência não era reiniciada; assim, a execução isolada criava o autor com ID 3. O contexto legítimo do baseline executa primeiro `testCreateAuthor_Snapshot`, que consome o ID 3, e depois `testGetAuthorById_Snapshot`, que reproduz naturalmente o approved com ID 4. A rematerialização ocorreu somente após esse baseline passar. Os CASEs, o Ground Truth e os objetivos experimentais não foram alterados.

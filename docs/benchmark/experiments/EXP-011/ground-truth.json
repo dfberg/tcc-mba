@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-011",
+  "classification": "SHOULD_UPDATE",
+  "reason": "A mudança de valor é consequência correta da nova política de exposição."
+}

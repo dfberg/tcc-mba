@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/example/pocapi/exception/ResourceNotFoundException.java b/src/main/java/com/example/pocapi/exception/ResourceNotFoundException.java
+index 13c12a0..941df2b 100644
+--- a/src/main/java/com/example/pocapi/exception/ResourceNotFoundException.java
++++ b/src/main/java/com/example/pocapi/exception/ResourceNotFoundException.java
+@@ -7,6 +7,6 @@ public class ResourceNotFoundException extends RuntimeException {
+     }
+     
+     public ResourceNotFoundException(String resourceName, Long id) {
+-        super(String.format("%s not found with id: %d", resourceName, id));
++        super(String.format("%s with identifier %d was not found", resourceName, id));
+     }
+ }

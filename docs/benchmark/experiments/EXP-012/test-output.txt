@@ -1,0 +1,189 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.example:poc-api >-------------------------
+[INFO] Building POC API 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.10:prepare-agent (default) @ poc-api ---
+[INFO] argLine set to -javaagent:C:\\Users\\dfber\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.10\\org.jacoco.agent-0.8.10-runtime.jar=destfile=E:\\Diego\\TCC\\poc-api\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ poc-api ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.12.0:compile (default-compile) @ poc-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ poc-api ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.12.0:testCompile (default-testCompile) @ poc-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ poc-api ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.pocapi.integration.AuthorApiIntegrationTest
+20:11:52.201 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.pocapi.integration.AuthorApiIntegrationTest]: AuthorApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:11:52.995 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.pocapi.PocApiApplication for test class com.example.pocapi.integration.AuthorApiIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.1)
+
+2026-08-23T20:11:54.971-03:00  INFO 20332 --- [poc-api] [           main] c.e.p.i.AuthorApiIntegrationTest         : Starting AuthorApiIntegrationTest using Java 21.0.11 with PID 20332 (started by dfber in E:\Diego\TCC\poc-api)
+2026-08-23T20:11:54.982-03:00  INFO 20332 --- [poc-api] [           main] c.e.p.i.AuthorApiIntegrationTest         : The following 1 profile is active: "test"
+2026-08-23T20:12:03.475-03:00  WARN 20332 --- [poc-api] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-23T20:12:09.687-03:00  INFO 20332 --- [poc-api] [           main] c.example.pocapi.service.AuthorService   : Initializing sample data...
+2026-08-23T20:12:09.995-03:00  INFO 20332 --- [poc-api] [           main] c.example.pocapi.service.AuthorService   : Sample data initialized successfully
+2026-08-23T20:12:10.434-03:00  WARN 20332 --- [poc-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-23T20:12:12.609-03:00  INFO 20332 --- [poc-api] [           main] c.e.p.i.AuthorApiIntegrationTest         : Started AuthorApiIntegrationTest in 18.844 seconds (process running for 24.617)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\dfber\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2026-08-23T20:12:14.700-03:00  INFO 20332 --- [poc-api] [           main] c.example.pocapi.service.AuthorService   : Author created with id: 3
+2026-08-23T20:12:14.993-03:00  INFO 20332 --- [poc-api] [           main] c.example.pocapi.service.AuthorService   : Author created with id: 4
+[23 de ago. de 2026 20:12:15 ~000000ms] To approve run : move /Y "E:\Diego\TCC\poc-api\.\src\test\java\com\example\pocapi\integration\AuthorApiIntegrationTest.testGetAuthorById_Snapshot.received.txt"  "E:\Diego\TCC\poc-api\.\src\test\java\com\example\pocapi\integration\AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt"
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /authors
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"73"]
+             Body = {"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.pocapi.controller.AuthorController
+           Method = com.example.pocapi.controller.AuthorController#createAuthor(AuthorDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /authors/4
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.pocapi.controller.AuthorController
+           Method = com.example.pocapi.controller.AuthorController#getAuthorById(Long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com","books":[]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 24.03 s <<< FAILURE! -- in com.example.pocapi.integration.AuthorApiIntegrationTest
+[ERROR] com.example.pocapi.integration.AuthorApiIntegrationTest.testGetAuthorById_Snapshot -- Time elapsed: 0.174 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+expected: <{"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com"}
+> but was: <{"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com","books":[]}
+>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.approvaltests.reporters.AbstractJUnitReporter.assertEquals(AbstractJUnitReporter.java:25)
+	at org.approvaltests.reporters.AbstractJUnitReporter.report(AbstractJUnitReporter.java:45)
+	at org.approvaltests.reporters.FirstWorkingReporter.report(FirstWorkingReporter.java:21)
+	at org.approvaltests.reporters.FirstWorkingReporter.report(FirstWorkingReporter.java:21)
+	at org.approvaltests.reporters.FirstWorkingReporter.report(FirstWorkingReporter.java:21)
+	at org.approvaltests.approvers.FileApprover.reportFailure(FileApprover.java:49)
+	at org.approvaltests.Approvals.verify(Approvals.java:220)
+	at org.approvaltests.Approvals.verify(Approvals.java:183)
+	at org.approvaltests.Approvals.verify(Approvals.java:191)
+	at org.approvaltests.Approvals.verify(Approvals.java:50)
+	at org.approvaltests.Approvals.verify(Approvals.java:46)
+	at com.example.pocapi.integration.AuthorApiIntegrationTest.testGetAuthorById_Snapshot(AuthorApiIntegrationTest.java:119)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   AuthorApiIntegrationTest.testGetAuthorById_Snapshot:119 expected: <{"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com"}
+> but was: <{"id":4,"firstName":"J.R.R.","lastName":"Tolkien","email":"tolkien@example.com","books":[]}
+>
+[INFO] 
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  34.789 s
+[INFO] Finished at: 2026-08-23T20:12:15-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test (default-test) on project poc-api: There are test failures.
+[ERROR] 
+[ERROR] Please refer to E:\Diego\TCC\poc-api\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,25 @@
+{
+    "experimentId":  "EXP-012",
+    "caseId":  "CASE-012",
+    "caseVersion":  "CASE-012-v1",
+    "category":  "SERIALIZATION",
+    "endpoint":  "/authors/{id}",
+    "httpMethod":  "GET",
+    "snapshotTarget":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+    "testTarget":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+    "mutationPoints":  [
+                           "MP-001",
+                           "MP-002",
+                           "MP-021"
+                       ],
+    "difficulty":  "MEDIUM",
+    "expectedScope":  "TARGET_ONLY",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
+    "receivedSha256":  "397B267F5281327232CAC470778837A11FDF8C7B85DCD615729059747A35BB61",
+    "patchSha256":  "ED579B176E46D12FE4D23A3E3388F01A1DE95A6EA12FAD83986573C8DBAD7EE1",
+    "testOutputSha256":  "E81D1E64A80335B5559D6F06EC797FDA22AADCA40159136A12E054D3BAA8509F",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}
