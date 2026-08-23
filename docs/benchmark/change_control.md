@@ -165,6 +165,8 @@ Tipos permitidos:
 
 Uma entrada nunca é apagada. Correções no próprio log são novas entradas `DOCUMENTATION_ONLY`, com referência à entrada corrigida.
 
+| 2026-08-22 | Benchmark V2 / EXP-002–EXP-005 freeze | VALIDATED | DOCUMENTATION_ONLY | `git diff --cached --check` era aplicado como gate absoluto e reportava CRLF em `llm-input.json` e blank line final em `patch.diff`, ambos pertencentes à evidência capturada e protegidos contra normalização | Para `EVIDENCE_IMMUTABLE`, integridade SHA-256, preservação de conteúdo, secret scan, schema quando aplicável e escopo substituem o whitespace check; `git diff --cached --check` permanece obrigatório para `EDITABLE_METADATA` | Permitir o freeze técnico sem alterar bytes ou hashes de evidências e sem enfraquecer o gate de arquivos editáveis | Nenhuma evidência, CASE, Ground Truth, prompt ou `llm-input.json` foi alterado; resultado de LLM observado durante a mudança: NÃO; nenhuma LLM/API executada; impacto experimental: nenhum | Codex / revisão humana pendente |
+
 ## 10. Ground Truth e informações reservadas
 
 Ground Truth e intenção ficam em artefatos reservados do pesquisador. Não podem aparecer direta ou indiretamente em `llm-input.json`. Categoria, dificuldade, CASE ID e outros metadados também devem ser omitidos quando puderem funcionar como pistas.

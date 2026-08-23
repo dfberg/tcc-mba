@@ -1,0 +1,24 @@
+{
+  "experimentId": "EXP-002",
+  "caseId": "CASE-002",
+  "caseVersion": "CASE-002-v1",
+  "category": "BUG",
+  "endpoint": "/authors",
+  "httpMethod": "GET",
+  "snapshotTarget": "AuthorApiIntegrationTest.testGetAllAuthors_Snapshot.approved.txt",
+  "testTarget": "AuthorApiIntegrationTest.testGetAllAuthors_Snapshot",
+  "mutationPoints": [
+    "MP-005",
+    "MP-007"
+  ],
+  "difficulty": "EASY",
+  "expectedScope": "TARGET_ONLY",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "catalogFreezeCommit": "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+  "approvedSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+  "receivedSha256": "74234E98AFE7498FB5DAF1F36AC2D78ACC339464F950703B8C019892F982B90B",
+  "patchSha256": "0982FEF043C4C5C070794ADED938FA304EE1DE78B9F214C8390DFC34C50C07D3",
+  "testOutputSha256": "26C3BA2EAFDD461AFE092D7C4FCC021F4E94AFDEB32152E5ADEB4221B59EB258",
+  "reproducible": true,
+  "state": "VALIDATED"
+}

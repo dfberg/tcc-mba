@@ -1,0 +1,14 @@
+{
+  "snapshot": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+  "test": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+  "approvedSha256": "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
+  "receivedSha256": "8D4CDF73040F7F4488C7EF88833F3F13389C719655FDC731702847934A49105A",
+  "execution": {
+    "testCommand": "mvn -Dtest=AuthorApiIntegrationTest#testCreateAuthor_Snapshot+testGetAuthorById_Snapshot test",
+    "timestamp": "2026-08-22T20:08:40-03:00",
+    "durationMs": 25547,
+    "testExitCode": 1,
+    "testOutput": "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt"
+  },
+  "status": "SNAPSHOT_MISMATCH_REPRODUCED"
+}

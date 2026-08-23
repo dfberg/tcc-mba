@@ -1,0 +1,25 @@
+diff --git a/src/main/java/com/example/pocapi/controller/AuthorController.java b/src/main/java/com/example/pocapi/controller/AuthorController.java
+index 1b4ef10..bbd5cc7 100644
+--- a/src/main/java/com/example/pocapi/controller/AuthorController.java
++++ b/src/main/java/com/example/pocapi/controller/AuthorController.java
+@@ -2,6 +2,7 @@ package com.example.pocapi.controller;
+ 
+ import com.example.pocapi.model.dto.AuthorDTO;
+ import com.example.pocapi.service.AuthorService;
++import com.fasterxml.jackson.databind.node.NullNode;
+ import lombok.RequiredArgsConstructor;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+@@ -17,8 +18,11 @@ public class AuthorController {
+     private final AuthorService authorService;
+     
+     @GetMapping
+-    public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
++    public ResponseEntity<?> getAllAuthors() {
+         List<AuthorDTO> authors = authorService.getAllAuthors();
++        if (authors.isEmpty()) {
++            return ResponseEntity.ok(NullNode.getInstance());
++        }
+         return ResponseEntity.ok(authors);
+     }
+     
