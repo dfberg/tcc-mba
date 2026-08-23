@@ -1,0 +1,8 @@
+{
+  "caseId": "EXP-009",
+  "timestamp": "2026-08-22T21:44:29-03:00",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "durationMs": 22989,
+  "testCommand": "mvn -Dtest=AuthorApiIntegrationTest#testCreateAuthor_Snapshot+testGetAuthorById_Snapshot test",
+  "testExitCode": 1
+}

@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-008",
+  "classification": "SHOULD_UPDATE",
+  "reason": "A perda do campo é intencional e constitui o comportamento correto definido para o caso."
+}

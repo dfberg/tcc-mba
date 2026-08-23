@@ -1,0 +1,15 @@
+{
+  "snapshot": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+  "test": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+  "approvedSha256": "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
+  "receivedSha256": "DE25D050CA58399238F28B3AB5DD3535805553C4C9FED6879FE570FB88668168",
+  "effectObserved": "firstName and lastName values are swapped in the GET response",
+  "execution": {
+    "testCommand": "mvn -Dtest=AuthorApiIntegrationTest#testCreateAuthor_Snapshot+testGetAuthorById_Snapshot test",
+    "timestamp": "2026-08-22T21:33:42-03:00",
+    "durationMs": 29836,
+    "testExitCode": 1,
+    "testOutput": "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt"
+  },
+  "status": "SNAPSHOT_MISMATCH_REPRODUCED"
+}

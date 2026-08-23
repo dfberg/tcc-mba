@@ -1,0 +1,15 @@
+diff --git a/src/main/java/com/example/pocapi/service/AuthorService.java b/src/main/java/com/example/pocapi/service/AuthorService.java
+index 430b3d9..c49c461 100644
+--- a/src/main/java/com/example/pocapi/service/AuthorService.java
++++ b/src/main/java/com/example/pocapi/service/AuthorService.java
+@@ -122,8 +122,8 @@ public class AuthorService {
+     private AuthorDTO convertToDTO(Author author) {
+         return AuthorDTO.builder()
+                 .id(author.getId())
+-                .firstName(author.getFirstName())
+-                .lastName(author.getLastName())
++                .firstName(author.getLastName())
++                .lastName(author.getFirstName())
+                 .email(author.getEmail())
+                 .build();
+     }
