@@ -216,3 +216,28 @@ O futuro `executionProtocolFreezeCommit` deve incluir, no mínimo:
 - o ensaio renderizado de EXP-001 e seus artefatos já validados.
 
 O commit e eventual tag só podem ser criados após revisão humana. Esta tarefa não cria commit nem executa LLM.
+
+## 13. Execução técnica repetida para evidência variável
+
+Esta seção aplica-se exclusivamente a CASEs que exijam explicitamente `repeated technical execution`. Ela regula a coleta técnica anterior à renderização e não altera o protocolo de inferência LLM.
+
+- `REPEATED_TECHNICAL_EXECUTION_COUNT = 3`.
+- Os índices fixos são `RUN-01`, `RUN-02` e `RUN-03`.
+- As três execuções usam a mesma mutação e o mesmo contexto técnico, sem alteração intermediária de código.
+- Cada execução é independente e preservada em `technical-runs/RUN-NN/received.txt` e `technical-runs/RUN-NN/test-output.txt`.
+- `technical-runs-manifest.json`, validado por `schemas/technical-runs-manifest.schema.json`, registra versão do protocolo, quantidade planejada, execução selecionada, IDs, status técnico e hashes SHA-256.
+- Ground Truth, categoria, dificuldade, interpretação, decisão esperada e dados LLM são proibidos no manifest e nos diretórios de runs.
+
+### 13.1 Seleção definida a priori
+
+`LLM_STIMULUS_RUN = RUN-01`. Somente os bytes de `RUN-01/received.txt` e `RUN-01/test-output.txt` alimentam os artefatos centrais `received.txt`, `test-output.txt`, `llm-input.json` e `rendered-prompt.txt`. A correspondência dos arquivos centrais com RUN-01 deve ser validada byte a byte e por SHA-256.
+
+Uma execução é tecnicamente válida somente quando parte do baseline correto, aplica a mutação prescrita, executa o contexto correto, alcança o mecanismo experimental esperado e produz os artefatos necessários sem falha de infraestrutura ou setup. A validade independe do conteúdo recebido, Ground Truth ou decisão esperada. Se RUN-01 sofrer falha infraestrutural, RUN-02 não é promovida: o EXP passa a `REQUIRES_REVIEW` e a ocorrência é preservada.
+
+RUN-02 e RUN-03 servem somente à caracterização da variabilidade. Não substituem RUN-01, não alteram o estímulo e não produzem inferências adicionais. `LLM_INFERENCES_PER_EXPERIMENT = 1`; execuções técnicas repetidas não são repetições LLM.
+
+`VARIABILITY_OBSERVED = YES` quando pelo menos duas execuções técnicas válidas possuem `received.txt` byte-diferentes, comprovados por SHA-256. A observação não altera `selectedRun`.
+
+### 13.2 Proibição de amostragem adaptativa
+
+São proibidos early stopping, executar até surgir determinada saída, alterar N após resultados, repetir por igualdade ou diferença das três saídas, descartar outliers, majority vote, resultado modal, selecionar proximidade ou distância do approved e qualquer seleção baseada em Ground Truth. A seleção nunca depende do resultado observado.
