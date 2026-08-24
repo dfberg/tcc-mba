@@ -331,3 +331,45 @@ Se um passo de preconditionamento também corresponder a um teste collateral, se
 - `COLLATERAL_EVIDENCE_REQUIRED_IN_LLM_INPUT = NO`.
 
 O `llm-input.json` não inclui transcript, manifest ou comandos de preconditionamento, collateral, indicação de que outro teste ocorreu antes, alcance `MULTIPLE_SNAPSHOTS` ou qualquer informação reservada.
+
+### 14.6 Sucesso da PHASE P e exit code do processo
+
+O sucesso do processo e o sucesso do estado de preconditionamento são fatos distintos. `exitCode == 0` caracteriza `SUCCESS_EXIT` e permite `PRECONDITION_SUCCESS`, desde que os demais requisitos desta seção sejam satisfeitos. Um exit code diferente de zero não constitui sucesso genérico: `NONZERO_EXIT_IS_GENERIC_SUCCESS = NO`.
+
+Uma PHASE P com `exitCode != 0` somente recebe `PRECONDITION_SUCCESS` quando, conjuntamente:
+
+1. o transcript integral demonstra que todas as ações necessárias à construção do estado foram concluídas antes da falha: `PRECONDITION_STATE_CONSTRUCTION_CONFIRMED = YES`;
+2. a falha é classificada como `POST_STATE_ASSERTION_FAILURE`, ocorre estritamente depois da construção do estado e não invalida seus efeitos;
+3. o transcript integral, sem recorte, edição ou normalização destinada a ocultar a falha, está preservado: `PRECONDITION_TRANSCRIPT_PRESERVED = YES`;
+4. em nova invocação, a PHASE O baseline usa o estado produzido, executa o teste primário sem mutação, passa, reproduz o approved congelado e os valores relevantes: `PRIMARY_BASELINE_PASS_AFTER_PRECONDITIONING = REQUIRED`;
+5. `PRECONDITIONING_STEPS_FIXED_BEFORE_MUTATION = YES`;
+6. `PRECONDITIONING_DEPENDS_ON_MUTATED_OUTPUT = NO`.
+
+Formalmente:
+
+```text
+PRECONDITION_SUCCESS =
+    (exitCode == 0)
+    OR
+    (
+      exitCode != 0
+      AND stateConstructionConfirmed == true
+      AND failureClassification == POST_STATE_ASSERTION_FAILURE
+      AND preconditionTranscriptPreserved == true
+      AND primaryBaselinePassAfterPreconditioning == true
+      AND preconditioningStepsFixedBeforeMutation == true
+      AND dependsOnMutatedOutput == false
+    )
+```
+
+A PHASE O baseline aprovada não apaga nem reclassifica o exit code factual; ela comprova independentemente a construção do estado. O manifest sempre preserva o valor real: `PRECONDITION_EXIT_CODE_PRESERVED_FACTUALLY = YES`.
+
+As classificações mínimas de término da PHASE P são:
+
+- `SUCCESS_EXIT`: processo encerrado com exit code zero;
+- `POST_STATE_ASSERTION_FAILURE`: depois de o estado estar integralmente construído, uma asserção de snapshot falha sem invalidar seus efeitos;
+- `PRE_STATE_FAILURE`: falha anterior ao início da construção necessária;
+- `STATE_CONSTRUCTION_FAILURE`: falha durante ou ao persistir a construção, deixando-a incompleta ou incerta;
+- `INFRASTRUCTURE_FAILURE`: falha de compilação, startup, conexão, fixture, timeout ou infraestrutura que impeça comprovar a construção.
+
+Somente `POST_STATE_ASSERTION_FAILURE` pode ser compatível com `PRECONDITION_SUCCESS` não-zero e apenas com todos os gates conjuntivos acima. Para `PRE_STATE_FAILURE`, `STATE_CONSTRUCTION_FAILURE` e `INFRASTRUCTURE_FAILURE`, `PRECONDITION_SUCCESS = NO`. A regra é geral para qualquer EXP com preconditionamento explícito e não depende de CASE, Ground Truth, received mutado ou resultado LLM.

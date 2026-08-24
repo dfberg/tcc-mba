@@ -17,7 +17,12 @@
     "primaryObservationStartsAfterPrecondition",
     "includedInLlmInput",
     "preconditioningStepsFixedBeforeMutation",
-    "dependsOnMutatedOutput"
+    "dependsOnMutatedOutput",
+    "stateConstructionConfirmed",
+    "failureClassification",
+    "preconditionTranscriptPreserved",
+    "primaryBaselinePassAfterPreconditioning",
+    "successDetermination"
   ],
   "properties": {
     "experimentId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
@@ -40,6 +45,65 @@
     "primaryObservationStartsAfterPrecondition": { "type": "boolean", "const": true },
     "includedInLlmInput": { "type": "boolean", "const": false },
     "preconditioningStepsFixedBeforeMutation": { "type": "boolean", "const": true },
-    "dependsOnMutatedOutput": { "type": "boolean", "const": false }
-  }
+    "dependsOnMutatedOutput": { "type": "boolean", "const": false },
+    "stateConstructionConfirmed": { "type": "boolean" },
+    "failureClassification": {
+      "type": "string",
+      "enum": [
+        "SUCCESS_EXIT",
+        "POST_STATE_ASSERTION_FAILURE",
+        "PRE_STATE_FAILURE",
+        "STATE_CONSTRUCTION_FAILURE",
+        "INFRASTRUCTURE_FAILURE"
+      ]
+    },
+    "preconditionTranscriptPreserved": { "type": "boolean", "const": true },
+    "primaryBaselinePassAfterPreconditioning": { "type": "boolean" },
+    "successDetermination": {
+      "type": "string",
+      "enum": ["PRECONDITION_SUCCESS", "PRECONDITION_FAILURE"]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "exitCode": { "const": 0 } }, "required": ["exitCode"] },
+      "then": {
+        "properties": {
+          "failureClassification": { "const": "SUCCESS_EXIT" },
+          "successDetermination": { "const": "PRECONDITION_SUCCESS" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "exitCode": { "not": { "const": 0 } },
+          "successDetermination": { "const": "PRECONDITION_SUCCESS" }
+        },
+        "required": ["exitCode", "successDetermination"]
+      },
+      "then": {
+        "properties": {
+          "stateConstructionConfirmed": { "const": true },
+          "failureClassification": { "const": "POST_STATE_ASSERTION_FAILURE" },
+          "primaryBaselinePassAfterPreconditioning": { "const": true }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failureClassification": {
+            "enum": ["PRE_STATE_FAILURE", "STATE_CONSTRUCTION_FAILURE", "INFRASTRUCTURE_FAILURE"]
+          }
+        },
+        "required": ["failureClassification"]
+      },
+      "then": {
+        "properties": {
+          "successDetermination": { "const": "PRECONDITION_FAILURE" }
+        }
+      }
+    }
+  ]
 }
