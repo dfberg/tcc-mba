@@ -241,3 +241,93 @@ RUN-02 e RUN-03 servem somente à caracterização da variabilidade. Não substi
 ### 13.2 Proibição de amostragem adaptativa
 
 São proibidos early stopping, executar até surgir determinada saída, alterar N após resultados, repetir por igualdade ou diferença das três saídas, descartar outliers, majority vote, resultado modal, selecionar proximidade ou distância do approved e qualquer seleção baseada em Ground Truth. A seleção nunca depende do resultado observado.
+
+## 14. Preconditionamento explícito de fixture e janela de observação primária
+
+Esta seção aplica-se quando a execução isolada do teste primário não reproduz o snapshot approved congelado porque o estado baseline depende de fixture, sequence, identity ou outras ações técnicas anteriores. A regra foi definida depois da observação de resultados técnicos de EXP-019 e EXP-020, mas antes de qualquer resultado LLM para esses EXPs.
+
+### 14.1 Definição e seleção
+
+`PRECONDITIONING` é a execução mínima e determinística das ações técnicas necessárias para colocar o sistema no estado em que o snapshot approved congelado é legitimamente reproduzível.
+
+- `PRECONDITIONING_PURPOSE = REPRODUCE_FROZEN_BASELINE_STATE`.
+- `PRECONDITIONING_SELECTION_RULE = MINIMUM_BASELINE_STATE_REPRODUCTION`.
+- A seleção deve ser demonstrável exclusivamente a partir do setup da suíte, fixtures, sequences, estado do banco, approved congelado e comportamento baseline.
+- São proibidos testes ou passos extras por conveniência.
+- O preconditionamento não integra a mutação e não altera CASE, Ground Truth ou snapshot approved.
+- A seleção não pode usar o received mutado, resultado ou classificação LLM, categoria, dificuldade ou intenção administrativa.
+- `PRECONDITIONING_STEPS_FIXED_BEFORE_MUTATION = YES`.
+- `PRECONDITIONING_DEPENDS_ON_MUTATED_OUTPUT = NO`.
+- `ARTIFICIAL_ID_FORCING_ALLOWED = NO`.
+- `SNAPSHOT_EDITING_ALLOWED = NO`.
+
+O objetivo é reproduzir, por consequência do fluxo real, o mesmo estado observável relevante ao teste primário. Quando aplicável, entidades criadas, sequence/identity state, IDs esperados e demais fatos de fixture devem ser registrados no manifest.
+
+### 14.2 Fases e janelas de captura
+
+O fluxo possui duas fases normativas separadas no momento da execução:
+
+```text
+PHASE P — PRECONDITIONING
+    constrói o estado baseline mínimo
+    preserva transcript próprio
+    não alimenta o estímulo LLM
+              ↓
+PHASE O — PRIMARY OBSERVATION
+    inicia depois do preconditionamento bem-sucedido
+    executa o teste primário oficial
+    produz received e test-output centrais
+```
+
+- `PRIMARY_LLM_EVIDENCE_SOURCE = PRIMARY_OBSERVATION_ONLY`.
+- PHASE P pode executar setup ou testes necessários, mas seu transcript não é `test-output.txt` central.
+- PHASE O é a única janela que produz o `testOutput` usado em `llm-input.json` e `rendered-prompt.txt`.
+- É proibido fazer uma captura ampla e remover posteriormente trechos de setup ou collateral: `POST_HOC_LOG_FILTERING_ALLOWED = NO`.
+- Os transcripts de PHASE P e PHASE O devem ser capturados separadamente desde o início de cada fase.
+
+### 14.3 Preservação e manifest
+
+O preconditionamento deve ser preservado integralmente em:
+
+```text
+EXP-NNN/
+  precondition/
+    manifest.json
+    test-output.txt
+```
+
+`precondition/manifest.json` deve validar contra `schemas/precondition-manifest.schema.json`. Ele registra somente fatos verificáveis: EXP, versão do protocolo, propósito, passos/comandos, estado baseline esperado, exit code, timestamp, SHA-256 do transcript, teste primário selecionado e confirmação de exclusão do input LLM.
+
+Ground Truth, classificação esperada, categoria, dificuldade, interpretação e dados LLM são proibidos no manifest e no transcript.
+
+### 14.4 Gates baseline e equivalência
+
+- `PRECONDITIONING_SUCCESS_REQUIRED = YES`.
+- `PRIMARY_BASELINE_PASS_REQUIRED_AFTER_PRECONDITIONING = YES`.
+- O preconditionamento apenas prepara o estado; ele não substitui a observação baseline primária nem autoriza aceitar mismatch.
+- Os mesmos passos de PHASE P devem ser usados no baseline e na execução mutada.
+- Exceção exige impossibilidade técnica objetiva definida e registrada antes da mutação; nunca pode decorrer do received mutado.
+
+Fluxo normativo futuro:
+
+1. restaurar o baseline congelado;
+2. executar PHASE P e preservar seu transcript/manifest;
+3. iniciar PHASE O baseline e confirmar que o approved passa;
+4. restaurar e preparar novamente estado equivalente;
+5. aplicar exclusivamente a mutação do CASE;
+6. executar PHASE P mutada com os mesmos passos fixados;
+7. iniciar PHASE O mutada e preservar `received.txt` e `test-output.txt` centrais;
+8. executar collateral separadamente;
+9. preservar collateral fora do estímulo LLM.
+
+### 14.5 Conjuntos de evidência e collateral
+
+`TECHNICAL_EVIDENCE_SET` pode conter evidência de preconditionamento, observação primária e collateral. `LLM_EVIDENCE_SET` contém somente a evidência primária permitida produzida em PHASE O. São conjuntos normativos distintos, produzidos em janelas distintas; essa separação não é truncamento nem edição de log.
+
+Se um passo de preconditionamento também corresponder a um teste collateral, seu output permanece evidência de preconditionamento e/ou collateral, nunca evidência LLM primária.
+
+- `PRECONDITION_METADATA_SENT_TO_LLM = NO`.
+- `PRECONDITION_COLLATERAL_OUTPUT_SENT_TO_LLM = NO`.
+- `COLLATERAL_EVIDENCE_REQUIRED_IN_LLM_INPUT = NO`.
+
+O `llm-input.json` não inclui transcript, manifest ou comandos de preconditionamento, collateral, indicação de que outro teste ocorreu antes, alcance `MULTIPLE_SNAPSHOTS` ou qualquer informação reservada.
