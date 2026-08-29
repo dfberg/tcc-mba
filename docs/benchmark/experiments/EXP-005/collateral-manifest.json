@@ -1,14 +1,25 @@
 {
-  "snapshot": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
-  "test": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
-  "approvedSha256": "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
-  "receivedSha256": "249EE7C1DB613D4F1FAB87540959CAD6827D49C81F40C361B7C76C0FCDAD9439",
-  "execution": {
-    "testCommand": "mvn -Dtest=AuthorApiIntegrationTest#testCreateAuthor_Snapshot+testGetAuthorById_Snapshot test",
-    "timestamp": "2026-08-22T20:12:47-03:00",
-    "durationMs": 34799,
-    "testExitCode": 1,
-    "testOutput": "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt"
-  },
-  "status": "SNAPSHOT_MISMATCH_REPRODUCED"
+    "experimentId":  "EXP-005",
+    "protocolVersion":  "COLLATERAL_EVIDENCE_V1",
+    "collateralCount":  1,
+    "collaterals":  [
+                        {
+                            "testName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+                            "snapshotName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+                            "approved":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/approved.txt",
+                                             "sha256":  "2511d0173d85da0b2b70faddbc079a5ff24be8206b82275d18a462189af44feb"
+                                         },
+                            "received":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/received.txt",
+                                             "sha256":  "249ee7c1db613d4f1fab87540959cad6827d49c81f40c361b7c76c0fcdad9439"
+                                         },
+                            "testOutput":  {
+                                               "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt",
+                                               "sha256":  "9021f743ba9a48fac79c72bc032b1c525f1122ba9438552096cd79c135e7b501"
+                                           },
+                            "evidencePreservedInFull":  true
+                        }
+                    ],
+    "includedInLlmInput":  false
 }

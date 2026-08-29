@@ -1,5 +1,5 @@
 {
-    "experimentId":  "EXP-020",
+    "experimentId":  "EXP-023",
     "protocolVersion":  "COLLATERAL_EVIDENCE_V1",
     "collateralCount":  1,
     "collaterals":  [
@@ -12,11 +12,11 @@
                                          },
                             "received":  {
                                              "path":  "collateral/BookApiIntegrationTest.testGetBooksByAuthor_Snapshot/received.txt",
-                                             "sha256":  "044f5dc013d6e006efe456769ada0347835899ec3829accb18d383b3cb27845e"
+                                             "sha256":  "9cda7cd2250f6a798d53e7e4ee5e42d42804182eaaed434efb07117a082c4471"
                                          },
                             "testOutput":  {
                                                "path":  "collateral/BookApiIntegrationTest.testGetBooksByAuthor_Snapshot/test-output.txt",
-                                               "sha256":  "d44785bc41b17d414c08376b50d46c7d5b4dd550dd5348fd20f8fcf8539c001b"
+                                               "sha256":  "93704673e41997e2267f8d11b2fb882e50bf18a9256ee67c8af17f62467f2a2e"
                                            },
                             "evidencePreservedInFull":  true
                         }

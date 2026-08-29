@@ -1,0 +1,25 @@
+{
+    "experimentId":  "EXP-022",
+    "caseId":  "CASE-022",
+    "caseVersion":  "CASE-022-v1",
+    "category":  "BUG",
+    "endpoint":  "/books",
+    "httpMethod":  "POST",
+    "snapshotTarget":  "BookApiIntegrationTest.testCreateBook_Snapshot.approved.txt",
+    "testTarget":  "BookApiIntegrationTest.testCreateBook_Snapshot",
+    "mutationPoints":  [
+                           "MP-013",
+                           "MP-014",
+                           "MP-016"
+                       ],
+    "difficulty":  "MEDIUM",
+    "expectedScope":  "MULTIPLE_SNAPSHOTS",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "8D97EFAFA136FC0FFA6AC71D9AC41B383D3D14A47A46392DB21DFDAE4D7BD8EF",
+    "receivedSha256":  "74C0B645827B5552AC3A8BD83B44157AB38911FBE4B5B40D222C13D10CA44310",
+    "patchSha256":  "2A32DC9E7F1D704F9A85727F58A4A28E44CC19669CC46335A8FA9627D23CF8FC",
+    "testOutputSha256":  "7EA42F4A58A8C4717DD7E638B345AD82FFD69A7D13233865F2678B6A1F28F9FE",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}

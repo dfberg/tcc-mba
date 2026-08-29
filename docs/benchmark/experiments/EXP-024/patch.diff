@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/example/pocapi/controller/BookController.java b/src/main/java/com/example/pocapi/controller/BookController.java
+index 3f1ff33..a2cd23e 100644
+--- a/src/main/java/com/example/pocapi/controller/BookController.java
++++ b/src/main/java/com/example/pocapi/controller/BookController.java
+@@ -37,6 +37,7 @@ public class BookController {
+     @PostMapping
+     public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) {
+         BookDTO createdBook = bookService.createBook(bookDTO);
++        createdBook.setReviews(List.of());
+         return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
+     }
+     

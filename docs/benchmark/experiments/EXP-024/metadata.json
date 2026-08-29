@@ -1,0 +1,25 @@
+{
+    "experimentId":  "EXP-024",
+    "caseId":  "CASE-024",
+    "caseVersion":  "CASE-024-v1",
+    "category":  "CONTRACT_EVOLUTION",
+    "endpoint":  "/books",
+    "httpMethod":  "POST",
+    "snapshotTarget":  "BookApiIntegrationTest.testCreateBook_Snapshot.approved.txt",
+    "testTarget":  "BookApiIntegrationTest.testCreateBook_Snapshot",
+    "mutationPoints":  [
+                           "MP-012",
+                           "MP-019",
+                           "MP-021"
+                       ],
+    "difficulty":  "MEDIUM",
+    "expectedScope":  "TARGET_ONLY",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "8D97EFAFA136FC0FFA6AC71D9AC41B383D3D14A47A46392DB21DFDAE4D7BD8EF",
+    "receivedSha256":  "1E08750C779C589E365B941BB8B08205D4B9A72E62BA21346A82427C8F810E29",
+    "patchSha256":  "9B6A80358916895AC18F9EB78F7FFBB1B1811169518BF02DDA2DBAEA942F194B",
+    "testOutputSha256":  "027F0802ABC2F260FD2F5CA568FABD284E2E92CA49537008A52A367E2005F10B",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}

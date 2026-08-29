@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-022",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "O relacionamento público se tornaria internamente inconsistente."
+}

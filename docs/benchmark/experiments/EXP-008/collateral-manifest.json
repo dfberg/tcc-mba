@@ -1,15 +1,25 @@
 {
-  "snapshot": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
-  "test": "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
-  "approvedSha256": "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
-  "receivedSha256": "FE6FCD828F839B1E648370919BD18E58F7C2CD73317579656796EEF6E44BB39C",
-  "effectObserved": "email is omitted from the GET response",
-  "execution": {
-    "testCommand": "mvn -Dtest=AuthorApiIntegrationTest#testCreateAuthor_Snapshot+testGetAuthorById_Snapshot test",
-    "timestamp": "2026-08-22T21:42:25-03:00",
-    "durationMs": 23468,
-    "testExitCode": 1,
-    "testOutput": "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt"
-  },
-  "status": "SNAPSHOT_MISMATCH_REPRODUCED"
+    "experimentId":  "EXP-008",
+    "protocolVersion":  "COLLATERAL_EVIDENCE_V1",
+    "collateralCount":  1,
+    "collaterals":  [
+                        {
+                            "testName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+                            "snapshotName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+                            "approved":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/approved.txt",
+                                             "sha256":  "2511d0173d85da0b2b70faddbc079a5ff24be8206b82275d18a462189af44feb"
+                                         },
+                            "received":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/received.txt",
+                                             "sha256":  "fe6fcd828f839b1e648370919bd18e58f7c2cd73317579656796eef6e44bb39c"
+                                         },
+                            "testOutput":  {
+                                               "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt",
+                                               "sha256":  "9256a1cabdef2d55c53087e8cc52e74423119addaa1b27ab026b71e1bc01242a"
+                                           },
+                            "evidencePreservedInFull":  true
+                        }
+                    ],
+    "includedInLlmInput":  false
 }
