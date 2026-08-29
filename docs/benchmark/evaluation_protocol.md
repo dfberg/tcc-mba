@@ -373,3 +373,15 @@ As classificações mínimas de término da PHASE P são:
 - `INFRASTRUCTURE_FAILURE`: falha de compilação, startup, conexão, fixture, timeout ou infraestrutura que impeça comprovar a construção.
 
 Somente `POST_STATE_ASSERTION_FAILURE` pode ser compatível com `PRECONDITION_SUCCESS` não-zero e apenas com todos os gates conjuntivos acima. Para `PRE_STATE_FAILURE`, `STATE_CONSTRUCTION_FAILURE` e `INFRASTRUCTURE_FAILURE`, `PRECONDITION_SUCCESS = NO`. A regra é geral para qualquer EXP com preconditionamento explícito e não depende de CASE, Ground Truth, received mutado ou resultado LLM.
+
+## 15. Manifest de evidências collateral
+
+Collateral evidence existe quando a mutação afeta um ou mais snapshots adicionais além do snapshot primário. Ela pertence exclusivamente ao `TECHNICAL_EVIDENCE_SET` e não pertence ao `LLM_EVIDENCE_SET`. Permanece obrigatória a regra `COLLATERAL_EVIDENCE_REQUIRED_IN_LLM_INPUT = NO`.
+
+Quando ao menos um collateral for observado, o EXP deve preservar `collateral-manifest.json`, validado por `schemas/collateral-manifest.schema.json`. Quando nenhum collateral for observado, o manifest não é criado e nenhuma evidência collateral artificial é adicionada. Por isso, um manifest existente contém no mínimo uma entrada.
+
+O manifest registra somente fatos verificáveis: EXP, versão do protocolo, quantidade de collaterals, identificação técnica de cada teste e snapshot, paths relativos dos artefatos approved, received e test-output, seus hashes SHA-256, preservação integral e exclusão do input LLM. `collateralCount` deve ser igual à quantidade de entradas em `collaterals`; essa igualdade é um gate do produtor e da validação metodológica, além das restrições estruturais do schema.
+
+Paths absolutos, travessia por `..`, Ground Truth, categoria, dificuldade, intenção, justificativa semântica, classificação esperada, scoring, `MATCH` e `MISMATCH` são proibidos. O valor de `includedInLlmInput` é sempre `false`.
+
+Antes de um EXP alcançar `VALIDATED` ou ser congelado, seu manifest collateral deve passar no schema, a contagem deve conferir com as entradas, cada path deve resolver dentro do EXP, os três hashes devem corresponder aos bytes preservados e a exclusão do `llm-input.json` e do prompt deve ser confirmada.
