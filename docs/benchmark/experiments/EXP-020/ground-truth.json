@@ -1,0 +1,5 @@
+{
+    "caseId":  "EXP-020",
+    "classification":  "SHOULD_UPDATE",
+    "reason":  "A diferença é o resultado correto da nova regra explícita."
+}

@@ -1,0 +1,5 @@
+{
+    "caseId":  "EXP-018",
+    "classification":  "SHOULD_NOT_UPDATE",
+    "reason":  "O erro deixaria de apontar para a requisição que falhou."
+}

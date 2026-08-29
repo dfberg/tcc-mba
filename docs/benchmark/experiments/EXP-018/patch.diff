@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java b/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
+index 448a5ea..bd2fbe8 100644
+--- a/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
++++ b/src/main/java/com/example/pocapi/exception/GlobalExceptionHandler.java
+@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
+                 .status("404")
+                 .message(ex.getMessage())
+                 .timestamp(LocalDateTime.now(clock).format(dateTimeFormatter))
+-                .path(request.getDescription(false).replace("uri=", ""))
++                .path("/errors")
+                 .build();
+         
+         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
