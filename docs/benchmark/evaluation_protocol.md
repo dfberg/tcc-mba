@@ -385,3 +385,49 @@ O manifest registra somente fatos verificáveis: EXP, versão do protocolo, quan
 Paths absolutos, travessia por `..`, Ground Truth, categoria, dificuldade, intenção, justificativa semântica, classificação esperada, scoring, `MATCH` e `MISMATCH` são proibidos. O valor de `includedInLlmInput` é sempre `false`.
 
 Antes de um EXP alcançar `VALIDATED` ou ser congelado, seu manifest collateral deve passar no schema, a contagem deve conferir com as entradas, cada path deve resolver dentro do EXP, os três hashes devem corresponder aos bytes preservados e a exclusão do `llm-input.json` e do prompt deve ser confirmada.
+
+## 16. Representação Git no stage e identidade da evidência
+
+Esta seção regula a representação versionada de artefatos durante o stage e freeze. Ela não autoriza alterar artefatos experimentais, `.gitattributes`, schemas, CASEs, Ground Truth ou estímulos para satisfazer um gate.
+
+### 16.1 Classes normativas
+
+`BYTE_IMMUTABLE_EVIDENCE` é evidência cujo valor científico depende dos bytes exatamente capturados e previamente validados. Inclui `patch.diff`, `approved.txt`, `received.txt`, `test-output.txt`, `llm-input.json`, `rendered-prompt.txt`, transcripts de preconditionamento, evidência collateral approved/received/test-output, technical runs e respostas brutas ou outputs de LLM. Para essa classe, `STAGED_BLOB_BYTES == EXPECTED_EVIDENCE_BYTES` é obrigatório. Qualquer alteração produzida por filtro Git bloqueia o freeze.
+
+`CANONICALIZABLE_TEXT_METADATA` é texto estruturado cujo valor normativo é o conteúdo factual e sua estrutura validada, não a escolha física de EOL. Inclui `metadata.json`, `execution.json`, `ground-truth.json`, `precondition/manifest.json`, `collateral-manifest.json` e `technical-runs-manifest.json`. Um arquivo JSON não entra automaticamente nessa classe: deve exercer papel de metadado estruturado e não de estímulo, transcript, snapshot, patch ou output bruto.
+
+`ground-truth.json` é metadata estruturada reservada: a regra não permite que seu conteúdo seja carregado no renderer, chamada LLM ou qualquer decisão sobre classificação experimental. `llm-input.json` permanece `BYTE_IMMUTABLE_EVIDENCE`, porque é o estímulo estruturado que origina o prompt, mesmo contendo JSON.
+
+### 16.2 Canonicalização permitida
+
+Para `CANONICALIZABLE_TEXT_METADATA`, a única canonicalização inicialmente aceita é `EOL_CANONICALIZATION_ONLY`. O commit pode congelar o blob Git canônico produzido por filtros já vigentes antes da tentativa de freeze somente se todos os seguintes gates passarem:
+
+1. a transformação provém exclusivamente de filtros Git preexistentes e versionados/aplicáveis;
+2. nenhum byte do worktree foi editado para obter a representação canônica;
+3. a diferença é somente CRLF/LF;
+4. ambas as representações são JSON válido e possuem estrutura, valores, tipos, propriedades, arrays e ordem de arrays idênticos;
+5. nenhuma string interna, encoding lógico ou informação é modificada;
+6. ambas passam no schema aplicável;
+7. o blob staged é exatamente o resultado esperado do clean filter Git;
+8. `.gitattributes` não foi alterado na mesma operação; e
+9. a aceitação não depende do EXP, de Ground Truth, de resultado técnico observado ou de resultado LLM.
+
+Não são permitidos trimming, reindentação, reordenação de propriedades, pretty-print, minificação, formatter, normalização Unicode, alteração de BOM, alteração de strings, espaços internos ou remoção de linhas em branco. Qualquer transformação além de EOL bloqueia o freeze.
+
+`GIT_ATTRIBUTES_MUST_PREEXIST_FREEZE_ATTEMPT = YES`. `GIT_ATTRIBUTES_CHANGE_TO_PASS_GATE_ALLOWED = NO`.
+
+### 16.3 Duas identidades verificáveis
+
+Para metadata canonicalizável, a auditoria registra separadamente `WORKTREE_SHA256`, hash dos bytes físicos factuais preservados, e `GIT_BLOB_SHA256`, hash da representação canônica que será versionada. Um não substitui silenciosamente o outro. Para evidência byte-imutável, a identidade congelada é o conteúdo byte-exato já validado; para metadata canonicalizável, a identidade congelada é o blob Git canônico somente após os gates da seção 16.2.
+
+### 16.4 Gate de freeze
+
+O freeze segue cinco gates:
+
+1. **Scope:** stage somente paths autorizados.
+2. **Byte immutable:** exigir identidade byte a byte para cada `BYTE_IMMUTABLE_EVIDENCE`.
+3. **Text metadata:** exigir proveniência do clean filter, transformação EOL-only, identidade semântica JSON, schema e ausência de edição no worktree para cada `CANONICALIZABLE_TEXT_METADATA` afetado.
+4. **Diff:** executar `git diff --cached --check`. Findings exclusivamente de whitespace preservado em `BYTE_IMMUTABLE_EVIDENCE` são diagnósticos e não autorizam alterar bytes; metadata editável continua sujeita ao check normal.
+5. **Secrets:** o scan dos blobs staged deve passar.
+
+Falha em qualquer gate bloqueia o freeze. Esta regra é geral para EXPs passados e futuros, não reclassifica evidência retroativamente e não invalida, reescreve ou move freezes/tags anteriores.
