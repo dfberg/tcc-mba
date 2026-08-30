@@ -1,0 +1,23 @@
+{
+    "experimentId":  "EXP-027",
+    "caseId":  "CASE-027",
+    "caseVersion":  "CASE-027-v1",
+    "category":  "BUG",
+    "endpoint":  "/books/by-author/{authorId}",
+    "httpMethod":  "GET",
+    "snapshotTarget":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot.approved.txt",
+    "testTarget":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot",
+    "mutationPoints":  [
+                           "MP-017"
+                       ],
+    "difficulty":  "MEDIUM",
+    "expectedScope":  "TARGET_ONLY",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "7FD5C171DB022F6B359EA46F3EC0B62EE84C270759D9BFB0BDCE9AA4A000B849",
+    "receivedSha256":  "FD4569DEA44DF73AFE0B11A9CD350E2E8FC676A9B3E6D1F385BA345ACF478C86",
+    "patchSha256":  "81C5E156007E2681BE7CF4DEE5EE13ED0DD50E2649E183F3584CC5D26CB79AFF",
+    "testOutputSha256":  "4833001BBEC72E0BFBEDB7A99EF221E515BCDF81B029AF82890E8F62021076F4",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}

@@ -1,0 +1,5 @@
+{
+    "caseId":  "EXP-030",
+    "classification":  "SHOULD_UPDATE",
+    "reason":  "The bibliographic author-name representation is an intentional contract evolution."
+}

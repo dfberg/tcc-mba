@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/pocapi/service/BookService.java b/src/main/java/com/example/pocapi/service/BookService.java
+index c6f359f..3ea9008 100644
+--- a/src/main/java/com/example/pocapi/service/BookService.java
++++ b/src/main/java/com/example/pocapi/service/BookService.java
+@@ -119,7 +119,7 @@ public class BookService {
+                 .title(book.getTitle())
+                 .isbn(book.getIsbn())
+                 .authorId(book.getAuthor().getId())
+-                .authorName(book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName())
++                .authorName(book.getAuthor().getLastName() + ", " + book.getAuthor().getFirstName())
+                 .build();
+     }
+ }

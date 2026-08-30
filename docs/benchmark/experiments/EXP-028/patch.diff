@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/example/pocapi/service/BookService.java b/src/main/java/com/example/pocapi/service/BookService.java
+index c6f359f..b4794cc 100644
+--- a/src/main/java/com/example/pocapi/service/BookService.java
++++ b/src/main/java/com/example/pocapi/service/BookService.java
+@@ -42,6 +42,7 @@ public class BookService {
+         
+         return bookRepository.findByAuthorId(authorId)
+                 .stream()
++                .limit(1)
+                 .map(this::convertToDTO)
+                 .collect(Collectors.toList());
+     }
