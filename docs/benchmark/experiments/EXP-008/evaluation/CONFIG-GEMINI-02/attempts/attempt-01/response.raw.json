@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":false,\"confidence\":95,\"reason\":\"A alteração no arquivo AuthorService.java removeu o mapeamento do campo 'email' na resposta do serviço. Como a requisição POST envia o campo de email no payload, a omissão desse campo no objeto retornado indica uma regressão/erro no mapeamento do código, e não um comportamento esperado.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3725,
+    "candidatesTokenCount": 80,
+    "totalTokenCount": 4393,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3725
+      }
+    ],
+    "thoughtsTokenCount": 588,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "aKmUavzPKL-kmtkP_IjgkAI"
+}

@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": false,
+  "confidence": 100,
+  "reason": "A alteração no código em `AuthorService.java` incrementa indevidamente o ID do DTO retornado (`authorDTO.setId(authorDTO.getId() + 1)`), fazendo com que a consulta ao autor de ID 4 retorne ID 5. Trata-se de um erro/bug de implementação e não de uma alteração comportamental válida."
+}

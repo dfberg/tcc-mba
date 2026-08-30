@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":false,\"confidence\":100,\"reason\":\"A alteracao no arquivo AuthorService.java inverteu incorretamente os campos firstName e lastName ao converter a entidade para DTO. Essa inversao e um erro de codigo e nao um comportamento esperado, portanto o snapshot nao deve ser atualizado.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3803,
+    "candidatesTokenCount": 67,
+    "totalTokenCount": 4297,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3803
+      }
+    ],
+    "thoughtsTokenCount": 427,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "MqmUapGVG7OeqtsPoPj1kAI"
+}

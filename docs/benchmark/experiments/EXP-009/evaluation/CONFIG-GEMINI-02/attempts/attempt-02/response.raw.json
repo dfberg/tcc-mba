@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":95,\"reason\":\"A alteração no controller concatena firstName e lastName em fullName e define os campos individuais como nulos, modificando o formato de resposta da API na rota GET /authors/{id}. O snapshot recebido reflete essa mudança planejada na resposta do DTO.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4337,
+    "candidatesTokenCount": 68,
+    "totalTokenCount": 4918,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4337
+      }
+    ],
+    "thoughtsTokenCount": 513,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "m6mUarrjDP-hz7IPhaaDkAM"
+}
