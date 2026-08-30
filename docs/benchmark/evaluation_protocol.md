@@ -446,6 +446,18 @@ O freeze segue cinco gates:
 
 Falha em qualquer gate bloqueia o freeze. Esta regra é geral para EXPs passados e futuros, não reclassifica evidência retroativamente e não invalida, reescreve ou move freezes/tags anteriores.
 
+## 18. Retomada de sequência técnica incompleta por interrupção do executor
+
+`EXECUTOR_INTERRUPTION` é um evento operacional distinto de falha do provider: o processo ou orquestrador termina depois da preservação completa de uma attempt e antes de obter a primeira resposta válida ou consumir `MAX_TECHNICAL_ATTEMPTS`. A interrupção não conta como attempt, não reinicia o orçamento, não apaga nem sobrescreve evidência e não torna automaticamente o EXP uma falha técnica terminal.
+
+`RESUME_INCOMPLETE_TECHNICAL_ATTEMPT_SEQUENCE` é permitido somente quando não existe `llm-output.json` válido, o número de attempts completas é menor que o máximo congelado, a sequência é contínua desde `attempt-01`, todas as attempts existentes passam integridade e hash linkage, nenhuma Phase B ocorreu, Ground Truth não foi carregado, prompt/config/schema permanecem idênticos e a interrupção ocorreu fora de qualquer decisão semântica da LLM. O próximo índice é determinístico: `NEXT_ATTEMPT_INDEX = EXISTING_ATTEMPT_COUNT + 1`.
+
+Attempts anteriores permanecem append-only: é proibido renomeá-las, apagá-las, reexecutá-las ou sobrescrever seus raws, timestamps e metadados. O máximo de attempts vale globalmente entre invocações; se o orçamento for esgotado sem resposta válida, então — e somente então — o resultado é `TECHNICAL_FAILURE_NO_VALID_RESPONSE`. `FIRST_VALID_RESPONSE` também vale globalmente: uma resposta válida em retomada congela o output e proíbe attempts posteriores.
+
+Somente uma attempt completa pode contar: `attempt.json` válido, raw preservado quando aplicável, hash linkage válido e status técnico determinado. Uma attempt parcial não pode ser recuperada ou sobrescrita automaticamente; o EXP fica `REQUIRES_REVIEW`. Se já houver output válido, retomada de inferência é proibida e a única próxima ação permitida é Phase B pendente.
+
+Após `EXECUTOR_INTERRUPTION`, o batch não pula o EXP incompleto: a próxima invocação deve aplicar a retomada nele antes do próximo EXP da ordem fixa. Interrupções repetidas continuam suportadas dentro do orçamento, sempre pelo próximo índice disponível. A retomada continua sendo a mesma Phase A: Ground Truth permanece proibido até o freeze de um output válido.
+
 ## 17. Recuperação de artefato normativo preexistente ausente
 
 `RECOVERY_OF_MISSING_PREEXISTING_NORMATIVE_ARTIFACT` é uma correção excepcional e geral para materializar um `ground-truth.json` fisicamente ausente. Ela não cria nem redefine Ground Truth: somente cria uma nova representação física de conteúdo normativo que já existia, de modo inequívoco, antes da primeira inferência relevante.
