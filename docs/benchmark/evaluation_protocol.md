@@ -445,3 +445,30 @@ O freeze segue cinco gates:
 5. **Secrets:** o scan dos blobs staged deve passar.
 
 Falha em qualquer gate bloqueia o freeze. Esta regra é geral para EXPs passados e futuros, não reclassifica evidência retroativamente e não invalida, reescreve ou move freezes/tags anteriores.
+
+## 17. Recuperação de artefato normativo preexistente ausente
+
+`RECOVERY_OF_MISSING_PREEXISTING_NORMATIVE_ARTIFACT` é uma correção excepcional e geral para materializar um `ground-truth.json` fisicamente ausente. Ela não cria nem redefine Ground Truth: somente cria uma nova representação física de conteúdo normativo que já existia, de modo inequívoco, antes da primeira inferência relevante.
+
+A recuperação só é permitida se todos os gates abaixo forem satisfeitos e registrados no protocolo/change control:
+
+1. `NORMATIVE_CONTENT_PREEXISTED_BEFORE_LLM = YES`;
+2. `NORMATIVE_SOURCE_FROZEN = YES`;
+3. `SCHEMA_PREEXISTED = YES`;
+4. `RECOVERY_DETERMINISTIC = YES`;
+5. `HISTORICAL_FILE_BYTES_EXIST = NO`;
+6. `LLM_RESULT_USED_FOR_RECOVERY = NO`;
+7. `NO_SEMANTIC_DECISION_INTRODUCED = YES`; e
+8. `RECOVERY_PROVENANCE_RECORDED = YES`.
+
+A proveniência obrigatoriamente distingue `GROUND_TRUTH_SEMANTIC_PROVENANCE: FROZEN_CATALOG` de `GROUND_TRUTH_FILE_BYTE_PROVENANCE: POST_HOC_DETERMINISTIC_MATERIALIZATION`. Ela também deve registrar `HISTORICAL_GT_FILE_BYTES_EXIST: NO` e `HISTORICAL_GT_SEMANTIC_CONTENT_EXISTED: YES`. Esses dados pertencem ao protocolo e ao change control; não podem ser adicionados ao `ground-truth.json` quando o schema não os autorizar.
+
+É proibido usar resposta, classificação, confidence ou reason de LLM para escolher a classificação, reescrever/simplificar/corrigir a justificativa, reinterpretar a fonte congelada, alterar o schema, comparar Ground Truth com output antes do freeze da recuperação, executar Phase B antes desse freeze ou afirmar que os bytes materializados são históricos.
+
+O arquivo materializado deve conter exclusivamente o objeto permitido pelo schema preexistente. A serialização física nova deve ser registrada como pós-hoc e determinística; a recuperação não autoriza alterar catálogo, fonte normativa, evidência imutável, output LLM ou decisão semântica.
+
+### 17.1 Gate de existência antes de inferência
+
+Antes da primeira chamada real de cada EXP elegível, um preflight independente do caminho de inferência deve confirmar `GROUND_TRUTH_FILE_PRESENT_FOR_FUTURE_PHASE_B: YES`, validade contra o schema e proveniência do arquivo resolvida. O caminho de Phase A continua proibido de ler o Ground Truth ou seus valores; esse gate verifica somente path, existência, schema e proveniência fora do caminho de inferência.
+
+O preflight deve falhar se qualquer uma dessas condições não for satisfeita. O gate é geral, não expõe conteúdo reservado ao modelo e não altera retroativamente uma Phase A já concluída.
