@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":true,"confidence":98,"reason":"A alteração no código adicionou o campo 'displayName' ao 'AuthorDTO' e preencheu o valor no 'AuthorService' combinando o primeiro e último nome. O snapshot recebido reflete exatamente essa nova propriedade na resposta da API, tratando-se de uma atualização legítima do contrato."}

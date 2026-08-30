@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":98,\"reason\":\"A alteração no código adicionou o campo 'displayName' ao 'AuthorDTO' e preencheu o valor no 'AuthorService' combinando o primeiro e último nome. O snapshot recebido reflete exatamente essa nova propriedade na resposta da API, tratando-se de uma atualização legítima do contrato.\"}",
+            "thoughtSignature": "EswJCskJARFNMg+IrgcDQViIT2frBlIxTzwcl65ro974FeLPRBhOZToPoKv9VXh0OUv/f0BlIGg9/lqlPUePjiOxPhtjvaUfgpcd/Gr8Vc3vuvuMe/OpeQmzuoOuButfB8tZQfvR6uXOwyTuc+DeudWNYXNaceUO2rGbJrsI8sGx6FIHOqnjXKTNSONAGXkmwR5BUjRvxsXHtgcXk4s32JgFtvrM2GiUjmbG0pY87XZfuPYTPy4TGoOu+GexqFSouHSNny+eEM6uNPekidcuHIBF9FqKN2GmcPezoSlAjx8uGxB+4J1rBhNE90HaZCA9FxgYrFf85GQDST0LyGfCeP8d5xs3dR9pDLP3c6UOJ2de5YeD+65IKCre9qM7j9kHfDpmBlXnhq1U9q3SL1SQCr4byffkFMKq9r4F2KRoP79E/BwSvUics32uF7qM6sxY4Y8uDaLU9Ixxufs1RtopJQPTX6UE4+TyRXjZB/kfhK+r/nT8FWmDdAUKSNE/HvvxKHPmVAEWUSb5WQulSsBgE3hJjxffVVJ6TbteBrVtLSoUJ24U3wCsOxunyV3fX/u/DfvQ62E6ruXMjdlTUdmv5mJKTXOyo6dQz/Xmudh5BIRqfMLeEaWrjUjnL4xbVt2q6iqmzq9FkGHGUo/BrVFRT5vAh4Xl79IXxSdhCuvwaESfswnYy3e/TgWlG+ZsaELtRy0bDdIhoBAYHmB2mxnISIFAfV8W98P+xSI1PM+IPE0LutuB2c4XQ7iKtSjNCrvuIuG85yEMQf9+Jky8sE5K2d3cn20WfSP5bowNTCHGVifWGoz3srSw3AvKrNFmxcBk3ag+29fQW2ToxuYvpGDMPHkHH38WMnoMY8XY93cfnVErKksLUCjpeyjQVgWVR7xTClPk3kP0ziuDB2ZI2x2one/Yw2NBWfKyzBiui/p2w8KO8BluKXzWgRLGowoJCGbLoJhiVxwHnmKX4RUuYbrWYCaJghm/IP/8ETF1pkC8DkGwfIG1g//k7XVZrTvLAIqoKwyuxjJGl0tYX9wg97luigq7oQvH8RDSN8VRMwVTg+hsQWvblObeFF3I5bnij/WfyEd4dzRaCo4n3tVvDsjQK4E/ER54U1mBm/3Oh5KQlCjV3lhG8m2MasbyzRq7Zhs8VLGfz0Mnu/our0EthJU5wBqDDL2Sd9xFn8ZvM8Gr4vgNBrDKIXv+VgNBulxgZsgGrV3vT0V/oYHjV2q44bz/MbSRhh9t+fKTsxs8H0PXXBghA1RT3XJnlzyoeCPLi0UpwEKrK8Sh/bCCmPAD8pxuT8ECImDfHRHQ62G6JEe2R5jiy6ixI1HKS7NKOIi1DYSa8h+berB8XjQu0p0JgA+Xn4pdZUmHNTS83x+R4w4sYiC0iUKxTHVYporuRvG9HiIBBW6cYJohkTNYYP5iH9wV+oLflkXuvG5Y5Am21QMh5CzUYpF3qP9loClc8RAXMivSwk2w5Ha1PyfaGuc1rQXgh3ztFgbo3ZF7zmvwc+2RgeFLRvHIb2gWUcwmSOD9zTaxHGeDu65xpv8vTo8LAmXce6d0g42RIg/c4l+OBwsaQesxmnmPBmP+OG1Wk/qfr/stkm6hegtpVXRI1rWG5/N9A42QAJbvDDtSYsATmby+6Q=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3986,
+    "candidatesTokenCount": 77,
+    "totalTokenCount": 4334,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3986
+      }
+    ],
+    "thoughtsTokenCount": 271,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "uKCUap_jKOfRz7IPxM-4wA8"
+}

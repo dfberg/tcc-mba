@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A inclusão da propriedade 'spring.jackson.serialization.indent-output=true' em application.properties ativa a formatação indentada do Jackson. A alteração no snapshot de '[]' para '[ ]' decorre diretamente dessa nova configuração de formatação de JSON."
+}

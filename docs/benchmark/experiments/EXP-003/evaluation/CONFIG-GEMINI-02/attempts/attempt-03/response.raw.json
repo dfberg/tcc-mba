@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A inclusão da propriedade 'spring.jackson.serialization.indent-output=true' em application.properties ativa a formatação indentada do Jackson. A alteração no snapshot de '[]' para '[ ]' decorre diretamente dessa nova configuração de formatação de JSON.\"\n}",
+            "thoughtSignature": "EvMKCvAKARFNMg9Rv6tYsAi/W0mkrc9Aj/Nf2H+7t9p91LAokpfpAODEGQZJe/M8YVHsXTCFTp1dnLoMN0TKNonvW1+AyvBoopn5ycHRGBncqmMmANf9mf/g54Z09jmHFfDtQnh1VKDDz8GGU+muC8Oyvai/+WOF7Xd88tAZg7r5W9C9lFL9qTer2loFb+YRhDG2wSJukUrZfLKT7YESDyZVpbheCu9Heo/it4J2GSXBNiwaKVoyMzvCuwsvSjKBE1QjDsbYC1ZBDi/co7QHWJBL0QnPmjpc00+UmIj0zuH56TQryR70RsH2KeU4Hi8itufnOKonfXhHZ1WhQFjqjONS1cGwRJEtXC7w6nqxUYKxVYssc9HSyP1rCRJGW27mmZYoKC8exZW8mUBPfKWxD5UMSWZ9eROi6TxZloslOSJ2CW+JlYf9JJ9MdRSYMYpKBu8ogeNO6H/WDRTazc4Q6nnVnZX+1FmMDAyao+zrXMnfGtrZli1LNq1UIFrWDaOowU/iGgOK5vmsYfly0kK3UzrYDJnPgrA8AxAL/BSvJW18MNRtbqX2nlX7CDSVhF0ssGJNBWawBkLzWoQ6G48JY3LDUm/l9a+hIJcGWxhK8QtpbMjltjXcnGuLdrMPWX/i7FXiwmaJxkeopqDTx1GxJr7SCH1P7mowvuhO7YJV/hkwrxcv7PX8iWlwi51f1yFKFLpGQNmjnyg8NxOs+zqDEbH+Sl+lcqZse0tb/tWARFQlq9x3AqlH1aE9fgVKyI+Sex7xUf9fomgU0GTZ/7ndCbjYMPLy8lS5stmb2JAo1ppGmTwAGBtyjG50lGBZ43FsVq30QRwLVB1ej56GuXzL589ei/LHGomzhsBu0vc3QRLN2r2L3zr1PzyFFzBbvFrrBjv1QMBSGHRPhZ1nkxzV3LNO9/o1HM2xyIhliLmayZv5kDZ0BrdWdkdHDKj6FWC9KW+uQUxgV4aKEO/qxXBcIL74z3qiLyMyPiv19KgX8QB5ZDdcRsPrFb9gqsF07FE7ymqYFXBPUelaPQFzPfJ7qecqa3XuFskwkceU1lmqzeQ2hdWoDwoys9Ygk4sHcdzq2e09zM6OiaGo0RDq1mZtwxg/WRwRDLe5n+phUxCKQ/1IBED+zp1ubautzBMOYIoVl2iQdpUUCn4ehmXocI5xDnihKM43TfMuSNhw4V1f9iRrRQ/Ffxb1UWsR1qglUTWb0KlsgnFOnozYYnKNT/sjVyz23/dzs5vXQEwJGuJmk9YYW2XF4Ujn39AeW/mwWOvZzdcUUEl3OkYM7B51/rtTUc2BaLdg03W+gUulfbUo7rrxHeKiSPKTg3RErziyeK/Uozoqt0bFFMv7t/rXcHsOvpSpoUegikz7VVzI/5ILn554fISnqfhpgjBnR9xHwYA314IIzwvxbjLjYEv++8jlXXxIfg3yNlxCs38GRij4dIYhVGxe21I0X3y0Nr4Lf5I+Et0mtntYlvUcB22Y6NQiMw2Z4QxToeADfcO92r1PAAIAhJcG4nB5cPQhCzCvdwv19tavBdGwGHusuVx3xEKWPCsRvIeHLd9ofV3aDeBmbYLlJHU5geDohFq2ggxFR+D2T6jpCecNTc2/5mabmMMt06gUi8m/kKPWGR4pRm6yrbW2eWguvEaPRtG7Ka116dcZvSiS2Yy1o6s5JibaLSZ5LAKRfGY4IQgFA3ZITJK/AqgYIl8HPSwj/TyzPy7+wxZdW08btyL2RBtcjgZeq6rAsTFLIksb6okJdRyBySkZ77xkv59peagduQ5uTZ86+ILw14pvcVv/xeF12S/13ncZMhohdpvWqS0WLK8BK8wMu6WCZVCGAfGsfybh3kbSgWdZEt0gUQEv"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3483,
+    "candidatesTokenCount": 83,
+    "totalTokenCount": 3868,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3483
+      }
+    ],
+    "thoughtsTokenCount": 302,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "naCUari4NNKIqtsP-eDxiQI"
+}
