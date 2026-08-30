@@ -121,6 +121,14 @@ Uma tentativa inicial admite no máximo 2 retries técnicos, totalizando 3 tenta
 
 Uma resposta JSON válida e compatível com o schema recebe `VALID_RESPONSE` e encerra as tentativas. É proibido repetir por classificação aparentemente errada, baixa confiança, razão fraca ou divergência do Ground Truth.
 
+### 6.3 Continuidade do batch após falha técnica terminal
+
+Esta regra aplica-se à rodada principal em ordem fixa e a cada EXP/configuração independentemente. Depois da tentativa inicial e de, no máximo, dois retries técnicos permitidos, um EXP sem resposta localmente válida recebe o outcome `TECHNICAL_FAILURE_NO_VALID_RESPONSE`. Suas attempts já preservadas permanecem fatos append-only; não é criado `llm-output.json`, não se carrega Ground Truth, e não se calcula `MATCH` ou `MISMATCH` para esse EXP.
+
+O batch deve então `CONTINUE_TO_NEXT_ELIGIBLE_EXPERIMENT`, preservando a ordem fixa. A falha encerra somente a avaliação daquele EXP/configuração. Não são permitidos quarto attempt, reexecução posterior para completar o dataset, compensação por chamadas extras em outro EXP, alteração de configuração, modelo, prompt, ordem, seed ou timing. A resposta válida máxima continua sendo uma por EXP/configuração; a primeira resposta válida encerra as tentativas e segue para a Phase B normal.
+
+As contagens futuras distinguem `ELIGIBLE_EXPERIMENTS`, `VALID_LLM_RESPONSES`, `TECHNICAL_FAILURES_NO_VALID_RESPONSE`, `MATCHES` e `MISMATCHES`. A regra é independente de Ground Truth, categoria, dificuldade, intenção, pares contrastivos e qualquer resultado observado.
+
 Estados normativos de tentativa: `VALID_RESPONSE`, `INVALID_JSON`, `SCHEMA_INVALID`, `API_ERROR`, `TIMEOUT`, `RATE_LIMIT`, `EMPTY_RESPONSE`.
 
 Todas as tentativas são preservadas em ordem. Para cada tentativa, registrar timestamp, estado, código HTTP quando houver, erro técnico e referência à resposta bruta. A primeira resposta válida é a única observação experimental; nenhuma tentativa posterior pode ocorrer.
@@ -199,6 +207,12 @@ O EXP-001 foi renderizado localmente duas vezes, sem chamada de rede ou LLM.
 - IDs administrativos enviados: NÃO
 
 Os rótulos `SHOULD_UPDATE` e `SHOULD_NOT_UPDATE` aparecem apenas nas instruções fixas como alternativas neutras.
+
+### 11.1 Identidade do template e do prompt renderizado
+
+`PROMPT_TEMPLATE_V1` é exclusivamente o arquivo `docs/benchmark/prompts/snapshot-review-v1.md`, congelado no `executionProtocolFreezeCommit` (`2beba4d26d7836c951c1f0601483b96acfd10c8a`). O SHA-256 autoritativo do arquivo-template é `85135355C8C1A22AEE5F693369538BED7C46E27AA106B9B933E3DC5E4B4E9A3C`.
+
+O SHA-256 `013A7EBAC85A7CE3ECFBA871BB2B990BAB6B36516D68CCCCB9FAD21802CD4EE9` registrado acima identifica o `rendered-prompt.txt` específico de EXP-001, obtido pela substituição literal do template pelo `llm-input.json` daquele EXP; ele não identifica o arquivo-template. Portanto, `PROMPT_TEMPLATE_SHA != RENDERED_PROMPT_SHA` quando o prompt contém evidência do EXP. Cada `rendered-prompt.txt` congelado é `BYTE_IMMUTABLE_EVIDENCE` e é a entrada direta da inferência: nenhuma rerenderização em runtime o substitui.
 
 ## 12. Candidatos ao congelamento
 
