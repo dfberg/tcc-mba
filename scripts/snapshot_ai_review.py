@@ -188,7 +188,23 @@ def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir
     maximum_attempts = config["retryPolicy"]["maximumTechnicalAttempts"]
     backoff_seconds = config["retryPolicy"]["backoffSeconds"]
 
-    for attempt_number in range(1, maximum_attempts + 1):
+    existing_attempts = sorted(path for path in attempts_dir.glob("attempt-*") if path.is_dir()) if attempts_dir.exists() else []
+    expected_names = [f"attempt-{index:02d}" for index in range(1, len(existing_attempts) + 1)]
+    if [path.name for path in existing_attempts] != expected_names:
+        raise RuntimeError("Attempt namespace is not contiguous")
+    for path in existing_attempts:
+        if not (path / "attempt.json").is_file():
+            raise RuntimeError(f"Incomplete preserved attempt: {path}")
+    if output_path.exists():
+        raise RuntimeError(f"Valid output already exists: {output_path}")
+    start_attempt = len(existing_attempts) + 1
+    if start_attempt > maximum_attempts:
+        raise RuntimeError("Technical attempt budget already exhausted")
+
+    for attempt_number in range(start_attempt, maximum_attempts + 1):
+        attempt_path = attempts_dir / f"attempt-{attempt_number:02d}"
+        if attempt_path.exists():
+            raise RuntimeError(f"Attempt slot already exists before provider call: {attempt_path}")
         metadata = {
             "attempt": attempt_number,
             "timestamp": utc_now(),
@@ -222,7 +238,7 @@ def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir
                     else:
                         metadata["status"] = "VALID_RESPONSE"
                         metadata["modelOutputSha256"] = sha256_bytes(model_text.encode("utf-8"))
-                        preserve_attempt(attempts_dir / f"attempt-{attempt_number:02d}", metadata, raw_body)
+                        preserve_attempt(attempt_path, metadata, raw_body)
                         if output_path.exists():
                             raise RuntimeError(f"Refusing to overwrite existing output: {output_path}")
                         output_path.write_bytes(model_text.encode("utf-8"))
@@ -238,7 +254,7 @@ def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir
             metadata["status"] = "API_ERROR"
             retryable = True
 
-        preserve_attempt(attempts_dir / f"attempt-{attempt_number:02d}", metadata, raw_body)
+        preserve_attempt(attempt_path, metadata, raw_body)
         if not retryable or metadata["status"] not in TECHNICAL_RETRY_STATES:
             break
         if attempt_number < maximum_attempts:
@@ -307,6 +323,7 @@ def parse_args():
     parser.add_argument("--response-schema", required=True, type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--attempts-dir", type=Path)
+    parser.add_argument("--execution-id", choices=("original", "rerun-01"), default="original")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -326,7 +343,14 @@ def main():
     if args.output is None or args.attempts_dir is None:
         raise ValueError("--output and --attempts-dir are required outside dry-run mode")
 
-    run_inference(config, prompt_bytes, output_schema, args.output, args.attempts_dir)
+    if args.execution_id == "rerun-01":
+        execution_root = args.output.parent / "reruns" / args.execution_id
+        output_path = execution_root / "llm-output.json"
+        attempts_dir = execution_root / "attempts"
+    else:
+        output_path = args.output
+        attempts_dir = args.attempts_dir
+    run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir)
     return 0
 
 
