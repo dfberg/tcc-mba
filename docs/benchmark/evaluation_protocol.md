@@ -458,6 +458,16 @@ Somente uma attempt completa pode contar: `attempt.json` válido, raw preservado
 
 Após `EXECUTOR_INTERRUPTION`, o batch não pula o EXP incompleto: a próxima invocação deve aplicar a retomada nele antes do próximo EXP da ordem fixa. Interrupções repetidas continuam suportadas dentro do orçamento, sempre pelo próximo índice disponível. A retomada continua sendo a mesma Phase A: Ground Truth permanece proibido até o freeze de um output válido.
 
+## 19. Freeze de evidência de falha técnica terminal
+
+`VALID_EVALUATION` e `TERMINAL_TECHNICAL_FAILURE_EVIDENCE` são conceitos distintos. Uma avaliação válida exige a primeira resposta válida preservada em `llm-output.json`, schema válido e Phase B quando aplicável. Já a evidência de `TECHNICAL_FAILURE_NO_VALID_RESPONSE` registra um outcome técnico terminal e não é avaliação válida, não recebe Phase B, Ground Truth para scoring, MATCH/MISMATCH, nem entra automaticamente no denominador de `VALID_RESPONSE_ACCURACY`.
+
+Uma evidência terminal pode ser congelada em Git somente se: o máximo de attempts autorizado foi atingido sem exceder orçamento; índices são contínuos; todas as attempts e raws estão preservados append-only, com hash linkage; não existe `llm-output.json`, resposta válida, indicação de resposta válida não persistida, segunda observação válida ou colisão de slot pós-call; a política de retry foi respeitada; Ground Truth não foi carregado para scoring; Phase B não ocorreu; não existe retry pós-batch; e o secret scan passou. A ausência de `llm-output.json` é obrigatória e suficiente para esse outcome, não evidência incompleta.
+
+O conjunto congelável contém somente `attempt.json` (`CANONICALIZABLE_TEXT_METADATA`) e `response.raw.json` (`BYTE_IMMUTABLE_EVIDENCE`) de cada attempt. A regra é geral para qualquer falha técnica retryable autorizada, não específica a HTTP 429. O status é derivável das attempts, seus raws, a ausência de output e este protocolo; não exige novo artefato de status.
+
+Um checkpoint de execução pode conter tanto avaliações válidas como evidências técnicas terminais, desde que os outcomes individuais sejam derivados dos artefatos e claramente diferenciados. Falhas terminais podem ser reportadas separadamente como outcomes técnicos, mas nunca como MATCH, MISMATCH ou avaliação válida. Não há retry compensatório ou pós-batch. A regra não reclassifica retroativamente casos com resposta válida não persistida, segunda observação válida, colisão de slot ou orçamento excedido.
+
 ## 17. Recuperação de artefato normativo preexistente ausente
 
 `RECOVERY_OF_MISSING_PREEXISTING_NORMATIVE_ARTIFACT` é uma correção excepcional e geral para materializar um `ground-truth.json` fisicamente ausente. Ela não cria nem redefine Ground Truth: somente cria uma nova representação física de conteúdo normativo que já existia, de modo inequívoco, antes da primeira inferência relevante.
