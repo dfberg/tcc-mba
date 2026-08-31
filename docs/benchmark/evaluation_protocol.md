@@ -468,6 +468,16 @@ O conjunto congelável contém somente `attempt.json` (`CANONICALIZABLE_TEXT_MET
 
 Um checkpoint de execução pode conter tanto avaliações válidas como evidências técnicas terminais, desde que os outcomes individuais sejam derivados dos artefatos e claramente diferenciados. Falhas terminais podem ser reportadas separadamente como outcomes técnicos, mas nunca como MATCH, MISMATCH ou avaliação válida. Não há retry compensatório ou pós-batch. A regra não reclassifica retroativamente casos com resposta válida não persistida, segunda observação válida, colisão de slot ou orçamento excedido.
 
+## 20. Condições técnicas do provider e reexecução controlada
+
+Resultado classificatório, resultado técnico e conformidade metodológica são dimensões independentes. Falha técnica do provider não é, por si, falha metodológica e não conta como MATCH ou MISMATCH.
+
+`response.raw.json` é obrigatório quando uma resposta do provider foi efetivamente recebida. Para `TIMEOUT` ou falha de transporte antes de qualquer resposta, `attempt.json` com status inequívoco é a evidência completa: raw é `NOT_APPLICABLE`, não pode ser sintetizado ou reconstruído, e a tentativa ainda consome orçamento. Uma primeira resposta válida posterior permanece selecionável sob `FIRST_VALID_RESPONSE`.
+
+HTTP 429, quota exhaustion e rate limit equivalente são `PROVIDER_LIMIT_CONDITION`: condição técnica externa, não observação válida nem falha metodológica. Uma execução com orçamento esgotado, zero resposta válida e todas as attempts em `PROVIDER_LIMIT_CONDITION` é `TERMINAL_PROVIDER_LIMIT_FAILURE`; sua evidência histórica permanece imutável e não é avaliação válida, MATCH ou MISMATCH.
+
+`PROVIDER_LIMIT_REEXECUTION` é permitido apenas para `TERMINAL_PROVIDER_LIMIT_FAILURE` com zero respostas/classificações válidas e sem não conformidade metodológica. A autorização é independente de Ground Truth e scores; usa namespace de execução novo e determinístico, orçamento novo e `FIRST_VALID_RESPONSE` dentro dessa nova execução, sem sobrescrever attempts históricas. É proibido após resposta válida, MATCH, MISMATCH, para melhorar classificação ou como inferência compensatória. Resposta válida não persistida, segunda observação válida, violação de orçamento ou colisão de slot não são curadas por esta regra.
+
 ## 17. Recuperação de artefato normativo preexistente ausente
 
 `RECOVERY_OF_MISSING_PREEXISTING_NORMATIVE_ARTIFACT` é uma correção excepcional e geral para materializar um `ground-truth.json` fisicamente ausente. Ela não cria nem redefine Ground Truth: somente cria uma nova representação física de conteúdo normativo que já existia, de modo inequívoco, antes da primeira inferência relevante.
