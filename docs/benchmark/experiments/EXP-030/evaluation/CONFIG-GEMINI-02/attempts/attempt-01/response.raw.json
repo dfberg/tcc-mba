@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteracao no arquivo BookService.java mudou explicitamente a formatacao do campo authorName de 'FirstName LastName' para 'LastName, com espaco e FirstName' ('LastName, FirstName'). O snapshot recebido reflete exatamente essa mudanca intencional de formatacao no servico, portanto o snapshot deve ser atualizado.\"\n}",
+            "thoughtSignature": "EqULCqILARFNMg+xPhoKDDa6pqoqwniCc/+4kuJIKIFaGYe7uNI2vsPheulnocdArdcg8JPn370dYCT3KVUXdVfNJOnRFwP0yydtx0oU9fhVu4EJfDjgyMQdSsMd1DDGTcX3a02BvbCOj/bGRafE1lT4HQQniBfEVJaBsh9nWdBCC9CR1YQJ9MaPngPE28g5Zz6AsZDaTPUNqEi/VpyGN4Rcq7dEyIdRQ0psnvsF848e7Us6lLzObmZ+F9HGhrDm6aT1jLgsN/vVetmXsxzOMqhqDq8JVf/na24ZfR65apFGBISn3G24uDONPQEbnCBuxUGbVpdBVaCjvifsicCJJQqsF5AMiqYni3zzV07MkGWSsdBaAeolTCj/InEUyrhEpoy6Hy2zpv8D/sfyTKXUj9pprIpMnQuRxGtHrRjkNxOVmBoWbTa2Gh/bbjhjlTtoSKKsuTLPqBCcJt0f7vb6dC2176YI5iTFvRO9qFkNwq5eTUMfYPaEVf9AqJC/dQO0viZ1KlYVkn5fQSKwphdMyRopO1dqCaEnfMF02khJ/2QhRXDNLpH0H6ZWFFr0FW7m0em4NLaz3ogq17g1bdr/RJ/TnOkHLFDqbnmyePjoa43OjVxeuXD4uL5lx1YPSR4uqzF+5XEhOynuyvpwduuh6WUazcSCcmMUHutrE5A32BQZK4I6Bw8HnieASdf6/Qsz2+JgBwOUYbofpX76w74xP7obOV/AxK6hcmzh3AVkIsEpsiEFbgbXh84wfcYtSPCINTVQD0VTR6cPNLkutWmxCQK1GhwFL3R8HN+AMRMD2Aqyw6ADGXcvCPrkl/o8C5cauc/rdcEcBHW0BC82HwJWB/p04smkSkHqV6Hctqasts9Sen7kgC3DU9F/CQw35mQenamrG+AUATmu4rxUVu1LSGRr/MU7SfpY+qI/YqKvuN+ihXLIhiZHjyniPVPvwGiLoflomkbPFQq4qEsn+MpwYBsoIDXh5CUCZLbR7Mw3XMT2ORsgH/K0NbwcOJObkZj8Ris4ad9YApkEdqRVQ2F/8TfkQcQwF5Zn83/YnMblV9oYfdEW8L7vNpNXfMj5YJI/0WFq2n88Qov59cie918cvI+vMhBohN+7lsRCPSiMu29bOzBLn6pP0No8TDQAUcB4rEc3OWu5w6R5KBk4BW9yAPGgNhXi5qHJEowG+PEaroROnZHj2Z+gQsWPu4JOEZ6g3q2HTVwDtgZFG01rkbKcWDiJMqAAar5iaeLdODgxgimH9TMLLzBEs08aBMN3O12Wpm69pXAWAIXxt0Er8R7v+fJIH7Hgz8wHLI4i0DqstT87kXb0AH5Ty1D+QuxbrJVKvVtYTkQYSEQolI80MorVz7xcjGV1Y26b+JgdvqPE3edlVDldOZVbpgT6V1kYlECsq/FPBzWUajoYg2lcY16qRAo8BT5NNeRzY372QPrWAdYdwjwXMEZW8t6Qj/9Bt3gGCG2oPv+WQTAtWjjV39oTdebNXdlcRFsklEKhdu1yHDDYH2pOMVV9FKSM4+9v2esnIClFU1VvIqGc5ciaSg1lOsobCYcyncT3DcORH/FsweiKxrWW853gwganwTsrmdvXu37rNVVU35hVWyvU+rNfB6uWfpPa9qr3CnHHjU4DF5uc/01vPDCAXahxAuuuZzb9bUwcSLxF//4VdkCOTKRqINuzHljf0VXkiF7HahEeXFcwGIRJi4diPiUh2/4sTOk4EtQ1WzbtcRQDH1krDimyL4rhEFEDg7R/r+dj3nQLvS3cQIUTgE3S5Ww77IZduHrOfRYDpnpUrOjvn13hk/qtNQtJRETBcQ3pDzoNhOdFsc+kwFnuVCeUeB1HkhCWMhKTzB/Y5tcHGzXFIzBm8MdUWkcPJMFMNpCjLXa8ZiO3uT5ZBOelmyLF7d41VX5BMS9XNTRRiSQRpzo="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 5593,
+    "candidatesTokenCount": 95,
+    "totalTokenCount": 6006,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 5593
+      }
+    ],
+    "thoughtsTokenCount": 318,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "pA-WapfSFdeGqtsP59-KiQI"
+}

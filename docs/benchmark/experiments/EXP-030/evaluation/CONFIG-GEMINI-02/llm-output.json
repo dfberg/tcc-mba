@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteracao no arquivo BookService.java mudou explicitamente a formatacao do campo authorName de 'FirstName LastName' para 'LastName, com espaco e FirstName' ('LastName, FirstName'). O snapshot recebido reflete exatamente essa mudanca intencional de formatacao no servico, portanto o snapshot deve ser atualizado."
+}
