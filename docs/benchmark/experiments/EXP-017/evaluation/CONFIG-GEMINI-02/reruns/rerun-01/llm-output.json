@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":true,"confidence":95,"reason":"A adição da anotação @JsonProperty(\"code\") no campo status da classe ErrorResponse renomeou intencionalmente o atributo na resposta JSON de \"status\" para \"code\". Como essa alteração altera o contrato de saída do endpoint, o snapshot recebido reflete o novo comportamento esperado da aplicação e deve ser atualizado."}

@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteracao no codigo (BookDTO e BookService) refatorou a estrutura do DTO de resposta, substituindo os campos authorId e authorName por um objeto aninhado AuthorDTO. O snapshot recebido reflete com precisao esse novo comportamento do endpoint."
+}

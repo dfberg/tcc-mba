@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteracao no codigo (BookDTO e BookService) refatorou a estrutura do DTO de resposta, substituindo os campos authorId e authorName por um objeto aninhado AuthorDTO. O snapshot recebido reflete com precisao esse novo comportamento do endpoint.\"\n}",
+            "thoughtSignature": "EqkNCqYNARFNMg894jYhJmniN7cli4d8SxvtD0ltASprSuSD8aeEzimKFWV0q10yw9jGYOC4jGzubEaVIDUa604xe6vOVi4njYrD9MSwm320PDdGUY+yo7hh+Y75QrVEC+1TxxPhWbOSldmwDgSbQWkhYMVNZLEv4Cy7wxH2fZOT1mrY3o2yXXLYLSqAowRfDPhgTpEg44aWhwf5ckm5JgD0nwzpiBJ9EzFdaxupcyD2jOgHcMPQdpvNAm7le49il3/xh7ZgJIdk3PwZPP/vtrjjbSZu9NiobjxAbOAse9i7o0V7fK8WQBw470d/b6jOu9SDsEf/y+ABG0v2k9w/vBvG6R2aZ8iNEK4rMrd67U267IeZ6kwi4AyhW2ap7NIkfjoGAsfTszfaDsA0zXY3XaqxvuJ8vTGc6P7X3XTr1Z8zB5K2ilecF2E44ZhzgjF8kDuTHkNQXNwVyqnGNESBoeQRHmFAUsT+5KR3dKe+TIfgCIU+K/wMNrx+9ePe5R8xTLuIQi/61qMvkW52fVcki1r3Qvzan8CbH6C7rRatdr28iaOsIip5WkuGH2jLLb999tSyGXqAXBS/EcjG1y4TiNjPFZ2GwdpY92rSc3ZprRZPxITrjf29Y3MrzyEdC3JFNkGB9ybZ1KU0bmk42oSVRdOxoBRsdYO+u1oF8SOEKFoPt47kToPq92lncnyL6j5v8DtugoAfAFebvRr1VW8TNMUiDvj73y9EyIUHDPJKdIA7+Gf9+FTmmgw4/n7wYPSxB1PMSfXKzx7hdb5CtBjnlONw0KbQHwZPGHVo02LNh54nqZLP/uINR4u9rlRIvWA7TaJWqNfeTZz8YkcYEHoKTkdConY80WKHaVOzPeKcEuBpD+XmyVTKS+rq1Rn0u+MGifg70vX7m3z7n/BLGCLb9nNcqBgNYjJCYjAMxIBEfR45BgGvzHKzWihNZvIGGQpKeGqAhvldMVZPh5MlPFZJ5ysOXFeZop2T4aw7DBfSBaQvkMd3SHwl1ogZjP4OtBKWvkXQCU3sg4o44pbq4uxoIgif9+KeU27CeJqv8Scrox6JNXFaWzaP4PIuFI8147mbeM727+08WVFkFeG2h6OTAnzWaTpm3w/oJXj6AHlRUo7lAjxazbDZ4XJR8kupfA5+yg+vvmEWhb8EUlw3K7ccFSDC6/6FPJk+tgS77eCJx4+Y9RSnEbeieeCK0v+EK+UnEz8VnYmozcJi/VxWv9ySokM2ziTqv8EBuF/dTfvUNStgX54icz83Y+rCk6VzuPNprXEW7+5Kv77+Feo40SszU3G29uzp/x6OH9mQgfdyBpOIG1NsvK/9v6cXe0fwG4LXyz4nlcWDJaS9upDe9YPdNGmlnaHTdIYYqZ5F7rXg2hiQWXg220uec/hlIzCzzsfXSKcxo0d+3CTx32v0w+8PMa8pKTaymw7RwbMoCLQCXnFQdY03NyGiCqyibdIa3q96wVsHJ3L9wwt0qx99vyRjCsj52f+WSPNDhK4IaYNhLBpdL3ilEQIB8tCMO6WPYcbPVMfQwEwwPubnxMr9tdV5wziwbYSuJF5t9oSuAQrjrYEbaTdm0A8XxU8ps9S7DogkBffHZtpRhjzZUqlzQ2q4zbVnFCW34e49fyuGyo+q+Shm+MFKOIcOSsLl94TWr5Nl5JAJM4yinMHeJNxA3YYqvxmi961pmXzgYiGG4hahwTBkQ4kStxtrA6Ck1yYMHBvk82rKqFfE7TxULPCEfz5+cUpQ50lak0FycWbQ09GxMfeR1PTWb92atQYwLL9w6CtWl8hFnRqGDtONKntRLQfVHSLJUUamSrnW82KKroAoJ9AY1hFN4RJ7A3m4ZulmnA2Ly1wqld0UnqxL4Ud8u78wxFM6y7NU9YKCIu54ajO5mEczzS3GG6ZHar0hb44xvY1EI5qML6oFBQs4zxr6tGGoBuXbIMR9PtXuo8ZHrA9RPS+tR/Jv9U1PfDE04Qkzc8HXh6EzIq9TJlgnp8SBCvZgU9t2bXBlc9HEXbPg3SRnVuyot2uCYxraqqQQkKFaGe8Ye8WjKu8rx54I+05ZIlQMZho9y5AeMgC64KYcGDvLXjLFknIJSQXvjjAHERV3kqKdLcR/9p4w28Wy47gajfKI2yjuHq8bj72fYpgiP9pqPQlGVUqeYT3itAQNNNl6eJ3E28ioEgHLaknOX6IRZc2crVnWoHI2bOJap3ldCGV7Xo20LEXARgm7qaRX70Q/jYikyVEHmSsCpn9G4D4wlbzKmNP6n9vI9k5PG73KIw=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 5050,
+    "candidatesTokenCount": 83,
+    "totalTokenCount": 5566,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 5050
+      }
+    ],
+    "thoughtsTokenCount": 433,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "SNaVaufSKpi2qtsPy9nsuQ4"
+}

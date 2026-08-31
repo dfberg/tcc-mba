@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":95,\"reason\":\"A adição da anotação @JsonProperty(\\\"code\\\") no campo status da classe ErrorResponse renomeou intencionalmente o atributo na resposta JSON de \\\"status\\\" para \\\"code\\\". Como essa alteração altera o contrato de saída do endpoint, o snapshot recebido reflete o novo comportamento esperado da aplicação e deve ser atualizado.\"}",
+            "thoughtSignature": "EusJCugJARFNMg9uEroIaQDBL3RCT7biaRk1aeUTYdTMZNfRvLqzqRh0W7k7T4Nf1bW4TGUSDGVskpSDFxOlB3SzdKWNgDL3QfeD98cJpDDSu2O3UDJ9DklyX88Wvchdk1GFagYdPlf6gjnWCRNDk/49FF7KOCrq4dviPQsw2M1XHIAmaQmMOQlEn7cq9bL6kIOYjn3Pg23Xt3mmmn2OICVo4U5QPgd9/UOEywvcaH5Dw4+oE6PXrXDVWE5vAyZFHuLivfn0NDxLoDPB6FU/TrNDX3eU7EOVXfmarRBrHqGe9UoNjVcFdDoTe8NuXq+64FmM1llsQOa61vtJnuTn/2xXmdNVAbZqtXMejeVBQOwo1QtK+H3yP1dT7g7I6+Hcwx8bq4zz4jfDGejAVAbwm6Sgd+HwKXMeXF9WmbwnHQLtYhGYv7tEr7AKAHeKyQl2DbKHwwxtGakRZZt18hH4IFQKxkOL8dAHL9YCe6OaWE1wdSUTDmE5peF5KB/fdWkmVNtB47zkz9T66YpXzbbDLlR+cX9Ua6GTtgB0eDH2kWAZZz2NlYovqgzmgWDeaX+1qaNLjfRlQDKSaSBfQkbDnnT4nwGJ9Gi1y5+yCLg20V7n8amjtdj5gl6A+3cMRpiCHM3zcCAGZ2OUmvRQxLTTQuakqxNcX2ReqHoBZhc2VJk/K9VAG1CS0RLrGiPbSTyYeBdZoYIdeDNFP0M00NW/7Vgd6g9kNhDIP1P7BMwOGa2YLWmyXBZQabO5i2a2k+WJ49A7BJKO40dbWRyJ4UypU4IFXKO2WAg5AcnquYFgusACLvgaEtZAgryhgIjehzXO6hYm0wuV3RwlguhJAeYaxU4KPvM+VGYGhssVBFqW/H6gdUpxoRGvpjXm+FBAY7cOZpS4ioyWWz4Yl0zdtOkK9ckebTjvq/XuKF4CD5OS3kvHqkhS131sedzMKCz2uxl8Tz6jJAVFV1wc6vDi3ouh/MqYOhZSgx5iUeOg4S5a4cFtP8su2TVOQoW+cm/0cV+wm/XwGGSAnLEUsinJ12WfEK8fXHdhFTGRQXkvX26dm5zpyG7I5n4nJ42M9tRtfcwSBXnDH3FYo2XmL5cIZJMQHHCCG+il1r1oRncngUoAR/1WxiYOAix/HVHV2ADH3ySqAlKjfYH81CZlf+ahyqiqrSiouYK4gGAHpVtzyjN9WZy6MBr3kcF7HnwsQNljEdFzRuJqioaNahstlALONyhN+nI2WVr+n9+pXbrVOJG6no9+c5CK85ipZQvyKsD4KqXYBVGS4dLVhe6apceDt6bvm2j8nwF2DOTEN0hg93wMBMvzIZGcNGUceBs5egnlAa2usJ/pES5hFDZ+X5wUc9RhyC68FO7nLmJT/ynZO3wsL9c7NCJM2iXNoBLWTvXMGOUOgBmz5cCTW08dD5OboEh55gwFTGEq0SD9PE+Uj7Xw2bK9AonwHwQN05OqbkAwNfq9MwwnyRARQ9m5qRNhjfNaTcDDzSiArDbKww8RwBGJoHwAQFYuLOwTIQuDiFPeLSlz6txv20EG3Xh9YGz5iiSqzhvvAPtvFa7TqasECtqZthhGNg435PJSN1KSw0GTGGBDJ8l/PlBxHKsrXqoRhc8hTumCNJR9VQ+niG/t18SNl7XlK2cuETmM5UrDp9LS95MgQY+m/7Ha5G+/TX1WkSs="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4174,
+    "candidatesTokenCount": 83,
+    "totalTokenCount": 4533,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4174
+      }
+    ],
+    "thoughtsTokenCount": 276,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "ptWVatkx1OHPsg_dy6nZDg"
+}
