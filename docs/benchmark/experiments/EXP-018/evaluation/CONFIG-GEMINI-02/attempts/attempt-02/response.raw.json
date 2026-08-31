@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":false,\"confidence\":95,\"reason\":\"A alteracao no GlobalExceptionHandler substituiu a captura dinamica da URI da requisicao por um valor estatico hardcoded ('/errors'), fazendo com que o campo 'path' da resposta de erro perca a informacao real do recurso acessado ('/authors/99999'). Trata-se de uma regressao/erro no codigo que nao deve ser incorporada ao snapshot.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4138,
+    "candidatesTokenCount": 97,
+    "totalTokenCount": 4698,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4138
+      }
+    ],
+    "thoughtsTokenCount": 463,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "QsyUarWSLaWkqtsPmO6O2QU"
+}
