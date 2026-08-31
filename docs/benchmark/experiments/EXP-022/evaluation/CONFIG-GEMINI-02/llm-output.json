@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":false,"confidence":100,"reason":"A alteracao no arquivo BookService.java adiciona +1 ao ID do autor ao construir o objeto (book.getAuthor().getId() + 1), gerando um authorId incorreto (7 em vez de 6) no snapshot retornado. Isso representa um erro de implementacao e nao um comportamento esperado."}
