@@ -478,6 +478,12 @@ HTTP 429, quota exhaustion e rate limit equivalente são `PROVIDER_LIMIT_CONDITI
 
 `PROVIDER_LIMIT_REEXECUTION` é permitido apenas para `TERMINAL_PROVIDER_LIMIT_FAILURE` com zero respostas/classificações válidas e sem não conformidade metodológica. A autorização é independente de Ground Truth e scores; usa namespace de execução novo e determinístico, orçamento novo e `FIRST_VALID_RESPONSE` dentro dessa nova execução, sem sobrescrever attempts históricas. É proibido após resposta válida, MATCH, MISMATCH, para melhorar classificação ou como inferência compensatória. Resposta válida não persistida, segunda observação válida, violação de orçamento ou colisão de slot não são curadas por esta regra.
 
+### 20.1 Namespace físico de `PROVIDER_LIMIT_REEXECUTION`
+
+A execução original é `original` e permanece em `evaluation/<CONFIG>/`. O único rerun atualmente autorizado usa explicitamente `rerun-01`, em `evaluation/<CONFIG>/reruns/rerun-01/`, por EXP e configuração. Attempts nele começam em `attempt-01`, usam o orçamento de `CONFIG-GEMINI-02` independentemente da execução histórica e o output válido, quando existir, é `reruns/rerun-01/llm-output.json`. `rerun-02` requer autorização protocolar explícita.
+
+Antes de cada call, o executor deve receber explicitamente o execution ID, descobrir o namespace, validar attempts append-only, calcular `EXISTING_RERUN_ATTEMPT_COUNT + 1` e comprovar que o slot está livre. Call antes dessa validação, descoberta pós-call ou colisão são proibidas. Interrupção retoma no mesmo namespace pelo próximo índice; não cria rerun novo. `FIRST_VALID_RESPONSE` tem escopo de execution namespace. Adaptador sem suporte explícito a execution ID e validação pré-call não pode executar rerun.
+
 ## 17. Recuperação de artefato normativo preexistente ausente
 
 `RECOVERY_OF_MISSING_PREEXISTING_NORMATIVE_ARTIFACT` é uma correção excepcional e geral para materializar um `ground-truth.json` fisicamente ausente. Ela não cria nem redefine Ground Truth: somente cria uma nova representação física de conteúdo normativo que já existia, de modo inequívoco, antes da primeira inferência relevante.
