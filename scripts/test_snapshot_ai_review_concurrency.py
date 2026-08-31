@@ -54,6 +54,8 @@ def worker(output, attempts, mode, counter, entered, release, result):
             raise urllib.error.HTTPError("offline", 429, "rate", {}, io.BytesIO(b'{"error":"rate"}'))
         if mode == "exception":
             raise RuntimeError("offline provider failure")
+        if mode == "delayed_valid":
+            time.sleep(.02)
         return 200, VALID_RAW
 
     adapter.call_gemini = fake_call
@@ -80,6 +82,11 @@ class ConcurrencyTests(unittest.TestCase):
         self.assertEqual(process.exitcode, 0)
         return result.get(timeout=2)
 
+    def assert_safe_contender(self, status):
+        # OS lock acquisition can report contention differently on Windows.
+        # The invariant is exclusion before the mock provider, not its class.
+        self.assertIn(status, ("RuntimeError", "PermissionError"))
+
     def test_c1_c2_c3_same_namespace_and_resume(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "execution"
@@ -91,7 +98,7 @@ class ConcurrencyTests(unittest.TestCase):
             time.sleep(.2)
             release.set()
             self.assertEqual(self.join(first, first_result), "ok")
-            self.assertEqual(self.join(second, second_result), "RuntimeError")
+            self.assert_safe_contender(self.join(second, second_result))
             self.assertEqual(counter.value, 1)
             self.assertTrue((root / "reruns" / "rerun-01" / "llm-output.json").is_file())
 
@@ -102,8 +109,9 @@ class ConcurrencyTests(unittest.TestCase):
             counter = self.context.Value("i", 0)
             first, first_result = self.start(resume_root, "valid", counter)
             second, second_result = self.start(resume_root, "valid", counter)
-            self.assertEqual(self.join(first, first_result), "ok")
-            self.assertEqual(self.join(second, second_result), "RuntimeError")
+            outcomes = [self.join(first, first_result), self.join(second, second_result)]
+            self.assertEqual(outcomes.count("ok"), 1)
+            self.assert_safe_contender(next(status for status in outcomes if status != "ok"))
             self.assertEqual(counter.value, 1)
             self.assertTrue((resume_root / "attempts" / "attempt-02" / "attempt.json").is_file())
 
@@ -154,6 +162,39 @@ class ConcurrencyTests(unittest.TestCase):
             process, result = self.start(root, "429", counter)
             self.assertEqual(self.join(process, result), "RuntimeError")
             self.assertTrue((root / "attempts" / "attempt-01" / "response.raw.json").is_file())
+
+    def test_c8_c9_persistent_lock_and_stress(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "persistent"
+            counter = self.context.Value("i", 0)
+            first, first_result = self.start(root, "valid", counter)
+            self.assertEqual(self.join(first, first_result), "ok")
+            lock_path = root / ".execution.lock"
+            self.assertTrue(lock_path.is_file())
+            original_identity = lock_path.stat().st_ino
+
+            # C8: two later contenders use the same persistent lock artifact.
+            b, br = self.start(root, "valid", counter)
+            c, cr = self.start(root, "valid", counter)
+            self.assert_safe_contender(self.join(b, br))
+            self.assert_safe_contender(self.join(c, cr))
+            self.assertEqual(counter.value, 1)
+            self.assertEqual(lock_path.stat().st_ino, original_identity)
+
+            # C9: a new process reopens the retained artifact safely.
+            reopen, reopen_result = self.start(root, "valid", counter)
+            self.assert_safe_contender(self.join(reopen, reopen_result))
+            self.assertEqual(lock_path.stat().st_ino, original_identity)
+
+            # Twenty isolated three-worker races: one mock call at most each.
+            for index in range(20):
+                stress_root = Path(temporary) / f"stress-{index:02d}"
+                stress_counter = self.context.Value("i", 0)
+                workers = [self.start(stress_root, "delayed_valid", stress_counter) for _ in range(3)]
+                outcomes = [self.join(process, result) for process, result in workers]
+                self.assertEqual(outcomes.count("ok"), 1)
+                self.assertLessEqual(stress_counter.value, 1)
+                self.assertTrue((stress_root / ".execution.lock").is_file())
 
 
 if __name__ == "__main__":

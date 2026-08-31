@@ -209,12 +209,8 @@ def execution_lock(execution_root):
 
                 fcntl.flock(descriptor, fcntl.LOCK_UN)
         os.close(descriptor)
-        try:
-            lock_path.unlink()
-        except (FileNotFoundError, PermissionError):
-            # A waiting Windows process can still have the artifact open and
-            # takes over cleanup after it releases the same OS lock.
-            pass
+        # Deliberately persistent: deleting this path while another process
+        # holds or waits on its descriptor can split the advisory-lock domain.
 
 
 def write_output_exclusively(output_path, model_text):
