@@ -1,4 +1,5 @@
 import argparse
+import contextlib
 import hashlib
 import json
 import os
@@ -174,7 +175,63 @@ def preserve_attempt(attempt_dir, metadata, raw_body=None):
     )
 
 
-def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir):
+@contextlib.contextmanager
+def execution_lock(execution_root):
+    """Hold an OS-level lock for one complete execution namespace."""
+    execution_root.mkdir(parents=True, exist_ok=True)
+    lock_path = execution_root / ".execution.lock"
+    descriptor = os.open(lock_path, os.O_CREAT | os.O_RDWR)
+    acquired = False
+    try:
+        # Both APIs lock one existing byte. This marker is not the exclusion.
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        os.write(descriptor, b"\0")
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(descriptor, msvcrt.LK_LOCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(descriptor, fcntl.LOCK_EX)
+        acquired = True
+        yield
+    finally:
+        if acquired:
+            if os.name == "nt":
+                import msvcrt
+
+                os.lseek(descriptor, 0, os.SEEK_SET)
+                msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(descriptor, fcntl.LOCK_UN)
+        os.close(descriptor)
+        try:
+            lock_path.unlink()
+        except (FileNotFoundError, PermissionError):
+            # A waiting Windows process can still have the artifact open and
+            # takes over cleanup after it releases the same OS lock.
+            pass
+
+
+def write_output_exclusively(output_path, model_text):
+    """Publish normative output bytes without silent replacement."""
+    descriptor = os.open(output_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL)
+    try:
+        with os.fdopen(descriptor, "wb") as output_file:
+            output_file.write(model_text.encode("utf-8"))
+    except BaseException:
+        try:
+            output_path.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def _run_inference_locked(config, prompt_bytes, output_schema, output_path, attempts_dir):
     api_key = os.getenv(config["authentication"]["environmentVariable"])
     if not api_key:
         raise RuntimeError("Missing GEMINI_API_KEY environment variable")
@@ -239,9 +296,7 @@ def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir
                         metadata["status"] = "VALID_RESPONSE"
                         metadata["modelOutputSha256"] = sha256_bytes(model_text.encode("utf-8"))
                         preserve_attempt(attempt_path, metadata, raw_body)
-                        if output_path.exists():
-                            raise RuntimeError(f"Refusing to overwrite existing output: {output_path}")
-                        output_path.write_bytes(model_text.encode("utf-8"))
+                        write_output_exclusively(output_path, model_text)
                         return parsed
         except TimeoutError:
             metadata["status"] = "TIMEOUT"
@@ -261,6 +316,15 @@ def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir
             time.sleep(backoff_seconds[attempt_number - 1])
 
     raise RuntimeError("No valid response was obtained within the technical retry policy")
+
+
+def run_inference(config, prompt_bytes, output_schema, output_path, attempts_dir):
+    # Acquire before inspecting any execution state. The lock is deliberately
+    # held across provider calls, persistence, and retry decisions.
+    with execution_lock(output_path.parent):
+        return _run_inference_locked(
+            config, prompt_bytes, output_schema, output_path, attempts_dir
+        )
 
 
 def validate_configuration(config):
