@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": false,\n  \"confidence\": 95,\n  \"reason\": \"A alteração no arquivo BookService.java removeu o mapeamento do campo 'isbn' na construção do BookDTO (.isbn(book.getIsbn())). Como a requisição POST envia o campo 'isbn', a ausência desse atributo no snapshot retornado representa uma regressão indesejada no contrato do endpoint e não um comportamento esperado.\"\n}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4419,
+    "candidatesTokenCount": 98,
+    "totalTokenCount": 5342,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4419
+      }
+    ],
+    "thoughtsTokenCount": 825,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "DWiVarCqCPWBqtsPupf84A4"
+}

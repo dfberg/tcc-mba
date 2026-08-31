@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteração no código alterou explicitamente a consulta no repositório de 'findByAuthorId' para 'findByAuthorIdOrderByIdDesc', alterando a ordenação dos livros para ordem decrescente por ID. O snapshot recebido reflete essa mudança intencional de comportamento."
+}

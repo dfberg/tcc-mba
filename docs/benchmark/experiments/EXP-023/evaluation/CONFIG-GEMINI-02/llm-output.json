@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": false,
+  "confidence": 95,
+  "reason": "A alteração no arquivo BookService.java removeu o mapeamento do campo 'isbn' na construção do BookDTO (.isbn(book.getIsbn())). Como a requisição POST envia o campo 'isbn', a ausência desse atributo no snapshot retornado representa uma regressão indesejada no contrato do endpoint e não um comportamento esperado."
+}

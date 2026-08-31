@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteração no controller (BookController.java) adicionou explicitamente a inicialização da lista de reviews ('createdBook.setReviews(List.of())') no payload da resposta do endpoint POST /books. Como o campo 'reviews': [] foi adicionado intencionalmente na resposta do endpoint, o snapshot deve ser atualizado para refletir essa mudança de comportamento."
+}

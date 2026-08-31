@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteração no código alterou explicitamente a consulta no repositório de 'findByAuthorId' para 'findByAuthorIdOrderByIdDesc', alterando a ordenação dos livros para ordem decrescente por ID. O snapshot recebido reflete essa mudança intencional de comportamento.\"\n}",
+            "thoughtSignature": "EocICoQIARFNMg8WGu7+3DQN+mKH3IJ1qFUpwm00BukqmPLyGsQy4dqviwRaW6ZdWztG7uHfSCXQMtnV2lsQGKSQp0USez2KbhloS5le0Ztfpcmu+4Znqqlo81kQYRwS354mu6Ebpvu9bbhGWCyZAPuAyWrOPY54o/wLJRgM5hFVMahg/dMOA9FmMhfthJ8Gp8m8wqFlwDuYofnR5hsTFotJtLwOs81AFejxVGzdOAepNKMDZvNBEqW7rln7VGMsfl8HBIQn1dHLDHAM/kcdykA5/HZIFnbj0+NexGGE64z57ipxaA1YYUVBj/KBfIT1GcTUW8xC8p/WtphuUFr9ULLkKMkIPUU2ANtnayksOtriY18f9MQgm0NRpk6vJVCdvjqX8c6eGd+dftE9TQ15C1ww1bHCGm7nSXFBS+sdamvB+LCAkIe3mOXq4hDDRRjVt+3AoGa4Wrn+wZeOxzuXe3xKaFe7LGJiTNROWh4ifmvT6ifUF5g8pBFEQA8icmj8VDI66VAm/l+yw92za6zQg4b8n9g3sdSbOoTdamy4zFp9DP5FnCZbimMNh8qN4zZmaow4c0HcUyQULv9AcZNhPreyz2kHTjgzA23qu9lD0if6lHtVLNDPs+tyFr5xZGViv0m95Cd5A08jSVR2J90vRXOvAEuXwMvW2Vs6BTO3UWRn0zs9Ud5upfhGLHfixDi+CFh/MHzJGfSPZ+rcfgZdLy126s/A3qi0gen1UejqIVJpKkgzC4Z+VOVIZh+I7blsHexBGBfzxBJS1P6KzKkXNZefzTP3YMiTeEx28H8JmhUkOzJiPutrqD6INMjTMydIVdo+fOJ/I9Wr0pfSXbxoblZLTcQMXT0DVzIrFBT6eMHqYI7htsFRIVoBHKo3deDuDk7hBIAzzop3sisum8pXH+2YvsyUAnd4mDAi36H9RfiM5SSVwzG83jIlanMZxuT0YJ9W8fqEv15Ee8aHmF43g7EfmuTQTdDyzTATQ9IgvYNpaTS+KGQD3R/wDiL+rS/wy0WhRDocRRuZjSxtstIjEZMWvG+XIZ/DvYE8mJiSBp9CB2B0KfSLdj3JXLNDOb+yyH5Q0tWmfvJkIiri+vE89WjCvOexQ7DFVfyz/RkLwEl+Uttawlu1o3cQu0Ejc1YgIU8MWmQ4ZQBkFuYGlZ4r/CDsJt9jbm5R/Wp1f80C+8OAABM1/elmM3CvGY1B9oTQ370Q1sF5vINX1OSrYdm1B06WPixUXH/bJ/yEsigRwmSkIDOB/nqx0NV2R/iozDk0RA7do8Zc8OVgZuAjmvsetwrSCJKmWBcfKLlOJ8DSEt0dUTtsHOe0m/a3jHkuBUL8RvwuZWRKBc6Af1+RxduLB1jIDAXILw1hcqU="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 5762,
+    "candidatesTokenCount": 86,
+    "totalTokenCount": 6064,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 5762
+      }
+    ],
+    "thoughtsTokenCount": 216,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "QGiVapyoH4CuqtsP2oSJ0Aw"
+}
