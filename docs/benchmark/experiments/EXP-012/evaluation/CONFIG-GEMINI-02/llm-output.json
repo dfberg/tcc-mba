@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteração no código em AuthorService.java adiciona explicitamente a propriedade books como uma lista vazia no DTO do autor durante a consulta por ID. Como o campo 'books': [] agora faz parte da resposta do endpoint GET /authors/{id}, o novo snapshot reflete a mudança pretendida no comportamento do código."
+}

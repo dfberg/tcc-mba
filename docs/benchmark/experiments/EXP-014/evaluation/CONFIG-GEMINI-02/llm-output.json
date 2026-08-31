@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": false,
+  "confidence": 98,
+  "reason": "A alteracao no AuthorService.java alterou incorretamente o nome do recurso na excecao ResourceNotFoundException de 'Author' para 'Book' ao buscar um autor por ID. Isso faz com que a API retorne 'Book not found' em um endpoint de autores (/authors/99999), tratando-se de um erro de implementacao e nao de um comportamento esperado."
+}

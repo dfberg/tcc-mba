@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteracao no código alterou intencionalmente o formatador de data/hora no GlobalExceptionHandler de ISO_LOCAL_DATE_TIME para ISO_INSTANT. Isso faz com que a propriedade 'timestamp' na resposta de erro inclua o sufixo 'Z' relativo ao UTC/Instant, refletindo uma alteracao de comportamento esperada na API.\"\n}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4620,
+    "candidatesTokenCount": 102,
+    "totalTokenCount": 5128,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4620
+      }
+    ],
+    "thoughtsTokenCount": 406,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "isKUarbdBufRz7IPoe2LyA4"
+}

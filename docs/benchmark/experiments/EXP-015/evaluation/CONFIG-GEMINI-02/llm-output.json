@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteracao no código alterou intencionalmente o formatador de data/hora no GlobalExceptionHandler de ISO_LOCAL_DATE_TIME para ISO_INSTANT. Isso faz com que a propriedade 'timestamp' na resposta de erro inclua o sufixo 'Z' relativo ao UTC/Instant, refletindo uma alteracao de comportamento esperada na API."
+}
