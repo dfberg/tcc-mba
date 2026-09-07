@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]; OUT=Path(__file__).parent
 PTAG="benchmark-v2-results-consolidation-protocol"
+PTAG_OBJECT="a97a34d5c95e119c59f51d4c508ee491448529f9"
 PCOMMIT="6a2c37446ca9de22b4538f62f0540408b47a708a"
 PBLOB="5380a1bb25a1b6d00e4e1f4d484b22c74a7935ee"
 PPATH="docs/benchmark/results_consolidation_protocol.md"
@@ -197,16 +198,98 @@ def etag(n):
     if n==22:return "benchmark-v2-exp-022-evaluated"
     if n>=26:return "benchmark-v2-exp-026-030-evaluated"
     raise ConsolidationIntegrityError(f"no frozen mapping for EXP-{n:03d}")
-def exclusion(exp):
-    # A frozen JSON status record is mandatory; no manual EXP-011/016 fallback.
+def json_normative_status_candidates():
+    """Read explicit per-EXP final statuses from frozen JSON sources."""
+    candidates=[];seen=set()
     for tag in txt("for-each-ref","--format=%(refname:short)","refs/tags").splitlines():
         c=commit(tag)
         for path in txt("ls-tree","-r","--name-only",c).splitlines():
-            if exp in path and path.endswith(".json"):
-                try:x=j(c,path)
-                except ConsolidationIntegrityError:continue
-                if x.get("experimentId")==exp and x.get("finalNormativeStatus")=="REQUIRES_REVIEW":return validate_source(tag,"normative exclusion",[path]),x,path
-    raise ConsolidationIntegrityError(f"missing frozen normative exclusion for {exp}")
+            if "/EXP-" not in path or not path.endswith(".json"):continue
+            try:x=j(c,path)
+            except ConsolidationIntegrityError:continue
+            if not isinstance(x,dict):continue
+            exp=x.get("experimentId");status=x.get("finalNormativeStatus")
+            if not isinstance(exp,str) or not re.fullmatch(r"EXP-\d{3}",exp) or not isinstance(status,str):continue
+            source=validate_source(tag,"explicit JSON normative status",[path]);blob_sha=sha(c,path)
+            reason=x.get("exclusionReason",x.get("reason"));included=x.get("includedInPrimaryAnalysis")
+            if reason is not None and not isinstance(reason,str):raise ConsolidationIntegrityError(f"invalid normative exclusion reason {tag}:{path}")
+            if included is not None and not isinstance(included,bool):raise ConsolidationIntegrityError(f"invalid normative inclusion value {tag}:{path}")
+            identity=(path,blob_sha,exp,status,reason,included)
+            if identity in seen:continue
+            seen.add(identity)
+            candidates.append({"experimentId":exp,"finalNormativeStatus":status,"includedInPrimaryAnalysis":included,"exclusionReason":reason,"provenance":{"sourceTag":tag,"tagType":source["tagType"],"tagObjectSha":source["tagObjectSha"],"dereferencedCommit":c,"path":path,"blobSha":blob_sha,"sourceFormat":"json","sourceLocation":"$.finalNormativeStatus","status":"PASS"}})
+    return candidates
+def markdown_normative_status_declarations(protocol_source):
+    """Collect explicit statuses only from the frozen canonical-selection table."""
+    if protocol_source["tag"]!=PTAG or protocol_source["tagType"]!="annotated" or protocol_source["tagObjectSha"]!=PTAG_OBJECT or protocol_source["dereferencedCommit"]!=PCOMMIT or protocol_source["blobSha"]!=PBLOB:
+        raise ConsolidationIntegrityError("normative exclusion authority identity failure")
+    document=txt("show",f"{PCOMMIT}:{PPATH}")
+    heading="## 2. Canonical experiment selection";next_heading="\n## 3. Reconstruction gates"
+    start=document.find(heading);end=document.find(next_heading,start)
+    if start<0 or end<0:raise ConsolidationIntegrityError("normative exclusion section not found")
+    lines=document[start:end].splitlines();header="| EXP range | normative evaluation source |"
+    try:header_index=lines.index(header)
+    except ValueError as e:raise ConsolidationIntegrityError("normative selection table not found") from e
+    if header_index+1>=len(lines) or lines[header_index+1]!="| --- | --- |":raise ConsolidationIntegrityError("normative selection table header mismatch")
+    candidates=[];absolute_start_line=document[:start].count("\n")+1
+    for row_index,line in enumerate(lines[header_index+2:],header_index+2):
+        if not line.startswith("|"):break
+        cells=[cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells)!=2:raise ConsolidationIntegrityError("malformed normative selection row")
+        exp_cell,normative_cell=cells;exp_match=re.fullmatch(r"\d{3}",exp_cell)
+        status_match=re.match(r"^`([A-Z][A-Z0-9_]*)`",normative_cell)
+        if not status_match:continue
+        if not exp_match:raise ConsolidationIntegrityError(f"unsupported normative status EXP cell: {exp_cell}")
+        reason_match=re.search(r", excluded: `([A-Z][A-Z0-9_]*)`$",normative_cell)
+        candidates.append({"experimentId":f"EXP-{exp_match.group(0)}","rawNormativeStatus":status_match.group(1),"rawReason":reason_match.group(1) if reason_match else None,"rawNormativeCell":normative_cell,"provenance":{"sourceTag":PTAG,"tagType":protocol_source["tagType"],"tagObjectSha":protocol_source["tagObjectSha"],"dereferencedCommit":PCOMMIT,"path":PPATH,"blobSha":PBLOB,"sourceFormat":"markdown","sourceLocation":f"section 2 / canonical experiment selection / line {absolute_start_line+row_index}","status":"PASS"}})
+    if not candidates:raise ConsolidationIntegrityError("frozen protocol contains no normative exclusions")
+    return candidates
+def reconcile_markdown_normative_statuses(protocol_source):
+    """Reconcile Markdown declarations before applying exclusion semantics."""
+    grouped=defaultdict(list)
+    for candidate in markdown_normative_status_declarations(protocol_source):grouped[candidate["experimentId"]].append(candidate)
+    reconciled=[]
+    for exp,candidates in sorted(grouped.items()):
+        statuses={candidate["rawNormativeStatus"] for candidate in candidates}
+        if len(statuses)!=1:raise ConsolidationIntegrityError(f"conflicting Markdown normative statuses for {exp}: {sorted(statuses)}")
+        status=next(iter(statuses))
+        reasons={candidate["rawReason"] for candidate in candidates if candidate["rawReason"] is not None}
+        if len(reasons)>1:raise ConsolidationIntegrityError(f"conflicting Markdown normative exclusion reasons for {exp}: {sorted(reasons)}")
+        reconciled.append({"experimentId":exp,"reconciledNormativeStatus":status,"reconciledReason":next(iter(reasons),None),"declarations":candidates})
+    return reconciled
+def interpret_markdown_normative_statuses(protocol_source):
+    """Interpret only statuses already collected and reconciled from Markdown."""
+    interpreted=[]
+    for state in reconcile_markdown_normative_statuses(protocol_source):
+        exp=state["experimentId"];status=state["reconciledNormativeStatus"]
+        if status!="REQUIRES_REVIEW":raise ConsolidationIntegrityError(f"unsupported Markdown normative status for {exp}: {status}")
+        for declaration in state["declarations"]:
+            normative_cell=declaration["rawNormativeCell"]
+            reason_match=re.fullmatch(r"`REQUIRES_REVIEW`, excluded: `([A-Z][A-Z0-9_]*)`",normative_cell)
+            if reason_match:reason=reason_match.group(1)
+            elif normative_cell=="`REQUIRES_REVIEW`, excluded under its frozen normative status":reason=None
+            else:raise ConsolidationIntegrityError(f"unsupported normative exclusion syntax: {normative_cell}")
+            if reason!=declaration["rawReason"]:raise ConsolidationIntegrityError(f"normative exclusion reason parsing conflict for {exp}")
+        provenances=sorted((declaration["provenance"] for declaration in state["declarations"]),key=lambda p:(p["sourceLocation"],p["blobSha"]))
+        interpreted.append({"experimentId":exp,"finalNormativeStatus":status,"includedInPrimaryAnalysis":False,"exclusionReason":state["reconciledReason"],"provenances":provenances})
+    return interpreted
+def resolve_normative_exclusions(protocol_source):
+    """Reconcile every explicit frozen status before deriving exclusions."""
+    grouped=defaultdict(list)
+    for candidate in json_normative_status_candidates()+interpret_markdown_normative_statuses(protocol_source):grouped[candidate["experimentId"]].append(candidate)
+    exclusions={}
+    for exp,candidates in sorted(grouped.items()):
+        statuses={candidate["finalNormativeStatus"] for candidate in candidates}
+        if len(statuses)!=1:raise ConsolidationIntegrityError(f"conflicting frozen normative statuses for {exp}: {sorted(statuses)}")
+        status=next(iter(statuses))
+        if status!="REQUIRES_REVIEW":continue
+        inclusions={candidate["includedInPrimaryAnalysis"] for candidate in candidates if candidate["includedInPrimaryAnalysis"] is not None}
+        if inclusions-{False}:raise ConsolidationIntegrityError(f"conflicting frozen normative inclusion for {exp}")
+        reasons={candidate["exclusionReason"] for candidate in candidates if candidate["exclusionReason"] is not None}
+        if len(reasons)>1:raise ConsolidationIntegrityError(f"conflicting frozen normative exclusion reasons for {exp}: {sorted(reasons)}")
+        provenances=sorted((provenance for candidate in candidates for provenance in (candidate["provenances"] if "provenances" in candidate else [candidate["provenance"]])),key=lambda p:(p["sourceFormat"],p["sourceTag"],p["path"],p["blobSha"]))
+        exclusions[exp]={"experimentId":exp,"finalNormativeStatus":status,"includedInPrimaryAnalysis":False,"exclusionReason":next(iter(reasons),None),"normativeStatusProvenance":{"status":"PASS","sources":provenances}}
+    return exclusions
 def build_case_mapping_index(registry):
     """Index explicit EXP-to-CASE metadata introduced by pre-inference technical freezes."""
     index={}
@@ -299,6 +382,8 @@ def main(validate_only):
     # Each amendment has precedence only within its declared provenance scope.
     source_registry={}
     proto=authority(PTAG,PCOMMIT,PBLOB,PPATH,"original protocol"); proto.update({"family":"protocol","requiredForPrimaryResults":True}); source_registry["protocol"]=[proto]
+    if proto["tagType"]!="annotated" or proto["tagObjectSha"]!=PTAG_OBJECT:raise ConsolidationIntegrityError("results protocol tag identity failure")
+    proto["normativeExclusionAuthority"]={"path":PPATH,"sourceFormat":"markdown","sourceLocation":"section 2 / canonical experiment selection","status":"PASS"}
     amendment=authority(ATAG,ACOMMIT,ABLOB,APATH,"amendment 01: provenance scope correction"); amendment.update({"family":"amendment","requiredForPrimaryResults":True}); source_registry["amendment"]=[amendment]
     amendment02=authority(ATAG2,ACOMMIT2,ABLOB2,APATH2,"amendment 02: EXP-to-CASE mapping provenance scope correction"); amendment02.update({"family":"amendment_02","requiredForPrimaryResults":True}); source_registry["amendment_02"]=[amendment02]
     config_source,config,template_evidence=normative_config()
@@ -322,13 +407,16 @@ def main(validate_only):
             else:
                 pair_set=pair_sets[0];pair_provenance=result(True,{"availability":"AVAILABLE","source":pair_source,"paths":list(PAIR_PATHS),"commit":CCOMMIT,"sets":[sorted(x) for x in pair_sets],"reason":None})
     catalog=register_source(source_registry,"catalog","benchmark-v2-catalog","catalog",[],True)
+    exclusions=resolve_normative_exclusions(proto);expected_experiments={f"EXP-{n:03d}" for n in range(1,31)}
+    unexpected_exclusions=sorted(set(exclusions)-expected_experiments)
+    if unexpected_exclusions:raise ConsolidationIntegrityError(f"normative exclusions outside catalog: {unexpected_exclusions}")
     sources=source_registry; rows=[]
     for n in range(1,31):
         exp=f"EXP-{n:03d}"
-        if n in (11,16):
-            s,status,path=exclusion(exp);s.update({"family":"evaluation_freezes","requiredForPrimaryResults":True});source_registry.setdefault("evaluation_freezes",[]).append(s)
+        if exp in exclusions:
+            status=dict(exclusions[exp]);normative_source=status["normativeStatusProvenance"]["sources"][0]
             case_id,case_mapping=resolve_case_mapping(case_mapping_index,exp)
-            status.update({"experimentId":exp,"caseId":case_id,"caseMappingStatus":case_mapping["status"],"includedInPrimaryAnalysis":False,"matchStatus":"NOT_APPLICABLE","authoritativeEvaluationTag":s["tag"],"authoritativeEvaluationCommit":s["dereferencedCommit"],"provenance":{"normativeStatusPath":path,"caseMappingProvenance":case_mapping}});rows.append(status);continue
+            status.update({"caseId":case_id,"caseMappingStatus":case_mapping["status"],"matchStatus":"NOT_APPLICABLE","authoritativeEvaluationTag":normative_source["sourceTag"],"authoritativeEvaluationCommit":normative_source["dereferencedCommit"],"provenance":{"normativeStatusPath":normative_source["path"],"normativeStatusProvenance":status["normativeStatusProvenance"],"caseMappingProvenance":case_mapping}});rows.append(status);continue
         tag=etag(n);base=f"docs/benchmark/experiments/{exp}";s=register_source(source_registry,"evaluation_freezes",tag,"normative evaluation",[f"{base}/metadata.json"]);c=s["dereferencedCommit"];case_id,case_mapping=resolve_case_mapping(case_mapping_index,exp)
         case,catalog_evidence=descriptive_attributes(catalog,case_id) if case_id is not None else ({"difficulty":None,"category":None,"targetFamily":None},{"tag":catalog["tag"],"commit":catalog["dereferencedCommit"],"passed":False,"reason":"CASE unavailable from frozen mapping evidence"})
         gs=register_source(source_registry,"ground_truth","benchmark-v2-exp-002-005-ground-truth-recovered" if 2<=n<=5 else tag,"ground truth recovery" if 2<=n<=5 else "ground truth in evaluation freeze",[f"{base}/ground-truth.json"]);gt=j(gs["dereferencedCommit"],f"{base}/ground-truth.json")
@@ -338,7 +426,7 @@ def main(validate_only):
         rows.append({"experimentId":exp,"caseId":case_id,"caseMappingStatus":case_mapping["status"],"finalNormativeStatus":"VALID_EVALUATION","includedInPrimaryAnalysis":True,"exclusionReason":None,"authoritativeEvaluation":{"tag":tag,"commit":c,"path":root},"authoritativeGroundTruth":{"tag":gs["tag"],"commit":gs["dereferencedCommit"],"path":f"{base}/ground-truth.json"},"executionNamespace":ns,"groundTruth":gt["classification"],"llmClassification":pred,"matchStatus":"MATCH" if pred==gt["classification"] else "MISMATCH","confidence":out.get("confidence"),"difficulty":case["difficulty"],"category":case["category"],"targetFamily":case["targetFamily"],"provenance":{"caseMappingProvenance":case_mapping,"catalog":catalog_evidence,"groundTruth":{"tag":gs["tag"],"commit":gs["dereferencedCommit"],"path":f"{base}/ground-truth.json"},"evaluation":{"tag":tag,"commit":c,"path":root},"llmOutput":evidence["llmOutputProvenance"],"modelConfig":evidence["modelConfig"],"prompt":evidence["prompt"],"attemptChain":evidence["firstValid"]}})
     inc=[x for x in rows if x["includedInPrimaryAnalysis"]]
     known_case_ids=[x["caseId"] for x in rows if x.get("caseId") is not None]
-    if len(rows)!=30 or len(inc)!=28 or len({x["experimentId"] for x in rows})!=30 or len(known_case_ids)!=len(set(known_case_ids)):raise ConsolidationIntegrityError("dataset integrity failure")
+    if len(rows)!=30 or len(inc)!=len(rows)-len(exclusions) or len({x["experimentId"] for x in rows})!=30 or len(known_case_ids)!=len(set(known_case_ids)):raise ConsolidationIntegrityError("dataset integrity failure")
     def case_mapping_passed(row):
         evidence=row.get("provenance",{}).get("caseMappingProvenance",{})
         return evidence.get("passed") is True and evidence.get("status")=="PASS" and evidence.get("caseId")==row.get("caseId") and evidence.get("chronology") in ("BEFORE_LLM_INFERENCE","DURING_TECHNICAL_EXECUTION_BEFORE_LLM") and evidence.get("chronologyValidationStatus")=="PASS" and evidence.get("validationStatus")=="PASS" and evidence.get("conflictStatus")=="NONE"
@@ -372,7 +460,7 @@ def main(validate_only):
     llm_output_gate=bool(included_llm_checks) and len(included_llm_checks)==len(inc) and not llm_output_failures
     primary_gate_names=("FROZEN_PRIMARY_ORIGINS_VALID","ONE_SELECTED_EVALUATION_PER_INCLUDED_EXP","GROUND_TRUTH_PROVENANCE_VALID","PRIMARY_EXP_CASE_MAPPING_PROVENANCE_VALID","LLM_OUTPUT_PROVENANCE_VALID","MODEL_CONFIG_CONSISTENCY","PROMPT_PROVENANCE_VALID","FIRST_VALID_POLICY_COMPATIBLE","NO_DUPLICATE_EVALUATION_COUNTING")
     frozen_origins,source_coverage,required_primary_sources=primary_registry_gate(source_registry)
-    gates={"FROZEN_PRIMARY_ORIGINS_VALID":frozen_origins,"ONE_SELECTED_EVALUATION_PER_INCLUDED_EXP":len(inc)==28,"GROUND_TRUTH_PROVENANCE_VALID":all(x.get("authoritativeGroundTruth") for x in inc),"PRIMARY_EXP_CASE_MAPPING_PROVENANCE_VALID":primary_mapping_gate,"FULL_CATALOG_CASE_MAPPING_PROVENANCE_COMPLETE":full_catalog_mapping_gate,"LLM_OUTPUT_PROVENANCE_VALID":llm_output_gate,"MODEL_CONFIG_CONSISTENCY":all(x["passed"] for x in model_checks),"PROMPT_PROVENANCE_VALID":all(x["passed"] for x in prompt_checks),"FIRST_VALID_POLICY_COMPATIBLE":all(x["passed"] for x in first_checks),"NO_DUPLICATE_EVALUATION_COUNTING":len({x["experimentId"] for x in inc})==len(inc)}
+    gates={"FROZEN_PRIMARY_ORIGINS_VALID":frozen_origins,"ONE_SELECTED_EVALUATION_PER_INCLUDED_EXP":len(inc)==len(rows)-len(exclusions),"GROUND_TRUTH_PROVENANCE_VALID":all(x.get("authoritativeGroundTruth") for x in inc),"PRIMARY_EXP_CASE_MAPPING_PROVENANCE_VALID":primary_mapping_gate,"FULL_CATALOG_CASE_MAPPING_PROVENANCE_COMPLETE":full_catalog_mapping_gate,"LLM_OUTPUT_PROVENANCE_VALID":llm_output_gate,"MODEL_CONFIG_CONSISTENCY":all(x["passed"] for x in model_checks),"PROMPT_PROVENANCE_VALID":all(x["passed"] for x in prompt_checks),"FIRST_VALID_POLICY_COMPATIBLE":all(x["passed"] for x in first_checks),"NO_DUPLICATE_EVALUATION_COUNTING":len({x["experimentId"] for x in inc})==len(inc)}
     if gates["PRIMARY_EXP_CASE_MAPPING_PROVENANCE_VALID"] and included_mapping_failures: raise ConsolidationIntegrityError("individual included CASE mapping failure escaped primary mapping gate")
     if gates["LLM_OUTPUT_PROVENANCE_VALID"] and llm_output_failures: raise ConsolidationIntegrityError("individual LLM output provenance failure escaped global gate")
     gates["PRIMARY_ANALYSIS_DATASET_INTEGRITY"]=all(gates[name] for name in primary_gate_names)
