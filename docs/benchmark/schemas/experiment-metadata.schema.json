@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment-metadata.schema.json",
+  "title": "Metadados factuais de uma execução experimental",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experimentId",
+    "caseId",
+    "caseVersion",
+    "category",
+    "endpoint",
+    "httpMethod",
+    "snapshotTarget",
+    "testTarget",
+    "mutationPoints",
+    "difficulty",
+    "expectedScope",
+    "baselineCommit",
+    "catalogFreezeCommit",
+    "approvedSha256",
+    "receivedSha256",
+    "patchSha256",
+    "testOutputSha256",
+    "reproducible",
+    "state"
+  ],
+  "properties": {
+    "experimentId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "caseId": { "type": "string", "pattern": "^CASE-[0-9]{3,}$" },
+    "caseVersion": { "type": "string", "pattern": "^CASE-[0-9]{3,}-v[1-9][0-9]*$" },
+    "category": {
+      "type": "string",
+      "enum": ["CONTRACT_EVOLUTION", "BREAKING_CHANGE", "BUSINESS_RULE", "HTTP", "SERIALIZATION", "ERROR_HANDLING", "COLLECTION", "NON_DETERMINISTIC", "NOISE", "BUG"]
+    },
+    "endpoint": { "type": "string", "minLength": 1 },
+    "httpMethod": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"] },
+    "snapshotTarget": { "type": "string", "minLength": 1 },
+    "testTarget": { "type": "string", "minLength": 1 },
+    "mutationPoints": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^MP-[0-9]{3,}$" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "difficulty": { "type": "string", "enum": ["EASY", "MEDIUM", "HARD"] },
+    "expectedScope": { "type": "string", "enum": ["TARGET_ONLY", "MULTIPLE_SNAPSHOTS", "GLOBAL_BEHAVIOR"] },
+    "baselineCommit": { "$ref": "#/$defs/gitCommit" },
+    "catalogFreezeCommit": { "$ref": "#/$defs/gitCommit" },
+    "approvedSha256": { "$ref": "#/$defs/sha256" },
+    "receivedSha256": { "$ref": "#/$defs/sha256" },
+    "patchSha256": { "$ref": "#/$defs/sha256" },
+    "testOutputSha256": { "$ref": "#/$defs/sha256" },
+    "reproducible": { "type": "boolean" },
+    "state": { "type": "string", "enum": ["PLANNED", "IMPLEMENTED", "EXECUTED", "VALIDATED", "EVALUATED", "REJECTED", "INVALIDATED"] }
+  },
+  "$defs": {
+    "gitCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9A-F]{64}$" }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "collateral-manifest.schema.json",
+  "title": "Manifest factual de evidências collateral",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experimentId",
+    "protocolVersion",
+    "collateralCount",
+    "collaterals",
+    "includedInLlmInput"
+  ],
+  "properties": {
+    "experimentId": {
+      "type": "string",
+      "pattern": "^EXP-[0-9]{3,}$"
+    },
+    "protocolVersion": {
+      "type": "string",
+      "const": "COLLATERAL_EVIDENCE_V1"
+    },
+    "collateralCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "collaterals": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/collateral"
+      }
+    },
+    "includedInLlmInput": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "$defs": {
+    "collateral": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "testName",
+        "snapshotName",
+        "approved",
+        "received",
+        "testOutput",
+        "evidencePreservedInFull"
+      ],
+      "properties": {
+        "testName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshotName": {
+          "type": "string",
+          "pattern": "^[^/\\\\]+\\.approved\\.txt$"
+        },
+        "approved": {
+          "$ref": "#/$defs/artifact"
+        },
+        "received": {
+          "$ref": "#/$defs/artifact"
+        },
+        "testOutput": {
+          "$ref": "#/$defs/artifact"
+        },
+        "evidencePreservedInFull": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9A-Fa-f]{64}$"
+        }
+      }
+    }
+  }
+}

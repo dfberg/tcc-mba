@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":95,\"reason\":\"A alteracao de codigo em BookService.java passa a remover os hifens do ISBN recebido antes de salva-lo (bookDTO.getIsbn().replace(\\\"-\\\", \\\"\\\")). Como resultado, a resposta da API agora retorna o ISBN apenas com digitos (\\\"9780140439268\\\" em vez de \\\"978-0-14-043926-8\\\"), refletindo uma alteracao intencional no formato do dado que deve ser incorporada ao snapshot.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4612,
+    "candidatesTokenCount": 130,
+    "totalTokenCount": 5216,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4612
+      }
+    ],
+    "thoughtsTokenCount": 474,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "ZNaVaqWkI7icqtsP1fmdiQE"
+}

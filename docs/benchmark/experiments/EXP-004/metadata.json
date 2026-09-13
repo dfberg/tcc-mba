@@ -1,0 +1,24 @@
+{
+  "experimentId": "EXP-004",
+  "caseId": "CASE-004",
+  "caseVersion": "CASE-004-v1",
+  "category": "CONTRACT_EVOLUTION",
+  "endpoint": "/authors",
+  "httpMethod": "POST",
+  "snapshotTarget": "AuthorApiIntegrationTest.testCreateAuthor_Snapshot.approved.txt",
+  "testTarget": "AuthorApiIntegrationTest.testCreateAuthor_Snapshot",
+  "mutationPoints": [
+    "MP-001",
+    "MP-002"
+  ],
+  "difficulty": "MEDIUM",
+  "expectedScope": "MULTIPLE_SNAPSHOTS",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "catalogFreezeCommit": "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+  "approvedSha256": "7B03E56D21100E0EED00A1C0B0EB8C4EDC733D47E0D6A9DF00F8E5066331677F",
+  "receivedSha256": "0CA8D9E50875784F0BF4A962107DC1038D7C13CED8CA33BBEEFFDCE90923059E",
+  "patchSha256": "E7FC126B9799898222E9E34E6568C9EFA8FCF0A581CF33F59FFFF520AC828577",
+  "testOutputSha256": "80B2CC7F0F94C7B99065923A9DE28A54CE5332D29A91B73DE59CC03EE79652EB",
+  "reproducible": true,
+  "state": "VALIDATED"
+}

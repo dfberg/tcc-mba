@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteracao no snapshot decorre diretamente da mudanca intencional de mensagem no construtor de ResourceNotFoundException no Git diff, onde '%s not found with id: %d' foi alterado para '%s with identifier %d was not found'."
+}

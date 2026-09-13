@@ -1,0 +1,1 @@
+{"status":"404","message":"Author not found with id: 99999","timestamp":"2026-05-26T13:25:34.6903399","path":"/authors/99999"}

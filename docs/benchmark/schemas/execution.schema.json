@@ -4,7 +4,7 @@
   "title": "Registro reproduzível de execução",
   "type": "object",
   "additionalProperties": false,
-  "required": ["caseId", "timestamp", "baselineCommit", "model", "modelProvider", "modelParameters", "durationMs", "testCommand", "testExitCode"],
+  "required": ["caseId", "timestamp", "baselineCommit", "durationMs", "testCommand", "testExitCode"],
   "properties": {
     "caseId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
     "timestamp": { "type": "string", "format": "date-time" },

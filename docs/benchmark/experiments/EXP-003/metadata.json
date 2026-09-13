@@ -1,0 +1,23 @@
+{
+  "experimentId": "EXP-003",
+  "caseId": "CASE-003",
+  "caseVersion": "CASE-003-v1",
+  "category": "NOISE",
+  "endpoint": "/authors",
+  "httpMethod": "GET",
+  "snapshotTarget": "AuthorApiIntegrationTest.testGetAllAuthors_Snapshot.approved.txt",
+  "testTarget": "AuthorApiIntegrationTest.testGetAllAuthors_Snapshot",
+  "mutationPoints": [
+    "MP-021"
+  ],
+  "difficulty": "HARD",
+  "expectedScope": "GLOBAL_BEHAVIOR",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "catalogFreezeCommit": "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+  "approvedSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+  "receivedSha256": "5984EAC0C5C6D947241E29DD5671B81A1546CEDF77E08D38438AC47029969AFA",
+  "patchSha256": "5EE02C6C417EB1DF289D6A45DB24DF5D4CCEBD6BC1A531C4E5A2E23732E2562C",
+  "testOutputSha256": "38DD777F341F2169A7F855980F4810CB7B79AB74D7CBACD6F3150EDC02731AF5",
+  "reproducible": true,
+  "state": "VALIDATED"
+}

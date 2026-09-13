@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-021",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "A representação ficaria incorreta segundo o comportamento esperado do caso."
+}

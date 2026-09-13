@@ -1,0 +1,21 @@
+{
+  "experimentId": "EXP-014",
+  "caseId": "CASE-014",
+  "caseVersion": "CASE-014-v1",
+  "category": "ERROR_HANDLING",
+  "endpoint": "/authors/99999",
+  "httpMethod": "GET",
+  "snapshotTarget": "AuthorApiIntegrationTest.testGetAuthorNotFound_Snapshot.approved.txt",
+  "testTarget": "AuthorApiIntegrationTest.testGetAuthorNotFound_Snapshot",
+  "mutationPoints": ["MP-009"],
+  "difficulty": "EASY",
+  "expectedScope": "TARGET_ONLY",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "catalogFreezeCommit": "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+  "approvedSha256": "C8A2A8873D9F1921A50A107DA494B936F51E485E2099EF2F5AD6EC345254C088",
+  "receivedSha256": "B5E0BEAC3362D80ADC2DC2EBBE454CEB463A6F3048A2A3EF70297D6EA2486A60",
+  "patchSha256": "B80965633B2DE3445A76168D2203F6FACF026E39E2E99A97582878DB8D19DFE0",
+  "testOutputSha256": "682E8881FAECE57CC23A0411F258BBC015113CB5A3F5B13194B14346520819FD",
+  "reproducible": true,
+  "state": "VALIDATED"
+}

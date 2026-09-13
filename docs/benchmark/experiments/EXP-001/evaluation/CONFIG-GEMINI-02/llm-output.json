@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":true,"confidence":95,"reason":"A alteração no controlador AuthorController mudou intencionalmente o contrato da resposta do endpoint GET /authors de uma lista simples para um objeto encapsulado contendo as propriedades 'authors' e 'count'. O snapshot recebido reflete exatamente essa nova estrutura de resposta introduzida no código."}

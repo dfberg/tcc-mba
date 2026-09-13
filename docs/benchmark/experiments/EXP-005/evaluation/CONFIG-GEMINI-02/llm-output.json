@@ -1,0 +1,5 @@
+{
+  "shouldUpdateSnapshot": true,
+  "confidence": 95,
+  "reason": "A alteração no código adicionou explicitamente a anotação @JsonProperty(\"givenName\") ao campo firstName do DTO AuthorDTO, alterando a chave da propriedade na serialização JSON para givenName. O snapshot recebido reflete com precisão essa mudança intencional no contrato da API."
+}

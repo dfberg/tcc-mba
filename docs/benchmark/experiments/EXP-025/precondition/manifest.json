@@ -1,0 +1,27 @@
+{
+    "experimentId":  "EXP-025",
+    "protocolVersion":  "EXPLICIT_PRECONDITIONING_V1",
+    "purpose":  "REPRODUCE_FROZEN_BASELINE_STATE",
+    "steps":  [
+                  "Run AuthorApiIntegrationTest#testGetAuthorNotFound_Snapshot against a fresh persistent H2 fixture database before the primary Maven invocation."
+              ],
+    "baselineExpectedState":  [
+                                  "PHASE P naturally creates authors ids 1 and 2 during application startup, then removes them in the test setup.",
+                                  "The subsequent application startup naturally creates authors ids 3 and 4.",
+                                  "The primary test setup naturally creates author id 5.",
+                                  "The primary requests naturally create book ids 1 and 2."
+                              ],
+    "exitCode":  0,
+    "outputSha256":  "6535DC8C497E2495DD68F8EF9DB0B41BFD8A53BC489EBE91560650CAF584E2B3",
+    "timestamp":  "2026-08-29T17:08:54.9294730-03:00",
+    "selectedPrimaryTest":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot",
+    "primaryObservationStartsAfterPrecondition":  true,
+    "includedInLlmInput":  false,
+    "preconditioningStepsFixedBeforeMutation":  true,
+    "dependsOnMutatedOutput":  false,
+    "stateConstructionConfirmed":  true,
+    "failureClassification":  "SUCCESS_EXIT",
+    "preconditionTranscriptPreserved":  true,
+    "primaryBaselinePassAfterPreconditioning":  true,
+    "successDetermination":  "PRECONDITION_SUCCESS"
+}

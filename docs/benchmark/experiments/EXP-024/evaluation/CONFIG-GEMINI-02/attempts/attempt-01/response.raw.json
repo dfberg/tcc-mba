@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteração no controller (BookController.java) adicionou explicitamente a inicialização da lista de reviews ('createdBook.setReviews(List.of())') no payload da resposta do endpoint POST /books. Como o campo 'reviews': [] foi adicionado intencionalmente na resposta do endpoint, o snapshot deve ser atualizado para refletir essa mudança de comportamento.\"\n}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4498,
+    "candidatesTokenCount": 103,
+    "totalTokenCount": 5012,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4498
+      }
+    ],
+    "thoughtsTokenCount": 411,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "MmiVav2cDeyJz7IPw9nWcQ"
+}

@@ -1,0 +1,8 @@
+{
+    "caseId":  "EXP-017",
+    "timestamp":  "2026-08-23T22:16:29-03:00",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "durationMs":  1,
+    "testCommand":  "mvn -Dmaven.repo.local=C:\\Users\\dfber\\.m2\\repository -Dtest=AuthorApiIntegrationTest#testGetAuthorNotFound_Snapshot test",
+    "testExitCode":  1
+}

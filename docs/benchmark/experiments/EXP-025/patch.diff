@@ -1,0 +1,24 @@
+diff --git a/src/main/java/com/example/pocapi/repository/BookRepository.java b/src/main/java/com/example/pocapi/repository/BookRepository.java
+index 32f4792..0db58b5 100644
+--- a/src/main/java/com/example/pocapi/repository/BookRepository.java
++++ b/src/main/java/com/example/pocapi/repository/BookRepository.java
+@@ -10,5 +10,5 @@ import java.util.Optional;
+ @Repository
+ public interface BookRepository extends JpaRepository<Book, Long> {
+     Optional<Book> findByIsbn(String isbn);
+-    List<Book> findByAuthorId(Long authorId);
++    List<Book> findByAuthorIdOrderByIdDesc(Long authorId);
+ }
+diff --git a/src/main/java/com/example/pocapi/service/BookService.java b/src/main/java/com/example/pocapi/service/BookService.java
+index c6f359f..24ef9f7 100644
+--- a/src/main/java/com/example/pocapi/service/BookService.java
++++ b/src/main/java/com/example/pocapi/service/BookService.java
+@@ -40,7 +40,7 @@ public class BookService {
+         authorRepository.findById(authorId)
+                 .orElseThrow(() -> new ResourceNotFoundException("Author", authorId));
+         
+-        return bookRepository.findByAuthorId(authorId)
++        return bookRepository.findByAuthorIdOrderByIdDesc(authorId)
+                 .stream()
+                 .map(this::convertToDTO)
+                 .collect(Collectors.toList());

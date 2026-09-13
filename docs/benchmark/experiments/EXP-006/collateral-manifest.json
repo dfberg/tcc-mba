@@ -1,0 +1,25 @@
+{
+    "experimentId":  "EXP-006",
+    "protocolVersion":  "COLLATERAL_EVIDENCE_V1",
+    "collateralCount":  1,
+    "collaterals":  [
+                        {
+                            "testName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+                            "snapshotName":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+                            "approved":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/approved.txt",
+                                             "sha256":  "2511d0173d85da0b2b70faddbc079a5ff24be8206b82275d18a462189af44feb"
+                                         },
+                            "received":  {
+                                             "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/received.txt",
+                                             "sha256":  "de25d050ca58399238f28b3ab5dd3535805553c4c9fed6879fe570fb88668168"
+                                         },
+                            "testOutput":  {
+                                               "path":  "collateral/AuthorApiIntegrationTest.testGetAuthorById_Snapshot/test-output.txt",
+                                               "sha256":  "813a473c8aff8ace193d7dae92dd1149617fc3dcd78df9d1cc1fe40e0f448880"
+                                           },
+                            "evidencePreservedInFull":  true
+                        }
+                    ],
+    "includedInLlmInput":  false
+}

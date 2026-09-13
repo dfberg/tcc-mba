@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteracao no snapshot decorre diretamente da mudanca intencional de mensagem no construtor de ResourceNotFoundException no Git diff, onde '%s not found with id: %d' foi alterado para '%s with identifier %d was not found'.\"\n}",
+            "thoughtSignature": "EvgICvUIARFNMg9MVjY3Ygxi1IozEj/XKADbZZotvVD32uIZ8cKo5H7jX18cNv1tU/hXWy1GkUWjmEmLvNFAB4woqa9B+NddbO85GFtRTcsq2saMhqF9jcVf2kMC1oJS+PHHcTEpjkTy6hHQV0heE+IMoEx6sLIG+KFtrRcAIRMgKJ+cBfATJjjSEyjcX0bUwmH3rU5j5/ZUPsAcyVoAisL9M4wNAonS5lSMKCyu351CnSr3Q7U05ZoEuGkdAjk+AlsuvyTj/9nWAkgvSeVqDdbE477S658/f00Vtds8bDRD8VLl5p5zNqu8dA0xUnSEgjntwrJomUqjDfQ8lgCJYLAGI1N68DsbP8ApXZvEA3C8+VmLg1dOnhnPtVwQ8D5fqD9kzky5BWdMUko1eLVraafWPP6LOj4AO/AS7VE77ZnhMDR7YTdfT8yVWZ82pJ8tb9ju5vjw89HCgvxa0eg32cDBuo1j2Nyc3UE3bt5x6JHoWMmMNbklfLkMzrilFxPgvchikimLjLHYCSmS8xeI+1pTnkWC/l9EhL8QkmqxCiWmGwNg4TBqY6UCIBxTvezb0ix0lAHo6/7nrPfWOMRmJtCiyqiXkhieimYrI9KjxP9F8vpgPxv3qK8zB9MFPL5AQVelZphyFcDbRDAoyyXHuVSA1TdfVqeiNTAkDyG0xcTC9oRe2yvwzPZzfQUnf3MmpnFss71rra36ASniPV7NELR58IiW2Hg7FRwI261jcuuSkvIV8z/xULGU24bOitiLAKRT7wQZ6Tlktz4R3n2Zu24C6TUixnLecbpJhCUfZUVuIsC+GgsFzqttB4JGQ/t1+4AxeDgEeiF6Eiq13zA0p5OsUSo1zJHnugdjfnxAgKCsyep1e078PVNT7QWWXkcdQQupx3nFs12ormHBrfQpsv75C0VHpWDd4MMFASweyGiWIbcDN0Kq+dLk2xjsV7O2CTl8rWdw37STdsy5kn978Kgz4Eq/gf/3mlHnUIcco7ZOeIoomb4BBGPWWgYV7mFQgZsAqd3MhkKpTx7i6eLak5V4nBpVQfYgad54GebSuzadtgqJ7w4f31vZWVSi3TWSp/hk4QJbg4cp9Psu0Q3IUNxQORaO3p9TB/ou3zAP9dLPYqys92uOjaBDyKzIYg77gwXKNBtuqZ7ZJisy6+yhw0+Z8rKrHoTKkroeJHwfMbZtbgJwepSBtbpn8hAbXAMiGAmXK0ObJALxh6X7BgjQEQHflvs63G2A7QMGIZmosoJQXdATXFR3O5b2VCytf/V07olQcTcp2sSkPRrtytH+fhdKNmPqrlIPE8nOBIIjThkY+qzU6YJzx5HKnLhOEaiM46Hztm1EJSMJXtX+6xVPlF4/gpkqcvunQGTtmalWzVGJZm1Os8pRrZbJh3NPftybbQ/O85o2dqvWxcFn7z77z4iOKtYz++AMiLqgIDR+WnSY2vS2m1g/5GHJT/gzrcKfxIgmymlJurTz10wAgB9qxfo2vN8r5tAe1mkxt9NOBEsm9yEUS6IfQImdrQ=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4139,
+    "candidatesTokenCount": 80,
+    "totalTokenCount": 4521,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4139
+      }
+    ],
+    "thoughtsTokenCount": 302,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "XsKUare3B56VmtkPqpK78QY"
+}

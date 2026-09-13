@@ -1,0 +1,24 @@
+{
+    "experimentId":  "EXP-011",
+    "caseId":  "CASE-011",
+    "caseVersion":  "CASE-011-v1",
+    "category":  "BUSINESS_RULE",
+    "endpoint":  "/authors/{id}",
+    "httpMethod":  "GET",
+    "snapshotTarget":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot.approved.txt",
+    "testTarget":  "AuthorApiIntegrationTest.testGetAuthorById_Snapshot",
+    "mutationPoints":  [
+                           "MP-002",
+                           "MP-007"
+                       ],
+    "difficulty":  "HARD",
+    "expectedScope":  "TARGET_ONLY",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "2511D0173D85DA0B2B70FADDBC079A5FF24BE8206B82275D18A462189AF44FEB",
+    "receivedSha256":  "67405105FCA63CD4B9309F761EFF72F33A4618BC5C8F86DE7B907518D873B93A",
+    "patchSha256":  "163FD8216F2FAA63AA0612749EAF49139EADF221B742FA2EE93BA12494CB40E0",
+    "testOutputSha256":  "A90BD6C6688D65962B32DC2F006B73F2F39ABD15AC609C41D57C0493F8F2B598",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}

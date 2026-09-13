@@ -1,0 +1,24 @@
+{
+    "experimentId":  "EXP-030",
+    "caseId":  "CASE-030",
+    "caseVersion":  "CASE-030-v1",
+    "category":  "CONTRACT_EVOLUTION",
+    "endpoint":  "/books/by-author/{authorId}",
+    "httpMethod":  "GET",
+    "snapshotTarget":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot.approved.txt",
+    "testTarget":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot",
+    "mutationPoints":  [
+                           "MP-013",
+                           "MP-014"
+                       ],
+    "difficulty":  "HARD",
+    "expectedScope":  "MULTIPLE_SNAPSHOTS",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "catalogFreezeCommit":  "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+    "approvedSha256":  "7FD5C171DB022F6B359EA46F3EC0B62EE84C270759D9BFB0BDCE9AA4A000B849",
+    "receivedSha256":  "4EC580A4880F59393BE12434468B3909C89F2607EA51DF4229FA20562EC16011",
+    "patchSha256":  "D2269E0F61C925B5A6D2BC486295D74ADFC47CA3F1533BCFAE2816509DC90945",
+    "testOutputSha256":  "643A23A4D9896E659A1703DED7DB535F51F56BF79DDC485E8271FC47549D64C9",
+    "reproducible":  true,
+    "state":  "VALIDATED"
+}

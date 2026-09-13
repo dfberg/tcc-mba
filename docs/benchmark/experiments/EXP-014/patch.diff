@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/pocapi/service/AuthorService.java b/src/main/java/com/example/pocapi/service/AuthorService.java
+index 430b3d9..05dd84a 100644
+--- a/src/main/java/com/example/pocapi/service/AuthorService.java
++++ b/src/main/java/com/example/pocapi/service/AuthorService.java
+@@ -51,7 +51,7 @@ public class AuthorService {
+     
+     public AuthorDTO getAuthorById(Long id) {
+         Author author = authorRepository.findById(id)
+-                .orElseThrow(() -> new ResourceNotFoundException("Author", id));
++                .orElseThrow(() -> new ResourceNotFoundException("Book", id));
+         return convertToDTO(author);
+     }
+     

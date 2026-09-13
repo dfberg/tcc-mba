@@ -1,0 +1,27 @@
+diff --git a/src/main/java/com/example/pocapi/controller/AuthorController.java b/src/main/java/com/example/pocapi/controller/AuthorController.java
+index 1b4ef10..2b0b67c 100644
+--- a/src/main/java/com/example/pocapi/controller/AuthorController.java
++++ b/src/main/java/com/example/pocapi/controller/AuthorController.java
+@@ -25,6 +25,10 @@ public class AuthorController {
+     @GetMapping("/{id}")
+     public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id) {
+         AuthorDTO author = authorService.getAuthorById(id);
++        String fullName = author.getFirstName() + " " + author.getLastName();
++        author.setFirstName(null);
++        author.setLastName(null);
++        author.setFullName(fullName);
+         return ResponseEntity.ok(author);
+     }
+     
+diff --git a/src/main/java/com/example/pocapi/model/dto/AuthorDTO.java b/src/main/java/com/example/pocapi/model/dto/AuthorDTO.java
+index 9c7a80e..7f5cf0e 100644
+--- a/src/main/java/com/example/pocapi/model/dto/AuthorDTO.java
++++ b/src/main/java/com/example/pocapi/model/dto/AuthorDTO.java
+@@ -18,6 +18,7 @@ public class AuthorDTO {
+     private Long id;
+     private String firstName;
+     private String lastName;
++    private String fullName;
+     private String email;
+     private List<BookDTO> books;
+     

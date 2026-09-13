@@ -1,0 +1,12 @@
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+index 9abf801..881dec6 100644
+--- a/src/main/resources/application.properties
++++ b/src/main/resources/application.properties
+@@ -1,6 +1,7 @@
+ server.port=8080
+ server.servlet.context-path=/api
+ spring.application.name=poc-api
++spring.jackson.serialization.indent-output=true
+ 
+ # JPA/Hibernate Configuration
+ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect

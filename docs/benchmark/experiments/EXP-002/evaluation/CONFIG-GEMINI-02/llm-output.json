@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":false,"confidence":95,"reason":"A alteracao no AuthorController substituiu o retorno de uma lista vazia [] pelo valor NullNode.getInstance() (null) quando a lista de autores esta vazia. Retornar null em vez de uma lista vazia em um endpoint de colecao caracteriza um comportamento inadequado/erro no codigo, nao devendo ter o snapshot atualizado."}

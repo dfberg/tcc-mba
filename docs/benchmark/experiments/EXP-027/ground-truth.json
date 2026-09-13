@@ -1,0 +1,5 @@
+{
+    "caseId":  "EXP-027",
+    "classification":  "SHOULD_NOT_UPDATE",
+    "reason":  "The duplicate third item is a regression in the collection result."
+}

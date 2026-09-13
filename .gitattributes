@@ -1,0 +1,8 @@
+# Experimental evidence is hashed byte-for-byte and must not be normalized.
+docs/benchmark/experiments/**/approved.txt -text
+docs/benchmark/experiments/**/received.txt -text
+docs/benchmark/experiments/**/test-output.txt -text whitespace=-blank-at-eol
+docs/benchmark/experiments/**/patch.diff -text whitespace=-blank-at-eol
+docs/benchmark/experiments/**/llm-input.json -text
+docs/benchmark/experiments/**/llm-output.json -text
+docs/benchmark/experiments/**/rendered-prompt.txt -text whitespace=-blank-at-eol

@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":false,"confidence":100,"reason":"A alteracao no arquivo AuthorService.java inverteu incorretamente os campos firstName e lastName ao converter a entidade para DTO. Essa inversao e um erro de codigo e nao um comportamento esperado, portanto o snapshot nao deve ser atualizado."}

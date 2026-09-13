@@ -1,0 +1,38 @@
+diff --git a/src/main/java/com/example/pocapi/model/dto/BookDTO.java b/src/main/java/com/example/pocapi/model/dto/BookDTO.java
+index 5d504a2..8db684f 100644
+--- a/src/main/java/com/example/pocapi/model/dto/BookDTO.java
++++ b/src/main/java/com/example/pocapi/model/dto/BookDTO.java
+@@ -20,6 +20,7 @@ public class BookDTO {
+     private String isbn;
+     private Long authorId;
+     private String authorName;
++    private AuthorDTO author;
+     private List<ReviewDTO> reviews;
+     
+     // Constructor for creating new book (without id and reviews)
+diff --git a/src/main/java/com/example/pocapi/service/BookService.java b/src/main/java/com/example/pocapi/service/BookService.java
+index c6f359f..19d5ac7 100644
+--- a/src/main/java/com/example/pocapi/service/BookService.java
++++ b/src/main/java/com/example/pocapi/service/BookService.java
+@@ -2,6 +2,7 @@ package com.example.pocapi.service;
+ 
+ import com.example.pocapi.exception.ResourceNotFoundException;
+ import com.example.pocapi.exception.ValidationException;
++import com.example.pocapi.model.dto.AuthorDTO;
+ import com.example.pocapi.model.dto.BookDTO;
+ import com.example.pocapi.model.entity.Author;
+ import com.example.pocapi.model.entity.Book;
+@@ -118,8 +119,11 @@ public class BookService {
+                 .id(book.getId())
+                 .title(book.getTitle())
+                 .isbn(book.getIsbn())
+-                .authorId(book.getAuthor().getId())
+-                .authorName(book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName())
++                .author(AuthorDTO.builder()
++                        .id(book.getAuthor().getId())
++                        .firstName(book.getAuthor().getFirstName())
++                        .lastName(book.getAuthor().getLastName())
++                        .build())
+                 .build();
+     }
+ }

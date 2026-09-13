@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-015",
+  "classification": "SHOULD_UPDATE",
+  "reason": "A mudança de formato é intencional e remove ambiguidade temporal."
+}

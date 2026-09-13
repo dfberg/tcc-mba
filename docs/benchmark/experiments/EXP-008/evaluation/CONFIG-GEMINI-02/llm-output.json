@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":false,"confidence":95,"reason":"A alteração no arquivo AuthorService.java removeu o mapeamento do campo 'email' na resposta do serviço. Como a requisição POST envia o campo de email no payload, a omissão desse campo no objeto retornado indica uma regressão/erro no mapeamento do código, e não um comportamento esperado."}

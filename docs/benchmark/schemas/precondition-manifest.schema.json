@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "precondition-manifest.schema.json",
+  "title": "Manifest factual de preconditionamento explícito",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experimentId",
+    "protocolVersion",
+    "purpose",
+    "steps",
+    "baselineExpectedState",
+    "exitCode",
+    "outputSha256",
+    "timestamp",
+    "selectedPrimaryTest",
+    "primaryObservationStartsAfterPrecondition",
+    "includedInLlmInput",
+    "preconditioningStepsFixedBeforeMutation",
+    "dependsOnMutatedOutput",
+    "stateConstructionConfirmed",
+    "failureClassification",
+    "preconditionTranscriptPreserved",
+    "primaryBaselinePassAfterPreconditioning",
+    "successDetermination"
+  ],
+  "properties": {
+    "experimentId": { "type": "string", "pattern": "^EXP-[0-9]{3,}$" },
+    "protocolVersion": { "type": "string", "const": "EXPLICIT_PRECONDITIONING_V1" },
+    "purpose": { "type": "string", "const": "REPRODUCE_FROZEN_BASELINE_STATE" },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "baselineExpectedState": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "exitCode": { "type": "integer" },
+    "outputSha256": { "type": "string", "pattern": "^[0-9A-F]{64}$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "selectedPrimaryTest": { "type": "string", "minLength": 1 },
+    "primaryObservationStartsAfterPrecondition": { "type": "boolean", "const": true },
+    "includedInLlmInput": { "type": "boolean", "const": false },
+    "preconditioningStepsFixedBeforeMutation": { "type": "boolean", "const": true },
+    "dependsOnMutatedOutput": { "type": "boolean", "const": false },
+    "stateConstructionConfirmed": { "type": "boolean" },
+    "failureClassification": {
+      "type": "string",
+      "enum": [
+        "SUCCESS_EXIT",
+        "POST_STATE_ASSERTION_FAILURE",
+        "PRE_STATE_FAILURE",
+        "STATE_CONSTRUCTION_FAILURE",
+        "INFRASTRUCTURE_FAILURE"
+      ]
+    },
+    "preconditionTranscriptPreserved": { "type": "boolean", "const": true },
+    "primaryBaselinePassAfterPreconditioning": { "type": "boolean" },
+    "successDetermination": {
+      "type": "string",
+      "enum": ["PRECONDITION_SUCCESS", "PRECONDITION_FAILURE"]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "exitCode": { "const": 0 } }, "required": ["exitCode"] },
+      "then": {
+        "properties": {
+          "failureClassification": { "const": "SUCCESS_EXIT" },
+          "successDetermination": { "const": "PRECONDITION_SUCCESS" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "exitCode": { "not": { "const": 0 } },
+          "successDetermination": { "const": "PRECONDITION_SUCCESS" }
+        },
+        "required": ["exitCode", "successDetermination"]
+      },
+      "then": {
+        "properties": {
+          "stateConstructionConfirmed": { "const": true },
+          "failureClassification": { "const": "POST_STATE_ASSERTION_FAILURE" },
+          "primaryBaselinePassAfterPreconditioning": { "const": true }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failureClassification": {
+            "enum": ["PRE_STATE_FAILURE", "STATE_CONSTRUCTION_FAILURE", "INFRASTRUCTURE_FAILURE"]
+          }
+        },
+        "required": ["failureClassification"]
+      },
+      "then": {
+        "properties": {
+          "successDetermination": { "const": "PRECONDITION_FAILURE" }
+        }
+      }
+    }
+  ]
+}

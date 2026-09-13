@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":true,\"confidence\":95,\"reason\":\"A alteracao no arquivo BookController.java modificou intencionalmente o retorno do endpoint /books/by-author/{authorId} de uma lista simples de DTOs para um objeto Map envelopando a lista na chave 'books' e adicionando a chave 'count'. O snapshot recebido reflete essa mudanca de contrato de forma exata.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 5684,
+    "candidatesTokenCount": 88,
+    "totalTokenCount": 6493,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 5684
+      }
+    ],
+    "thoughtsTokenCount": 721,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "Tg-WaqauEOPVz7IPlqTdIQ"
+}

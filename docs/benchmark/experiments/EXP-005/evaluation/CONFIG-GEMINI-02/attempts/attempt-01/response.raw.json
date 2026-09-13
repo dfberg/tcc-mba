@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": true,\n  \"confidence\": 95,\n  \"reason\": \"A alteração no código adicionou explicitamente a anotação @JsonProperty(\\\"givenName\\\") ao campo firstName do DTO AuthorDTO, alterando a chave da propriedade na serialização JSON para givenName. O snapshot recebido reflete com precisão essa mudança intencional no contrato da API.\"\n}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3837,
+    "candidatesTokenCount": 89,
+    "totalTokenCount": 4297,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3837
+      }
+    ],
+    "thoughtsTokenCount": 371,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "1KCUasHnDuyJqtsPx7mv8QU"
+}

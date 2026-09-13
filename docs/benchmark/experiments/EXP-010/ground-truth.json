@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-010",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "O body deixaria de identificar corretamente o recurso solicitado."
+}

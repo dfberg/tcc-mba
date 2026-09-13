@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-001",
+  "classification": "SHOULD_UPDATE",
+  "reason": "A quebra de representação de [] para um envelope com authors e count é deliberada e constitui o novo contrato esperado."
+}

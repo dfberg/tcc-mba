@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":true,"confidence":95,"reason":"A alteracao no arquivo BookController.java modificou intencionalmente o retorno do endpoint /books/by-author/{authorId} de uma lista simples de DTOs para um objeto Map envelopando a lista na chave 'books' e adicionando a chave 'count'. O snapshot recebido reflete essa mudanca de contrato de forma exata."}

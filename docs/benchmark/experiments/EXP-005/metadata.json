@@ -1,0 +1,24 @@
+{
+  "experimentId": "EXP-005",
+  "caseId": "CASE-005",
+  "caseVersion": "CASE-005-v1",
+  "category": "BREAKING_CHANGE",
+  "endpoint": "/authors",
+  "httpMethod": "POST",
+  "snapshotTarget": "AuthorApiIntegrationTest.testCreateAuthor_Snapshot.approved.txt",
+  "testTarget": "AuthorApiIntegrationTest.testCreateAuthor_Snapshot",
+  "mutationPoints": [
+    "MP-001",
+    "MP-021"
+  ],
+  "difficulty": "EASY",
+  "expectedScope": "MULTIPLE_SNAPSHOTS",
+  "baselineCommit": "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+  "catalogFreezeCommit": "3a30d6154bafc230db0b83c8872b7fe79aeba420",
+  "approvedSha256": "7B03E56D21100E0EED00A1C0B0EB8C4EDC733D47E0D6A9DF00F8E5066331677F",
+  "receivedSha256": "A4334A492D2BDE7EFC9CE114F4BD7DD2CD61D008A371950C0AF1D0610977C85E",
+  "patchSha256": "A5867024B387A5BC8E6B16A43E5E2B3996A5CD22DFF3C784ED7E71735C28A8B6",
+  "testOutputSha256": "DE93779A2E1E6296C5998E2939D0FA80165D418E6112AF19853CEC19C0F6E379",
+  "reproducible": true,
+  "state": "VALIDATED"
+}

@@ -1,0 +1,10 @@
+{
+  "attempt": 1,
+  "timestamp": "2026-08-31T00:34:54.484328+00:00",
+  "configurationId": "CONFIG-GEMINI-02",
+  "modelRequested": "gemini-3.6-flash",
+  "renderedPromptSha256": "BC0FC8972BA024A7BF789E6AD1C3ACE8483F98066206D6F73F8340BA29807A19",
+  "status": "RATE_LIMIT",
+  "httpStatus": 429,
+  "rawResponseSha256": "D617A0EE62A8DA6E1E987D1E89DD072FBC200673032FDD3482D6100072731ED1"
+}

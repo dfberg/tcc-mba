@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "technical-runs-manifest.schema.json",
+  "title": "Manifest factual de execuções técnicas repetidas",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "runCountPlanned", "selectedRun", "variabilityObserved", "independentlyPreserved", "runs"],
+  "properties": {
+    "protocolVersion": { "type": "string", "const": "REPEATED_TECHNICAL_EXECUTION_V1" },
+    "runCountPlanned": { "type": "integer", "const": 3 },
+    "selectedRun": { "type": "string", "const": "RUN-01" },
+    "variabilityObserved": { "type": "boolean" },
+    "independentlyPreserved": { "type": "boolean", "const": true },
+    "runs": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["runId", "technicalStatus", "receivedSha256", "testOutputSha256"],
+        "properties": {
+          "runId": { "type": "string", "enum": ["RUN-01", "RUN-02", "RUN-03"] },
+          "technicalStatus": { "type": "string", "enum": ["VALID", "INFRASTRUCTURE_FAILURE"] },
+          "receivedSha256": { "type": ["string", "null"], "pattern": "^[0-9A-F]{64}$" },
+          "testOutputSha256": { "type": ["string", "null"], "pattern": "^[0-9A-F]{64}$" }
+        }
+      }
+    }
+  }
+}

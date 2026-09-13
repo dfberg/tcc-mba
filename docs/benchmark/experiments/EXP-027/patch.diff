@@ -1,0 +1,23 @@
+diff --git a/src/main/java/com/example/pocapi/service/BookService.java b/src/main/java/com/example/pocapi/service/BookService.java
+index c6f359f..ce7d33b 100644
+--- a/src/main/java/com/example/pocapi/service/BookService.java
++++ b/src/main/java/com/example/pocapi/service/BookService.java
+@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
+ 
+ import java.util.List;
+ import java.util.stream.Collectors;
++import java.util.stream.Stream;
+ 
+ @Service
+ @RequiredArgsConstructor
+@@ -40,8 +41,8 @@ public class BookService {
+         authorRepository.findById(authorId)
+                 .orElseThrow(() -> new ResourceNotFoundException("Author", authorId));
+         
+-        return bookRepository.findByAuthorId(authorId)
+-                .stream()
++        List<Book> books = bookRepository.findByAuthorId(authorId);
++        return Stream.concat(books.stream(), books.stream().limit(1))
+                 .map(this::convertToDTO)
+                 .collect(Collectors.toList());
+     }

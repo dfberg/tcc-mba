@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":false,\"confidence\":95,\"reason\":\"A alteração no arquivo AuthorService.java removeu o mapeamento do campo email (.email(author.getEmail())), fazendo com que a resposta da API omita essa informação ao criar um autor. Como o payload da requisição envia o email e o snapshot anterior incluía essa informação na resposta, a omissão do campo representa uma regressão/erro no código e não um comportamento esperado que deva atualizar o snapshot.\"}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 3725,
+    "candidatesTokenCount": 100,
+    "totalTokenCount": 4319,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 3725
+      }
+    ],
+    "thoughtsTokenCount": 494,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "UKmUarqjH-GyqtsPtqnp-AE"
+}

@@ -1,0 +1,1 @@
+{"shouldUpdateSnapshot":true,"confidence":95,"reason":"A alteração no controller concatena firstName e lastName em fullName e define os campos individuais como nulos, modificando o formato de resposta da API na rota GET /authors/{id}. O snapshot recebido reflete essa mudança planejada na resposta do DTO."}

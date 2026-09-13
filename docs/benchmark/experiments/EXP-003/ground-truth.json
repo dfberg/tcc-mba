@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-003",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "Atualizar aceitaria ruído de apresentação que deveria ser estabilizado ou normalizado, sem evolução semântica do body."
+}

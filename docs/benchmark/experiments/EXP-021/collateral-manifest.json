@@ -1,0 +1,25 @@
+{
+    "experimentId":  "EXP-021",
+    "protocolVersion":  "COLLATERAL_EVIDENCE_V1",
+    "collateralCount":  1,
+    "collaterals":  [
+                        {
+                            "testName":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot",
+                            "snapshotName":  "BookApiIntegrationTest.testGetBooksByAuthor_Snapshot.approved.txt",
+                            "approved":  {
+                                             "path":  "collateral/BookApiIntegrationTest.testGetBooksByAuthor_Snapshot/approved.txt",
+                                             "sha256":  "7fd5c171db022f6b359ea46f3ec0b62ee84c270759d9bfb0bdce9aa4a000b849"
+                                         },
+                            "received":  {
+                                             "path":  "collateral/BookApiIntegrationTest.testGetBooksByAuthor_Snapshot/received.txt",
+                                             "sha256":  "ae152a2b444746bd54e3c33f1e0d156428a582e4de5556ac4db73f4ad51ef822"
+                                         },
+                            "testOutput":  {
+                                               "path":  "collateral/BookApiIntegrationTest.testGetBooksByAuthor_Snapshot/test-output.txt",
+                                               "sha256":  "d713b71b9589c30be6b5813212eed472b357afbb9762a9f907cdf827daaade7d"
+                                           },
+                            "evidencePreservedInFull":  true
+                        }
+                    ],
+    "includedInLlmInput":  false
+}

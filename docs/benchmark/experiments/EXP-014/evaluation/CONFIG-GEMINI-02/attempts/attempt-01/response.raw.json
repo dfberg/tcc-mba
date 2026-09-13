@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"shouldUpdateSnapshot\": false,\n  \"confidence\": 98,\n  \"reason\": \"A alteracao no AuthorService.java alterou incorretamente o nome do recurso na excecao ResourceNotFoundException de 'Author' para 'Book' ao buscar um autor por ID. Isso faz com que a API retorne 'Book not found' em um endpoint de autores (/authors/99999), tratando-se de um erro de implementacao e nao de um comportamento esperado.\"\n}",
+            "thoughtSignature": "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"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 4145,
+    "candidatesTokenCount": 108,
+    "totalTokenCount": 4705,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 4145
+      }
+    ],
+    "thoughtsTokenCount": 452,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "bsKUapCYIri8qtsP1N3cwAg"
+}

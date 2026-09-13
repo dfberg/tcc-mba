@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-009",
+  "classification": "SHOULD_UPDATE",
+  "reason": "A transformação é uma evolução intencional do contrato de leitura."
+}

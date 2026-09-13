@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"shouldUpdateSnapshot\":false,\"confidence\":95,\"reason\":\"A adição de `.limit(1)` no `BookService` limita arbitrariamente a listagem de livros por autor a apenas 1 resultado, omitindo outros livros cadastrados para o mesmo autor (como o livro id 2 presente no snapshot aprovado). Isso representa uma regressão/comportamento incorreto do endpoint e não uma alteração de comportamento esperada.\"}",
+            "thoughtSignature": "Ep8KCpwKARFNMg+a775oZ9/mDJi6sw8l/LBcbeUPqqohn++jkWRCfK2cJVGdUHN9VIDVRV0PcWuVkHa1umayoMla6sQzzrftbfa8cnvnuVqRsK96It8ZnxWstoeg3pavF30xQkin7lTglY3zdC/h1+kUoMKUVMwUxfLMxh8KC9CEEX4wjz/yQTCMZy93dCMP/8mOUZrkLbFG4+Llg5lga6z6rdKyIlZ+PGPQ2VSGJibc7Pwz31vDQPH1N2txDee4QHvaJviZ9LC7xxoXyMWOjKuuaB5uzBJa0tjdukBZvKw7+Ftc8BSfzD+5TfzmwUsreiYA5CIKa9VJxt38jgbWSvmX1f5WB5u4DGwtcAPLad6hc2Pf+Ali2CommhgOlE78ZdGBU2X9p+IQyo+9xGcRdb6fZYaXmXoRUX866umY8Y2iHOD1EV/SVLswjOnZyHUBqOpdxDSZI2xvG0p4YlBgr8bjvOKp4HZ4vftvSXiFDhJ/+wg9QJ1yWtwL5yublZMf4+gZPbnR5TUkq7WhdVzlKQgcgKhP0xbCdcsJj0GB5kI8OIY4rN7aYh5aBKEXMcekhmwvUnoBa9C6WEgiUlSasLBK1I8sxe2xmSPdc5g5ayqPMiC8EuDRjWASaRWWYYZGaLKOKCvnYtymIRYzm3BEgQ/JWUblH6UW6xFCuMbraB/Rl1GFCEPEv+Yp5C3rKP1M+qKZ6L0i801AnFSb/rw3gkR5o7mNCggS2eduH/QkVy4+zQzApztwNEzpZyVZDYlbtbC5RtfuV8xf8IXrhgO52CovoB2STMlcOvJt+yA5QMVXNiLgNWXTbv2IPU04L5pM50Lim1bINnMSjRkMI0p6VonFVHm2WIgJrVkrJzJm1Tmf5kyzZ3Aax+TZ0rbGQWPjvfKr+U1tVgPWJx4VO3FHv4AyamuoPAtzxTgf3RzXLDmUSmDIZNP4dB8Vu7k3/8CZloeb/wzCdx/WWxSD+m18nGl7lY9uuIPr47IEhSyCgH+i/4h/BwmXWAMWliGsFvSWGnkC35prgrx3wQCEt8T4K+aKKDpUeI9MaEJqTc2HfWQ1zTFl0sSF2nByyiUI+v7KIQ6/+yWKZcsjINPeEMlkvla8Jc1IQSZTDPL1gmTb0zTq75CKSFAen4ae6+Qsk5PivN19CxUGlUeJ+5BngPwlL1Uafubhd0XgL0Xk/k5QIOqaeD0c9BjWwkevJn7n+FBikUyZ9TFy1M0fD99DloXvU8i+muwacI3Ql+zSzsA8xF+ViJuv8lMydn25P78kHbp7k2abXW5L75CY/WQKf3oc34ODKsRGHCBgyndBHV6B0VCeLRjiBcN0Ksn+XeOiSoS+ApwjAlREvXvBg4w2kYOwkQrm+26p35iuuHJytbFZdJkYeXA6Xg3484esY+h5j7JPS678V21pT/fmhHKBDIGbAZRC4ODZR/2Sl1/W0h4sLWg6ACg8zn7yUEuQh3dnbMnXOW45xo5p0h+iBXGpGMRVaw/hb04rXLxj0bJ+gxv9wjANkjpzJG0Qj53WZe2R6mbyzajCkxJYluk9Zxq6r0d5jVddKuDgpXBaFAD3p4Pq9FMo008Zu8XuDymFe1IND7pN7z8T3ceYQEoo8dGsuMvYudN1O8SNS5/i/nqFn1fpvRwALts7zxafqtDxYK4yfPWsmLO6ETKlVxM9F04yw/q55eLDEXAWL7Wj4Zu8318UGTZdJQ1RiqrhL9EJLp/s9JKjqFwrT7RKefKz7v0Ul7oPkQua"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 5349,
+    "candidatesTokenCount": 90,
+    "totalTokenCount": 5758,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 5349
+      }
+    ],
+    "thoughtsTokenCount": 319,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "Lw-WarjoHebFz7IP-86J4Aw"
+}

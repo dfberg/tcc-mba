@@ -1,0 +1,8 @@
+{
+    "caseId":  "EXP-024",
+    "timestamp":  "2026-08-29T17:04:52.0946964-03:00",
+    "baselineCommit":  "8316d9ffa0c109c0aac68fd181b94fdd9dce368e",
+    "durationMs":  28100,
+    "testCommand":  "mvn -Dmaven.repo.local=\u003clocal-repository\u003e -Dspring.datasource.url=jdbc:h2:file:\u003ctemporary-primary-db\u003e;DB_CLOSE_ON_EXIT=FALSE -Dspring.jpa.hibernate.ddl-auto=update -Dtest=BookApiIntegrationTest#testCreateBook_Snapshot test",
+    "testExitCode":  1
+}

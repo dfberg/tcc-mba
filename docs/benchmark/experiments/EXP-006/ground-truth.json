@@ -1,0 +1,5 @@
+{
+  "caseId": "EXP-006",
+  "classification": "SHOULD_NOT_UPDATE",
+  "reason": "Atualizar o snapshot aceitaria valores semanticamente trocados."
+}
